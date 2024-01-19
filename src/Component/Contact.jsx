@@ -35,14 +35,15 @@ const Contact = () => {
       </div>
       <div>
         <div>
-          <iframe className=" border-0 w-80 h-44"
+          <iframe
+            className=" border-0 w-80 h-44"
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3875.4160131817052!2d100.5267266!3d13.7537679!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f3a19f61fed%3A0xacd8af8b022d88f0!2sSpring%20Tower!5e0!3m2!1sen!2sth!4v1704857486161!5m2!1sen!2sth"
             // width="600"
             // height="450"
             // style={{border:0}}
             allowfullscreen=""
             loading="lazy"
-            alt='GoogleMap'
+            alt="GoogleMap"
           ></iframe>
         </div>
       </div>
