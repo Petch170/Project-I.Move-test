@@ -1,6 +1,27 @@
 import React from "react";
-
+import BMI from "../BMI";
+import Modal from "react-modal";
 export default function NavHead() {
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      transform: "translate(-50%, -50%) scale(0.75)",
+
+      padding: "30px",
+      backgroundColor: "#EADBC8",
+    },
+    overlay: { zIndex: 1000 },
+  };
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
     <div className="bg-[#EADBC8] flex justify-between col-span-12 ">
       <div className="flex items-center">
@@ -24,13 +45,24 @@ export default function NavHead() {
             About
           </a>
         </div>
-        <div className="rounded-full border-4 border-[#CE9F9F] bg-[#E8E8E8] p-3 pr-3 flex flex-col items-center w-[75px] h-[75px] cursor-pointer">
+        <div
+          className="rounded-full border-4 border-[#CE9F9F] bg-[#E8E8E8] p-3 pr-3 flex flex-col items-center w-[75px] h-[75px] cursor-pointer"
+          onClick={openModal}
+        >
           <span class="material-icons-outlined">volunteer_activism</span>
           <p className="text-xs/[10px] whitespace-nowrap text-[#102C57] font-bold p-1">
             BMI
           </p>
         </div>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <BMI />
+      </Modal>
     </div>
   );
 }

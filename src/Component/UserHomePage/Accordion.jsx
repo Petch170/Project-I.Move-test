@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Accordion = ({ activityCardData, handleDelete }) => {
+const Accordion = ({ activityCardData, handleEditClick }) => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -27,7 +27,12 @@ const Accordion = ({ activityCardData, handleDelete }) => {
                       {item.fullname}
                     </span>
                   </div>
-                  <span class="material-icons-outlined p-2">edit</span>
+                  <span
+                    className="material-icons-outlined p-2 z-[1] cursor-pointer"
+                    onClick={() => handleEditClick(item)}
+                  >
+                    edit
+                  </span>
                 </div>
                 {/* PicContainer */}
                 <div className="w-full h-[220px]">
@@ -58,7 +63,7 @@ const Accordion = ({ activityCardData, handleDelete }) => {
                 className={`${
                   activeIndex === index
                     ? "opacity-100 translate-y-0 h-[fit] duration-1000"
-                    : "opacity-0 -translate-y-3 h-[0px] duration-1000"
+                    : "opacity-0 -translate-y-3 h-[0px] -z-[1] duration-1000"
                 } `}
               >
                 {/* Content in accordion */}
@@ -83,7 +88,6 @@ const Accordion = ({ activityCardData, handleDelete }) => {
                     <p className="text-[#102C57] font-bold">Description</p>
                     <p>{item.description}</p>
                   </div>
-                  <span class="material-icons-outlined flex">delete_sweep</span>
                 </div>
               </div>
             </div>

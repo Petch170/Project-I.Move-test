@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
-export default function Sidebar({ active, setActive, userData }) {
+export default function Sidebar({ userData }) {
   console.log(userData);
   return (
-    // {MockActive.map((item)=>)}
     <div className="flex flex-col justify-between items-center col-span-3 border-r-4 border-[#102C57] p-3 m-5 h-[100vh]">
       <div>
         <div className="flex items-center">
@@ -25,41 +24,33 @@ export default function Sidebar({ active, setActive, userData }) {
               <img
                 src="./Picture/user.png"
                 alt="user"
-                className={`${
-                  active === "home" ? "block" : "hidden"
-                } h-[15px] w-[15px]`}
+                className="h-[15px] w-[15px]"
               />
-              <a onClick={() => setActive("home")}>Home</a>
+              <a href="/UserHomePage">Home</a>
             </div>
             <div className="flex items-center cursor-pointer">
               <img
                 src="./Picture/user.png"
                 alt="user"
-                className={`${
-                  active === "activity" ? "block" : "hidden"
-                } h-[15px] w-[15px]`}
+                className="h-[15px] w-[15px]"
               />
-              <a onClick={() => setActive("activity")}>Activity</a>
+              <a href="/Activity">Activity</a>
             </div>
             <div className="flex items-center cursor-pointer">
               <img
                 src="./Picture/user.png"
                 alt="user"
-                className={`${
-                  active === "dashboard" ? "block" : "hidden"
-                } h-[15px] w-[15px]`}
+                className="h-[15px] w-[15px]"
               />
-              <a onClick={() => setActive("dashboard")}>Dash board</a>
+              <a href="/user/dashboard">Dashboard</a>
             </div>
             <div className="flex items-center cursor-pointer">
               <img
                 src="./Picture/user.png"
                 alt="user"
-                className={`${
-                  active === "setting" ? "block" : "hidden"
-                } h-[15px] w-[15px]`}
+                className="h-[15px] w-[15px]"
               />
-              <a onClick={() => setActive("setting")}>Setting</a>
+              <a href="/setting">Setting</a>
             </div>
           </div>
         </div>
