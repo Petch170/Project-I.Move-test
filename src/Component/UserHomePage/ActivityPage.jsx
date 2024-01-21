@@ -50,29 +50,6 @@ export default function ActivityPage() {
     setMockCard(newData);
   };
 
-  const handleUpdate = (
-    id,
-    activityName,
-    activityType,
-    date,
-    durations,
-    distance,
-    description
-  ) => {
-    const updateData = {
-      id: id,
-      activityName: activityName,
-      activityType: activityType,
-      date: date,
-      durations: durations,
-      distance: distance,
-      description: description,
-      imageUrl:
-        "https://fittoplay.org/globalassets/pictures/badminton/badminton_pho10254241_crop.jpg",
-    };
-    setMockCard([...mockCard, updateData]);
-  };
-
   return (
     <>
       <div className="col-span-9 p-3 m-5 ">
@@ -89,11 +66,7 @@ export default function ActivityPage() {
           <div className="text-[#102C57] text-[24px] font-bold pb-2">
             <h1>My Activity</h1>
           </div>
-          <Accordion
-            activityCardData={mockCard}
-            handleDelete={handleDelete}
-            handleUpdate={handleUpdate}
-          />
+          <Accordion activityCardData={mockCard} handleDelete={handleDelete} />
         </div>
         <Modal
           isOpen={modalIsOpen}
