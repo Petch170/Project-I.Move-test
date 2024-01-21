@@ -1,23 +1,25 @@
 import React, { useState } from "react";
-import CardFeed from "./CardFeed";
-import ActivityPage from "./ActivityPage";
 import NavHead from "./NavHead";
 import Sidebar from "./Sidebar";
-import { mockUserData } from "./mockData";
+import { mockActivity, mockUserData } from "./mockData";
+import Accordion from "./Accordion";
 
 export default function UserHomePage() {
-  const [active, setActive] = useState("home");
-  let section;
-  if (active === "home") {
-    section = <CardFeed />;
-  } else if (active === "activity") {
-    section = <ActivityPage />;
-  }
   return (
     <div className="grid grid-cols-12">
       <NavHead />
-      <Sidebar active={active} setActive={setActive} userData={mockUserData} />
-      {section}
+      <Sidebar userData={mockUserData} />
+      <div className="col-span-9 p-3 m-5 ">
+        <div>
+          <h1 className="text-[36px] text-[#102C57] font-bold">Home</h1>
+          <h2 className="text-[24px] text-[#102C57] font-bold pb-2">
+            Latest Activity
+          </h2>
+        </div>
+        <div>
+          <Accordion activityCardData={mockActivity} />
+        </div>
+      </div>
     </div>
   );
 }

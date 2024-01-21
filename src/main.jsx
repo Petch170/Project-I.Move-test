@@ -6,6 +6,7 @@ import "material-icons/iconfont/material-icons.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import UserHomePage from "./Component/UserHomePage/UserHomePage.jsx";
 import { Setting, SettingPassword, SettingProfile, Dashboard } from "./Page";
+import ActivityPage from "./Component/UserHomePage/ActivityPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/user/dashboard",
     element: <Dashboard />,
+  },
+  {
+    path: "/Activity",
+    element: <ActivityPage />,
   },
 ]);
 
