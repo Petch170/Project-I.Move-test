@@ -4,13 +4,15 @@ export default function NavHead() {
   return (
     <div className="bg-[#EADBC8] flex justify-between col-span-12 ">
       <div className="flex items-center">
-        <div className="h-[93px] w-[100px] flex justify-start">
+        <div className="h-[85px] w-[100px] flex justify-start">
           <a href="/">
-            <img src="./Picture/logo1.png" alt="logo1" />
+            <img src="./Picture/logo1.png" alt="logo1" className="relative" />
           </a>
         </div>
         <div>
-          <h1 className="text-[#102C57] font-bold">I.MOVE</h1>
+          <h1 className="text-[#102C57] font-bold absolute left-[70px]">
+            I.MOVE
+          </h1>
         </div>
       </div>
       <div className="flex items-center px-3">
