@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  background-color: #102c57;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+}
+
+.errorMsg {
+  max-width: 350px;
+  color: #f21e08;
+  padding: 2px 0;
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+@media screen and (max-width: 640px) {
+  .desktop {
+    display: none;
+  }
+}
