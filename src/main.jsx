@@ -5,6 +5,7 @@ import "./index.css";
 import "material-icons/iconfont/material-icons.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import UserHomePage from "./Component/UserHomePage/UserHomePage.jsx";
+import { Setting, SettingPassword, SettingProfile, Dashboard } from "./Page";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,22 @@ const router = createBrowserRouter([
   {
     path: "/UserHomePage",
     element: <UserHomePage />,
+  },
+  {
+    path: "/setting",
+    element: <Setting />,
+  },
+  {
+    path: "/setting/password",
+    element: <SettingPassword />,
+  },
+  {
+    path: "/setting/profile",
+    element: <SettingProfile />,
+  },
+  {
+    path: "/user/dashboard",
+    element: <Dashboard />,
   },
 ]);
 
