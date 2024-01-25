@@ -1,29 +1,28 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import logo1 from './Picture/logo1'
 import './App.css'
-import Navbar from './Component/Navbar'
+import Navbarhome from './Component/Navbarhome'
 import Home from './Component/Home'
 import Aboutus from './Component/Aboutus'
 import Contact from './Component/Contact'
 import Footer from './Component/Footer'
-import BMI from './Component/BMI'
+import { useRef } from 'react'
 
-function App() {
-  // const [count, setCount] = useState(0)
 
-  return (
-    <>
+
+
+const App = () => {
+  const ref = useRef(null);
   
-    <Navbar/>
-    <Home/>
-    <Aboutus/>
-    <Contact/>
-    <Footer/>
-    <BMI/>
 
-    </>
-  )
-}
+  return (<>
+  <Navbarhome  liref={ref}/>
+  <Home/>
+  <Aboutus liref={ref}/>
+  <Contact liref={ref}/>
+  <Footer/>
+   
+  </>
+  
+  );
+};
 
 export default App

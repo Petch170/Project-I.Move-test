@@ -7,12 +7,26 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import UserHomePage from "./Component/UserHomePage/UserHomePage.jsx";
 import { Setting, SettingPassword, SettingProfile, Dashboard } from "./Page";
 import ActivityPage from "./Component/UserHomePage/ActivityPage.jsx";
+import Home from "./Component/Home.jsx";
+import Contact from "./Component/Contact.jsx";
+import Aboutus from "./Component/Aboutus.jsx";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App/>,
   },
+
+  // {
+  //   path: "/Contact", 
+  //   element: <Contact />,
+  // },
+  // {
+  //   path: "/Aboutus",
+  //   element: <Aboutus />,
+  // },
+
   {
     path: "/UserHomePage",
     element: <UserHomePage />,
