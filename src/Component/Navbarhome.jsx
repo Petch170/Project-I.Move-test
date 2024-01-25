@@ -1,9 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-
-
-// import logo1 from './Picture/logo1'
 
 function Navbarhome({liref}) {
 

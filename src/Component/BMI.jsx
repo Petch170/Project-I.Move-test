@@ -81,12 +81,14 @@ const BMI = () => {
           <h2 className="text-xl bg-white pt-8">Result BMI</h2>
           <p className=" text-lg font-bold bg-white pb-5">{chekResult()}</p>
         </div>
-        <div className="m-2 px-8 py-2 text-center bg-white">
-          <h4 className="text-xl pt-8">BMI Categories</h4>
-          <p className="text-lg">Underweight = {"<"}18.5</p>
-          <p className="text-lg">Normal weight = 18.5-24.9</p>
-          <p className="text-lg">Overweight = 25-29.9</p>
-          <p className="text-lg">Obesity = BMI of 30 or greater</p>
+        <div className="m-2 px-8 py-2 bg-white border border-black">
+          <h4 className="text-xl text-center">BMI Categories</h4>
+          <p> Underweight = {"<"}18.5 <br/>Normal weight = 18.5-24.9<br/>Overweight = 25-29.9<br/>Obesity = BMI of 30 or greater
+          </p>
+          {/* <p className="text-lg text-left">Underweight = {"<"}18.5</p>
+          <p className="text-lg text-left">Normal weight = 18.5-24.9</p>
+          <p className="text-lg text-left">Overweight = 25-29.9</p>
+          <p className="text-lg text-left">Obesity = BMI of 30 or greater</p> */}
         </div>
       </div>
     </div>
