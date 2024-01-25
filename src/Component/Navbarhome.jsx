@@ -1,7 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+
 // import logo1 from './Picture/logo1'
 
-function Navbar() {
+function Navbarhome() {
+
+  
   return (
     <div className="navbar bg-[#EADBC8] h-16 w-full flex justify-between items-center pl-2 pr-16">
       <div className="navlogobar flex  items-center">
@@ -14,14 +19,24 @@ function Navbar() {
       </div>
       <ul className="list flex gap-10 ">
         <li>
-          <a className="hover:cursor-pointer" href="#">
+          {/* <Link to="/Contact" className="hover:cursor-pointer " >
             Contact
-          </a>
+          </Link> */}
+          <ScrollLink
+            to="contactSection"
+            className="hover:cursor-pointer"
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+          >
+            Contact
+          </ScrollLink>
         </li>
         <li>
-          <a className="hover:cursor-pointer" href="#">
+          <Link to="/Aboutus" className="hover:cursor-pointer">
             About
-          </a>
+          </Link>
         </li>
         <li>
           <a className="hover:cursor-pointer" href="/UserHomePage">
@@ -38,4 +53,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Navbarhome;

@@ -14,7 +14,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className=" flex justify-evenly  pt-6 pb-6 border-black border">
+    <div id="contactSection" className=" flex justify-evenly  pt-6 pb-6 border-black border">
       <div className="flex flex-col justify-center">
         <h2 className=" font-medium text-2xl">Contact</h2>
         <p>Monday-sunday 9:00-21:00</p>
