@@ -21,35 +21,19 @@ export default function Sidebar({ userData }) {
         <div>
           <div className="text-[#102C57] font-bold text-base flex flex-col gap-3 p-3">
             <div className="flex items-center cursor-pointer">
-              <img
-                src="./Picture/user.png"
-                alt="user"
-                className="h-[15px] w-[15px]"
-              />
+              <span class="material-icons-outlined">house</span>
               <a href="/UserHomePage">Home</a>
             </div>
             <div className="flex items-center cursor-pointer">
-              <img
-                src="./Picture/user.png"
-                alt="user"
-                className="h-[15px] w-[15px]"
-              />
+              <span class="material-icons-outlined">snowshoeing</span>
               <a href="/Activity">Activity</a>
             </div>
             <div className="flex items-center cursor-pointer">
-              <img
-                src="./Picture/user.png"
-                alt="user"
-                className="h-[15px] w-[15px]"
-              />
+              <span class="material-icons-outlined">stacked_bar_chart</span>
               <a href="/user/dashboard">Dashboard</a>
             </div>
             <div className="flex items-center cursor-pointer">
-              <img
-                src="./Picture/user.png"
-                alt="user"
-                className="h-[15px] w-[15px]"
-              />
+              <span class="material-icons-outlined">manage_accounts</span>
               <a href="/setting">Setting</a>
             </div>
           </div>
