@@ -1,5 +1,5 @@
-import React from "react";
-import Navbarhome from "./Navbarhome";
+// import React from "react";
+// import Navbarhome from "./Navbarhome";
 import Contact from "./Contact";
 import Aboutus from "./Aboutus";
 import Footer from "./Footer";
@@ -45,9 +45,10 @@ const Home = () => {
           alt="Dashboard"
         />
       </div>
-      {/* <Aboutus/>
+      <Aboutus/>
       <Contact/>
-      <Footer/> */}
+      <Footer/>
+
     </div>
   );
 };
