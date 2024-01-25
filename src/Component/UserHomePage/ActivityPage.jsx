@@ -93,7 +93,7 @@ export default function ActivityPage() {
 
   return (
     <div className="grid grid-cols-12">
-      <NavHead />
+      <NavHead handleCreateClick={handleCreateClick} />
       <Sidebar userData={userData} />
 
       <div className="col-span-9 p-3 m-5 ">
