@@ -1,6 +1,6 @@
 import React from "react";
 
-const Contact = () => {
+const Contact = ({liref}) => {
   const brand = [
     { id: 0, name: "facebook", logo: "Picture/facebook_3488302.png", url: "#" },
     { id: 1, name: "twitter", logo: "Picture/twitter_5968830.png", url: "#" },
@@ -14,7 +14,7 @@ const Contact = () => {
   ];
 
   return (
-    <div id="contactSection" className=" flex justify-evenly  pt-6 pb-6 border-black border">
+    <div ref={liref} className=" flex justify-evenly  pt-6 pb-6 border-black border">
       <div className="flex flex-col justify-center">
         <h2 className=" font-medium text-2xl">Contact</h2>
         <p>Monday-sunday 9:00-21:00</p>

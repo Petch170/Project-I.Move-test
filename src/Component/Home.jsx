@@ -1,13 +1,10 @@
 // import React from "react";
 // import Navbarhome from "./Navbarhome";
-import Contact from "./Contact";
-import Aboutus from "./Aboutus";
-import Footer from "./Footer";
+
 
 const Home = () => {
   return (
     <div >
-      {/* <Navbarhome/> */}
       <div className="homepage relative ">
         <div className="Picbox relative h-[638px]">
           <img
@@ -45,9 +42,6 @@ const Home = () => {
           alt="Dashboard"
         />
       </div>
-      <Aboutus/>
-      <Contact/>
-      <Footer/>
 
     </div>
   );

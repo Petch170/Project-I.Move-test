@@ -1,6 +1,6 @@
 import React from "react";
 
-const Aboutus = () => {
+const Aboutus = ({liref}) => {
   const data = [
     {
       id: 0,
@@ -29,8 +29,8 @@ const Aboutus = () => {
   ];
 
   return (
-    <div className=" my-8 mx-[100px]">
-      <div>
+    <div  className=" my-8 mx-[100px]">
+      <div ref={liref}>
         <h1 className=" text-center text-wrap font-bold text-3xl">About Us</h1>
         <h2 className=" text-xl text-center p-5">
           <strong>"I.MOVE"</strong> is not just an app but a companion that
