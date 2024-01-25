@@ -1,7 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+
+
 // import logo1 from './Picture/logo1'
 
-function Navbar() {
+function Navbarhome({liref}) {
+
+  const handleClick = () => {
+    liref.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="navbar bg-[#EADBC8] h-16 w-full flex justify-between items-center pl-2 pr-16">
       <div className="navlogobar flex  items-center">
@@ -13,15 +22,11 @@ function Navbar() {
         <a className="Logo hover:cursor-pointer">I.MOVE</a>
       </div>
       <ul className="list flex gap-10 ">
-        <li>
-          <a className="hover:cursor-pointer" href="#">
+        <li onClick={handleClick} className="hover:cursor-pointer ">
             Contact
-          </a>
         </li>
-        <li>
-          <a className="hover:cursor-pointer" href="#">
+        <li onClick={handleClick} className="hover:cursor-pointer ">
             About
-          </a>
         </li>
         <li>
           <a className="hover:cursor-pointer" href="/UserHomePage">
@@ -38,4 +43,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Navbarhome;
