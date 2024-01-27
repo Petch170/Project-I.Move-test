@@ -3,7 +3,6 @@ import NavHead from "./NavHead";
 import Sidebar from "./Sidebar";
 import { mockActivity, mockUserData } from "./mockData";
 import Accordion from "./Accordion";
-import { leftArrowIcon } from "../../assets/Icon";
 
 export default function UserHomePage() {
   return (

@@ -119,6 +119,7 @@ export default function ActivityPage() {
             </div>
           </div>
         </div>
+
         <NavHead handleCreateClick={handleCreateClick} />
         <Sidebar userData={mockUserData} />
 

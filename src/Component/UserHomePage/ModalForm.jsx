@@ -91,7 +91,7 @@ export default function ModalForm({
           </label>
         </div>
       </div>
-      <div className="grid sm:grid-cols-2 bg-[#EADBC8] ">
+      <div className="grid sm:grid-cols-2  bg-[#EADBC8] ">
         <div className="p-4 text-[#102C57] font-semibold">
           <label for="Activity Name">Activity Name : </label>
           <input
@@ -148,28 +148,39 @@ export default function ModalForm({
             defaultValue={inputData.durations}
           >
             <option value="Durations">Durations</option>
-            <option value="20 minutes">20 minutes</option>
-            <option value="30 minutes">30 minutes</option>
-            <option value="1 hr">1 hr</option>
-            <option value="2 hr">2 hr</option>
-            <option value="3 hr">3 hr</option>
-            <option value="4 hr">4 hr</option>
-            <option value="5 hr">5 hr</option>
+            <option value={20}>20 minutes</option>
+            <option value={30}>30 minutes</option>
+            <option value={60}>1 hr</option>
+            <option value={120}>2 hr</option>
+            <option value={180}>3 hr</option>
+            <option value={240}>4 hr</option>
+            <option value={350}>5 hr</option>
           </select>
         </div>
         <div className="p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Distance">Distance : </label>
-          <input
-            type="text"
+          <select
             id="Distance"
             name="Distance"
-            placeholder="Distance(KM)"
             className="rounded-md p-2"
             onChange={(ev) =>
               handleOnChangeInputData("distance", ev.target.value)
             }
             defaultValue={inputData.distance}
-          ></input>
+          >
+            <option value="Distance">Distance</option>
+            <option value={0}>-</option>
+            <option value={1000}>1 km</option>
+            <option value={2000}>2 km</option>
+            <option value={3000}>3 km</option>
+            <option value={4000}>4 km</option>
+            <option value={5000}>5 km</option>
+            <option value={6000}>6 km</option>
+            <option value={7000}>7 km</option>
+            <option value={8000}>8 km</option>
+            <option value={10000}>10 km</option>
+            <option value={20000}>20 km</option>
+          </select>
         </div>
         <div className="p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Description" className="">
