@@ -8,15 +8,13 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const getUserData = async () => {
-      const response = await axios.get("http://localhost:8000/user/1");
+      const response = await axios.get("http://localhost:8000/user/activity/1");
       if (response.status === 200 && response.data) {
-        console.log("response", response);
         setData([...response.data.data]);
       }
     };
     getUserData();
   }, []);
-  console.log(data);
   return (
     <customContext.Provider value={{ data }}>
       <header>
