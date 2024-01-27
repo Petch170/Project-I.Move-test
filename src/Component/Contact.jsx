@@ -26,7 +26,7 @@ const Contact = ({liref}) => {
                 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className=" w-full h-auto hover:cursor-pointer"
+                  className="  h-auto hover:cursor-pointer"
                 />
               </a>
             </div>

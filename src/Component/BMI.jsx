@@ -104,7 +104,7 @@ const BMI = () => {
             </div>
           </div>
           <div className=" flex justify-center">
-            <div className="  p-5">
+            <div className="p-5">
             <p className=" text-center font-bold text-md md:text-lg xl:text-2xl underline">BMI weight ranges</p>
             <ul className=" text-left  text-base  text-md md:text-lg xl:text-2xl">
               <li>Less than 18.5 = Underweight</li>

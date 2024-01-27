@@ -57,11 +57,11 @@ const Aboutus = ({ liref }) => {
         <h1 className=" text-center text-lg md:text-2xl font-semibold text-[#102C57] underline pb-3">
           Our Dream Team
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-blue-800 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
           {data.map((member) => (
             <div
               key={member.id}
-              className="border border-gray p-2 flex flex-col items-center"
+              className="border border-red p-2 flex flex-col items-center"
             >
               <img
                 src={member.image}
