@@ -1,8 +1,24 @@
+import { createContext, useEffect, useState } from "react";
 import { NavBar, PieChartComponent, SettingAside, Stat } from "../Component";
 import { clearIcon } from "../assets/Icon";
+import axios from "axios";
+
+export const customContext = createContext({});
 const Dashboard = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const getUserData = async () => {
+      const response = await axios.get("http://localhost:8000/user/1");
+      if (response.status === 200 && response.data) {
+        console.log("response", response);
+        setData([...response.data.data]);
+      }
+    };
+    getUserData();
+  }, []);
+  console.log(data);
   return (
-    <>
+    <customContext.Provider value={{ data }}>
       <header>
         <NavBar />
       </header>
@@ -13,7 +29,7 @@ const Dashboard = () => {
             <h1 className="text-3xl font-bold underline underline-offset-4 text-center sm:text-2xl sm:text-left sm:no-underline">
               Dashboard
             </h1>
-            <div className="mt-4 flex flex-row gap-4 sm:mt-0">
+            {/* <div className="mt-4 flex flex-row gap-4 sm:mt-0">
               <label htmlFor="date range">
                 choose date range
                 <select name="date range" id="date range" className="block">
@@ -37,13 +53,13 @@ const Dashboard = () => {
                 <p>clear</p>
                 <img src={clearIcon} alt="clearIcon" />
               </div>
-            </div>
+            </div> */}
           </div>
           <PieChartComponent />
           <Stat />
         </section>
       </main>
-    </>
+    </customContext.Provider>
   );
 };
 export default Dashboard;
