@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 
-const AddminPage = () => {
+const AdminPage = () => {
 
     const [members , setMembers] = useState([]);
 
@@ -55,4 +55,4 @@ useEffect(() => {
     )
 }
 
-export default AddminPage
+export default ddminPage
