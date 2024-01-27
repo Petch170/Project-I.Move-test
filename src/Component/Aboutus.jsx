@@ -4,33 +4,33 @@ const Aboutus = ({ liref }) => {
   const data = [
     {
       id: 0,
-      image: "src/assets/Pic-home/Picture/run.jpg",
+      image: "src/assets/Pic-home/swim.jpg",
       name: "petch",
       position: "Web Developers",
     },
     {
       id: 1,
-      image: "src/assets/Pic-home/Picture/run.jpg",
+      image: "src/assets/Pic-home/swim.jpg",
       name: "nan",
       position: "Web Developers",
     },
     {
       id: 2,
-      image: "src/assets/Pic-home/Picture/run.jpg",
+      image: "src/assets/Pic-home/swim.jpg",
       name: "boy",
       position: "Web Developers",
     },
     {
       id: 3,
-      image: "src/assets/Pic-home/Picture/run.jpg",
+      image: "src/assets/Pic-home/swim.jpg",
       name: "jane",
       position: "Web Developers",
     },
   ];
 
   return (
-    <div className=" m-[7.5px] md:m-[30px]">
-      <div className="border border-bl" ref={liref} >
+    <div  ref={liref}  className=" mx-[7.5px] md:mx-[30px]">
+      <div >
         <h1 className="text-center text-lg md:text-2xl font-semibold text-[#102C57] underline py-3">
           About Us
         </h1>
@@ -53,7 +53,7 @@ const Aboutus = ({ liref }) => {
           us!
         </p>
       </div>
-      <div className=" py-10 ">
+      <div className="pt-10 py-5 ">
         <h1 className=" text-center text-lg md:text-2xl font-semibold text-[#102C57] underline pb-3">
           Our Dream Team
         </h1>
@@ -61,7 +61,7 @@ const Aboutus = ({ liref }) => {
           {data.map((member) => (
             <div
               key={member.id}
-              className="border border-red p-2 flex flex-col items-center"
+              className=" py-2 px-5 flex flex-col items-center"
             >
               <img
                 src={member.image}

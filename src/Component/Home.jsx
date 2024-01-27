@@ -10,7 +10,7 @@ const Home = () => {
         <div className="Picbox relative h-[638px]">
           <img
             className="banner h-full w-full object-cover opacity-2"
-            src="src\assets\Pic-home\Picture\run1.jpg"
+            src="src/assets/Pic-home/run1.jpg"
             alt="run"
           />
         </div>

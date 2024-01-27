@@ -1,4 +1,5 @@
 import React from "react";
+import { logo } from "../assets/Picture";
 
 function Navbarhome({liref}) {
 
@@ -7,16 +8,16 @@ function Navbarhome({liref}) {
   };
 
   return (
-    <div className="navbar bg-[#EADBC8] h-16 w-full flex justify-between items-center desktop pl-2 pr-16">
+    <div className="navbar bg-[#EADBC8] h-16 w-full flex justify-between items-center desktop pl-2 pr-16 text-base md:text-xl">
       <div className="navlogobar flex  items-center">
         <img
           className="nav w-14 h-14"
-          src="src/assets/Pic-home/Picture/logo1.png"
+          src={logo}
           alt="icon"
         />
-        <a className="Logo hover:cursor-pointer">I.MOVE</a>
+        <a className="Logo hover:cursor-pointer font-bold">I.MOVE</a>
       </div>
-      <ul className="list flex gap-10 ">
+      <ul className="list flex gap-10 text-sm md:text-lg">
         <li onClick={handleClick} className="hover:cursor-pointer ">
             Contact
         </li>

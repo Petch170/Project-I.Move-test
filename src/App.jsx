@@ -7,6 +7,7 @@ import Footer from "./Component/Footer";
 import { useRef } from "react";
 import BMI from "./Component/BMI";
 import { NavBar } from "./Component";
+import Navbarmbh from "./Component/Navbarmbh";
 
 const App = () => {
   const ref = useRef(null);
@@ -18,8 +19,7 @@ const App = () => {
       <Aboutus liref={ref} />
       <Contact liref={ref} />
       <Footer />
-   
-  <NavBar/>
+<Navbarmbh/>
     </>
   );
 };

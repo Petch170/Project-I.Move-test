@@ -2,20 +2,20 @@ import React from "react";
 
 const Contact = ({liref}) => {
   const brand = [
-    { id: 0, name: "facebook", logo: "src/assets/Pic-home/Picture/facebook_3488302.png", url: "#" },
-    { id: 1, name: "twitter", logo: "src/assets/Pic-home/Picture/twitter_5968830.png", url: "#" },
+    { id: 0, name: "facebook", logo: "src/assets/Pic-home/facebook_3488302.png", url: "#" },
+    { id: 1, name: "twitter", logo: "src/assets/Pic-home/twitter_5968830.png", url: "#" },
     {
       id: 2,
       name: "Instragram",
-      logo: "src/assets/Pic-home/Picture/instagram_2111463.png",
+      logo: "src/assets/Pic-home/instagram_2111463.png",
       url: "#",
     },
-    { id: 3, name: "youtube", logo: "src/assets/Pic-home/Picture/youtube_1384060.png", url: "#" },
+    { id: 3, name: "youtube", logo: "src/assets/Pic-home/youtube_1384060.png", url: "#" },
   ];
 
   return (
-    <div ref={liref} className=" grid grid-cols-1 md:grid-cols-2 justify-evenly border-black border m-[7.5px] md:m-[30px] ">
-      <div className="flex flex-col justify-center text-center md:text-left p-2 md:pl-40">
+    <div ref={liref} className=" grid grid-cols-1 md:grid-cols-2 justify-evenly mx-[7.5px] md:mx-[30px] ">
+      <div className="flex flex-col justify-start text-center md:text-left p-2 md:pl-40 ">
         <h2 className="text-lg md:text-2xl font-semibold text-[#102C57] underline">Contact</h2>
         <p className="text-wrap text-sm md:text-lg">Monday-sunday 9:00-21:00</p>
         <p className="text-wrap text-sm md:text-lg">Tel : 012 345 6789</p>

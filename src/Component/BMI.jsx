@@ -37,11 +37,11 @@ const BMI = () => {
   };
 
   return (
-    <div className="grid place-items-center col-span-12 md:col-span-8 lg:col-span-6 2xl:col-span-2 bg-[#EADBC8]  m-[7.5px] md:m-[30px]">
+    <div className="grid place-items-center col-span-12 md:col-span-8 lg:col-span-6 2xl:col-span-2 bg-[#EADBC8]  mx-[7.5px] md:mx-[30px]">
       <div className=" w-3/4">
         <div className=" card">
           <h1 className=" font-bold text-center text-lg md:text-2xl text-[#102C57]">
-            BMI Calculator
+            BMI Calculatorqq
           </h1>
           <form className="mt-4 text-base lg:text-lg xl:text-2xl">
             <label className="block">
@@ -99,19 +99,20 @@ const BMI = () => {
                 >
                   {checkResult()}
                 </span>{" "}
-                range.
               </p>
             </div>
           </div>
           <div className=" flex justify-center">
-            <div className="p-5">
-            <p className=" text-center font-bold text-md md:text-lg xl:text-2xl underline">BMI weight ranges</p>
-            <ul className=" text-left  text-base  text-md md:text-lg xl:text-2xl">
-              <li>Less than 18.5 = Underweight</li>
-              <li>Between 18.5 - 24.9 = Healthy Weight</li>
-              <li>Between 25 - 29.9 = Overweight</li>
-              <li>Over 30 = Obese</li>
-            </ul>
+            <div className="py-5">
+              <p className=" text-center font-bold text-md md:text-xl underline">
+                BMI weight ranges
+              </p>
+              <ul className=" text-left  text-base  text-md md:text-xl text-wrap">
+                <li>Less than 18.5 = Underweight</li>
+                <li>Between 18.5 - 24.9 = Healthy Weight</li>
+                <li>Between 25 - 29.9 = Overweight</li>
+                <li>Over 30 = Obese</li>
+              </ul>
             </div>
           </div>
         </div>
