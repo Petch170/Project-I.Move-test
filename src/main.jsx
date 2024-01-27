@@ -10,7 +10,7 @@ import ActivityPage from "./Component/UserHomePage/ActivityPage.jsx";
 import Home from "./Component/Home.jsx";
 import Contact from "./Component/Contact.jsx";
 import Aboutus from "./Component/Aboutus.jsx";
-
+import AddminPage from "./Page/members/adnim.jsx";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: "/Activity",
     element: <ActivityPage />,
+  },
+  {
+    path: "/admin",
+    element: <AddminPage />,
   },
 ]);
 
