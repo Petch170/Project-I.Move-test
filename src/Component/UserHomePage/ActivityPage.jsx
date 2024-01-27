@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import ModalForm from "./ModalForm";
 import Accordion from "./Accordion";
-import { userData } from "./mockData";
+import { mockUserData, userData } from "./mockData";
 import Sidebar from "./Sidebar";
 import NavHead from "./NavHead";
 
@@ -23,7 +23,7 @@ export default function ActivityPage() {
   const [mockCard, setMockCard] = useState(userData);
   const [imageFile, setImageFile] = useState("");
   const [initialValue, setInitialValue] = useState(initialValues);
-
+  console.log(mockUserData);
   const customStyles = {
     content: {
       top: "50%",
@@ -67,6 +67,7 @@ export default function ActivityPage() {
     const newData = mockCard.filter((item) => item.id !== id);
     setMockCard(newData);
     openModal(false);
+    setIsOpen(true);
   };
 
   const handleCreateClick = () => {
@@ -92,46 +93,57 @@ export default function ActivityPage() {
   };
 
   return (
-    <div className="grid grid-cols-12">
-      <NavHead handleCreateClick={handleCreateClick} />
-      <Sidebar userData={userData} />
+    <div>
+      <div className="grid grid-cols-12 ">
+        <NavHead handleCreateClick={handleCreateClick} />
+        <Sidebar userData={userData} />
 
-      <div className="col-span-9 p-3 m-5 ">
-        <div className="flex justify-between  ">
-          <h1 className="text-[36px] text-[#102C57] font-bold">Activity</h1>
-          <button
-            onClick={handleCreateClick}
-            className="bg-[#102C57] rounded-lg text-white font-medium p-3 hover:bg-cyan-600"
-          >
-            Create Activity
-          </button>
-        </div>
-        <div>
-          <div className="text-[#102C57] text-[24px] font-bold pb-2">
-            <h1>My Activity</h1>
+        <div className="col-span-9 p-3 m-5 ">
+          <div className="flex justify-between  ">
+            <h1 className="text-[36px] text-[#102C57] font-bold">Activity</h1>
+            <button
+              onClick={handleCreateClick}
+              className="bg-[#102C57] rounded-lg text-white font-medium p-3 hover:bg-cyan-600"
+            >
+              Create Activity
+            </button>
           </div>
-          <Accordion
-            activityCardData={mockCard}
-            handleEditClick={handleEditClick}
-          />
+          <div>
+            <div className="text-[#102C57] text-[24px] font-bold pb-2">
+              <h1>My Activity</h1>
+            </div>
+            <Accordion
+              activityCardData={mockCard}
+              handleEditClick={handleEditClick}
+            />
+          </div>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <ModalForm
+              closeModal={closeModal}
+              handleCreate={handleCreate}
+              initialValue={initialValue}
+              formType={formType}
+              setMockCard={setMockCard}
+              mockCard={mockCard}
+              handleDelete={handleDelete}
+            />
+          </Modal>
         </div>
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <ModalForm
-            closeModal={closeModal}
-            handleCreate={handleCreate}
-            initialValue={initialValue}
-            formType={formType}
-            setMockCard={setMockCard}
-            mockCard={mockCard}
-            handleDelete={handleDelete}
-          />
-        </Modal>
       </div>
+      {/* Mobile */}
+      {/* <div className="flex items-center"> */}
+      {/* <div className="w-28 h-28 p-3 rounded-full"> */}
+      {/* <img src={mockUserData[0].profilepic} alt="Profile picture" /> */}
+      {/* </div> */}
+      {/* <div className="font-bold"> */}
+      {/* <p>{mockUserData[0].fullname}</p> */}
+      {/* </div> */}
+      {/* </div> */}
     </div>
   );
 }

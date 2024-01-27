@@ -32,7 +32,7 @@ export default function NavHead({ handleCreateClick }) {
   }
   return (
     <>
-      <div className="bg-[#EADBC8] flex justify-between col-span-12 ">
+      <div className="bg-[#EADBC8] flex justify-between col-span-12 max-sm:hidden">
         <div className="flex items-center">
           <div className="h-[85px] w-[100px] flex justify-start">
             <a href="/" className="h-[80px] w-[80px]">
