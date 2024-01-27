@@ -100,7 +100,7 @@ fullname:'Cat the Frog',
     imageUrl:'https://fittoplay.org/globalassets/pictures/badminton/badminton_pho10254241_crop.jpg',},
   ]
 
-  export const mockUserData = [{
+  export const mockUserData = {
     profilepic:'https://preview.redd.it/nq8ifla08ip51.jpg?width=640&crop=smart&auto=webp&s=18f9423ecc712d589113f2568235ddd096c4a366',
     fullname:'Duck Killer',
-  }]
+  }
