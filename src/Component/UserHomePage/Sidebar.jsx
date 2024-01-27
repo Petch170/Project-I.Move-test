@@ -6,11 +6,15 @@ export default function Sidebar({ userData }) {
     <div className="flex flex-col justify-between items-center col-span-3 border-r-4 border-[#102C57] p-3 m-5 h-[100vh] max-sm:hidden">
       <div>
         <div className="flex items-center">
-          <div className="w-28 h-28 p-3 rounded-full">
-            <img src={userData[0].profilepic} alt="Profile picture" />
+          <div className="w-28 h-28 p-3 ">
+            <img
+              src={userData.profilepic}
+              alt="Profile picture"
+              className="rounded-full"
+            />
           </div>
           <div className="font-bold">
-            <p>{userData[0].fullname}</p>
+            <p>{userData.fullname}</p>
           </div>
         </div>
         {/* choose direction */}

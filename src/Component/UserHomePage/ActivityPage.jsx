@@ -95,21 +95,47 @@ export default function ActivityPage() {
   return (
     <div>
       <div className="grid grid-cols-12 ">
+        {/* Mobile */}
+        <div className=" sm:hidden col-span-12">
+          <div className="flex justify-between px-6 py-2 items-center bg-cream">
+            <a href="/" className="w-[40px] h-[40px]">
+              <img src="./Picture/logo1.png" alt="logo1" className="" />
+            </a>
+            <p className="text-[#102C57] font-bold">Proflie</p>
+            <a href="/setting">
+              <span className="material-icons-outlined">settings</span>
+            </a>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="w-24 h-24 p-3 ">
+              <img
+                src={mockUserData.profilepic}
+                alt="Profile picture"
+                className="rounded-full w-full h-full"
+              />
+            </div>
+            <div className="font-bold">
+              <p>{mockUserData.fullname}</p>
+            </div>
+          </div>
+        </div>
         <NavHead handleCreateClick={handleCreateClick} />
-        <Sidebar userData={userData} />
+        <Sidebar userData={mockUserData} />
 
-        <div className="col-span-9 p-3 m-5 ">
+        <div className="col-span-12 sm:col-span-9 p-3 m-5 ">
           <div className="flex justify-between  ">
-            <h1 className="text-[36px] text-[#102C57] font-bold">Activity</h1>
+            <h1 className="sm:text-[36px] text-[20px] text-[#102C57] font-bold">
+              Activity
+            </h1>
             <button
               onClick={handleCreateClick}
-              className="bg-[#102C57] rounded-lg text-white font-medium p-3 hover:bg-cyan-600"
+              className="bg-[#102C57] rounded-lg text-white font-medium p-3 hover:bg-cyan-600 hidden sm:block"
             >
               Create Activity
             </button>
           </div>
           <div>
-            <div className="text-[#102C57] text-[24px] font-bold pb-2">
+            <div className="text-[#102C57] sm:text-[24px] text-[18px] font-bold pb-2">
               <h1>My Activity</h1>
             </div>
             <Accordion
@@ -135,15 +161,6 @@ export default function ActivityPage() {
           </Modal>
         </div>
       </div>
-      {/* Mobile */}
-      {/* <div className="flex items-center"> */}
-      {/* <div className="w-28 h-28 p-3 rounded-full"> */}
-      {/* <img src={mockUserData[0].profilepic} alt="Profile picture" /> */}
-      {/* </div> */}
-      {/* <div className="font-bold"> */}
-      {/* <p>{mockUserData[0].fullname}</p> */}
-      {/* </div> */}
-      {/* </div> */}
     </div>
   );
 }

@@ -78,7 +78,7 @@ export default function NavHead({ handleCreateClick }) {
         </Modal>
       </div>
       {/* mobile */}
-      <nav className="sm:hidden grid grid-cols-5 items-center bg-cream py-2 fixed inset-x-0 bottom-0 ">
+      <nav className="sm:hidden grid grid-cols-5 items-center bg-cream py-2 fixed inset-x-0 bottom-0 z-[2]">
         <Link to="/">
           <div className="flex flex-col justify-center items-center">
             <img src={homeIcon} alt="home" />
