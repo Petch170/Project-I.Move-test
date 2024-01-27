@@ -17,11 +17,11 @@ import Signup from "./Page/members/signup.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
   },
 
   // {
-  //   path: "/Contact", 
+  //   path: "/login",
   //   element: <Contact />,
   // },
   // {

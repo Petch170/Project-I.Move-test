@@ -86,12 +86,12 @@ export default function ModalForm({
           </h1>
         </div>
         <div className="p-4 text-center	text-[#102C57] font-semibold flex justify-center">
-          <label class="bg-[#102C57] hover:bg-cyan-600 duration-150 text-white font-semibold py-2 px-4 rounded cursor-pointer w-1/4 ">
+          <label class="bg-[#102C57] hover:bg-cyan-600 duration-150 text-white font-semibold py-2 px-4 rounded cursor-pointer sm:w-1/4 ">
             <input type="file" class="hidden" /> Upload Image
           </label>
         </div>
       </div>
-      <div className="grid grid-cols-2 bg-[#EADBC8] ">
+      <div className="grid sm:grid-cols-2 bg-[#EADBC8] ">
         <div className="p-4 text-[#102C57] font-semibold">
           <label for="Activity Name">Activity Name : </label>
           <input
