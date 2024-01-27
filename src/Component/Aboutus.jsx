@@ -4,25 +4,25 @@ const Aboutus = ({ liref }) => {
   const data = [
     {
       id: 0,
-      image: "/Picture/swim.jpg",
+      image: "src/assets/Pic-home/Picture/run.jpg",
       name: "petch",
       position: "Web Developers",
     },
     {
       id: 1,
-      image: "/Picture/swim.jpg",
+      image: "src/assets/Pic-home/Picture/run.jpg",
       name: "nan",
       position: "Web Developers",
     },
     {
       id: 2,
-      image: "/Picture/swim.jpg",
+      image: "src/assets/Pic-home/Picture/run.jpg",
       name: "boy",
       position: "Web Developers",
     },
     {
       id: 3,
-      image: "/Picture/swim.jpg",
+      image: "src/assets/Pic-home/Picture/run.jpg",
       name: "jane",
       position: "Web Developers",
     },
@@ -30,7 +30,7 @@ const Aboutus = ({ liref }) => {
 
   return (
     <div className=" m-[7.5px] md:m-[30px]">
-      <div ref={liref} className="border border-bl">
+      <div className="border border-bl" ref={liref} >
         <h1 className="text-center text-lg md:text-2xl font-semibold text-[#102C57] underline py-3">
           About Us
         </h1>

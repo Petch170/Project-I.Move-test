@@ -2,15 +2,15 @@ import React from "react";
 
 const Contact = ({liref}) => {
   const brand = [
-    { id: 0, name: "facebook", logo: "Picture/facebook_3488302.png", url: "#" },
-    { id: 1, name: "twitter", logo: "Picture/twitter_5968830.png", url: "#" },
+    { id: 0, name: "facebook", logo: "src/assets/Pic-home/Picture/facebook_3488302.png", url: "#" },
+    { id: 1, name: "twitter", logo: "src/assets/Pic-home/Picture/twitter_5968830.png", url: "#" },
     {
       id: 2,
       name: "Instragram",
-      logo: "Picture/instagram_2111463.png",
+      logo: "src/assets/Pic-home/Picture/instagram_2111463.png",
       url: "#",
     },
-    { id: 3, name: "youtube", logo: "Picture/youtube_1384060.png", url: "#" },
+    { id: 3, name: "youtube", logo: "src/assets/Pic-home/Picture/youtube_1384060.png", url: "#" },
   ];
 
   return (
