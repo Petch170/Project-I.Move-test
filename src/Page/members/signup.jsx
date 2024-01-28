@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React , { useState } from "react";
+import Navbarhome from "../../Component/Navbarhome";
 
 function Signup() {
   const [getData, setGetData] = useState();
@@ -18,7 +19,10 @@ function Signup() {
   };
 
   return (
-    <body className="flex h-screen w-screen ">
+
+    <>
+    <Navbarhome />
+    <body className="flex h-screen w-screen">
       <div className="flex flex-row w-1/2 h-screen aspect-auto">
         <img
           className="w-full"
@@ -26,12 +30,16 @@ function Signup() {
           alt="picture"
         />
       </div>
-      <div className="flex flex-col w-1/2 h-screen justify-center">
+
+      {/* right side */}
+
+
+      <div className="flex flex-col w-1/2 h-screen justify-center items-center">
         <div>i-Move</div>
         <br />
         <div>Sign Up</div>
         <br />
-        <div>
+        <div className="flex flex-col items-center ">
           <label
             htmlFor="Fullname"
             className="flex flex-row justify-start ml-10"
@@ -39,7 +47,6 @@ function Signup() {
             Fullname
           </label>
           <input
-            className="flex flex-row justify-start ml-10 w-full"
             type="text"
             id="Fullname"
             name="Fullname"
@@ -50,7 +57,6 @@ function Signup() {
             E-mail
           </label>
           <input
-            className="flex flex-row justify-start ml-10 w-full"
             type="email"
             id="e-mail"
             name="e-mail"
@@ -64,7 +70,6 @@ function Signup() {
             Password
           </label>
           <input
-            className="flex flex-row justify-start ml-10 w-full"
             type="password"
             id="password"
             name="password"
@@ -78,7 +83,6 @@ function Signup() {
             Phone Number
           </label>
           <input
-            className="flex flex-row justify-start ml-10 w-screen"
             type="tel"
             id="phonenumber"
             name="phonenumber"
@@ -96,6 +100,7 @@ function Signup() {
         </div>
       </div>
     </body>
+    </>
   );
 }
 
