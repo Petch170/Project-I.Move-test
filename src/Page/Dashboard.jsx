@@ -53,6 +53,7 @@ const Dashboard = () => {
               </div>
             </div> */}
           </div>
+          <h2 className="text-center mb-2 font-bold">Total Activity Time (hr)</h2>
           <PieChartComponent />
           <Stat />
         </section>

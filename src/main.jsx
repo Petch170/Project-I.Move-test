@@ -5,21 +5,26 @@ import "./index.css";
 import "material-icons/iconfont/material-icons.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import UserHomePage from "./Component/UserHomePage/UserHomePage.jsx";
-import { Setting, SettingPassword, SettingProfile, Dashboard } from "./Page";
+import {
+  Setting,
+  SettingPassword,
+  SettingProfile,
+  Dashboard,
+  Mock,
+} from "./Page";
 import ActivityPage from "./Component/UserHomePage/ActivityPage.jsx";
 import Home from "./Component/Home.jsx";
 import Contact from "./Component/Contact.jsx";
 import Aboutus from "./Component/Aboutus.jsx";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
   },
 
   // {
-  //   path: "/Contact", 
+  //   path: "/Contact",
   //   element: <Contact />,
   // },
   // {
@@ -51,6 +56,7 @@ const router = createBrowserRouter([
     path: "/Activity",
     element: <ActivityPage />,
   },
+  { path: "/mock", element: <Mock /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
