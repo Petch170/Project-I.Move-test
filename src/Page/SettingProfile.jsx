@@ -8,6 +8,7 @@ import axios from "axios";
 const SettingProfile = () => {
   const [getNewProfile, setGetNewProfile] = useState([]);
   const [imageName, setImageName] = useState("");
+  const [image, setImage] = useState(null);
   const {
     register,
     handleSubmit,
@@ -47,16 +48,32 @@ const SettingProfile = () => {
         <section className="w-screen px-10 sm:w-fit">
           {/* mobile */}
           <div className="sm:hidden flex justify-end mt-6 relative">
-            <img
-              src={userImage}
-              alt="user image"
-              className="object-cover max-w-[60px]"
+            <input
+              type="file"
+              name="image"
+              id="image-mobile"
+              accept=".png, .jpg, .jpeg"
+              className="inputfile"
+              {...register("image", {
+                required: true,
+              })}
+              onChange={(e) => {
+                setImageName(e.target.files[0].name);
+                setImage(URL.createObjectURL(e.target.files[0]));
+              }}
             />
-            <img
-              src={pencilIcon}
-              alt="pencilIcon"
-              className="absolute bottom-[2px] right-[7px]"
-            />
+            <label htmlFor="image-mobile">
+              <img
+                src={userImage}
+                alt="user image"
+                className="object-cover max-w-[60px]"
+              />
+              <img
+                src={pencilIcon}
+                alt="pencilIcon"
+                className="absolute bottom-[2px] right-[7px]"
+              />
+            </label>
           </div>
           <div className="sm:border-l-2 sm:border-black sm:pl-10">
             <h2 className="text-2xl font-bold my-4">Edit Profile</h2>
@@ -66,22 +83,25 @@ const SettingProfile = () => {
               encType="multipart/form-data"
             >
               <div className="flex gap-10 items-center desktop mb-4">
-                <div className="file-input">
+                <div>
                   <input
                     type="file"
                     name="image"
                     id="image"
+                    accept=".png, .jpg, .jpeg"
                     className="inputfile"
                     {...register("image", {
                       required: true,
                     })}
                     onChange={(e) => {
-                      const [file] = e.target.files;
-                      const { name } = file;
-                      setImageName(name);
+                      setImageName(e.target.files[0].name);
+                      setImage(URL.createObjectURL(e.target.files[0]));
                     }}
                   />
-                  <label htmlFor="image" className="btn flex justify-center items-center cursor-pointer text-xs">
+                  <label
+                    htmlFor="image"
+                    className="btn flex justify-center items-center cursor-pointer text-xs"
+                  >
                     Change Picture (PNG,JPG)
                   </label>
                   {imageName ? (
@@ -92,7 +112,11 @@ const SettingProfile = () => {
                   {/* <button className="btn">Delete Picture</button> */}
                 </div>
                 <div>
-                  <img src={userImage} alt="user image" />
+                  <img
+                    src={image || userImage}
+                    alt="user image"
+                    className="object-cover aspect-square rounded-full max-w-[150px]"
+                  />
                 </div>
               </div>
               <div className="mb-4">
