@@ -1,17 +1,30 @@
 import { useForm } from "react-hook-form";
 import { HeaderMobile, NavBar, SettingAside } from "../Component";
+import { useState } from "react";
+import axios from "axios";
 
 const SettingPassword = () => {
+  const [getNewPassword, setGetNewPassword] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+  const changePassword = async (data) => {
+    const response = await axios.post(
+      "http://localhost:8000/user/changePassword/1",
+      data
+    );
+    if (response.status === 200 && response.data) {
+      setGetNewPassword([...response.data.data]);
+    }
+  };
   const submitForm = (data) => {
-    // console.log(data);
+    changePassword(data);
     reset();
   };
+  console.log("getNewPassword", getNewPassword);
   return (
     <>
       <header>
