@@ -13,7 +13,7 @@ export default function UserHomePage() {
           <div className="flex justify-between px-6 py-2 items-center bg-cream">
             <a href="/" className="h-[40px] w-[40px]">
               <img
-                src="./Picture/logo1.png"
+                src="./src/Pic-home/logo1.png"
                 alt="logo1"
                 className="relative "
               />

@@ -97,7 +97,7 @@ fullname:'Cat the Frog',
     durations: "2 hr",
     distance:'-',
     description:'very feeling good',
-    imageUrl:'',},
+    imageUrl:'https://img.freepik.com/free-photo/badminton-concept-with-shuttlecock-racket_23-2149940877.jpg',},
   ]
 
   export const mockUserData = {
