@@ -8,6 +8,10 @@
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
   text-align: center;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+}
+.btn:hover {
+  background-color: rgb(8 145 178);
 }
 
 .errorMsg {
@@ -17,6 +21,13 @@
   margin-top: 2px;
   font-size: 14px;
   font-weight: 300;
+}
+
+.inputfile {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
 }
 
 @media screen and (max-width: 640px) {
