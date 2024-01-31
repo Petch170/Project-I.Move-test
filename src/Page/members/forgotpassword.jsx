@@ -1,15 +1,27 @@
+import axios from "axios";
 import { useState } from "react";
 import { set } from "react-hook-form";
 
 function ForgotPassword() {
-  const [getEmail, setGetEmail] = useState();
+
   const [email, setEmail] = useState();
 
-  const handleData = () => {
+  const handleData = async () => {
     const getemail = {
       email: email,
     };
-    setGetEmail(getemail);
+    const responseEmail = await axios.post("#",getemail);
+    console.log(responseEmail);
+    try { if (responseEmail.status === 200 && responseEmail.data) {
+      console.log(responseEmail);
+    } else {
+      //
+    }
+      
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   return (
