@@ -1,6 +1,6 @@
 import React from "react";
 
-const Aboutus = ({ liref }) => {
+const Aboutus = () => {
   const data = [
     {
       id: 0,
@@ -29,7 +29,7 @@ const Aboutus = ({ liref }) => {
   ];
 
   return (
-    <div  ref={liref}  className=" mx-[7.5px] md:mx-[30px]">
+    <div id="aboutus" className=" mx-[7.5px] md:mx-[30px]">
       <div >
         <h1 className="text-center text-lg md:text-2xl font-semibold text-[#102C57] underline py-3">
           About Us
