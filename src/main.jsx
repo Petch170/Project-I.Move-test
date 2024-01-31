@@ -19,6 +19,7 @@ import Aboutus from "./Component/Aboutus.jsx";
 import AdminPage from "./Page/members/adminpage.jsx"
 import Login from "./Page/login.jsx";
 import Signup from "./Page/members/signup.jsx";
+import ForgotPassword from "./Page/members/forgotpassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/forgotpassword",
+    element: <ForgotPassword />,
   },
   { path: "/mock", element: <Mock /> },
 ]);
