@@ -97,7 +97,7 @@ fullname:'Cat the Frog',
     durations: "2 hr",
     distance:'-',
     description:'very feeling good',
-    imageUrl:'https://fittoplay.org/globalassets/pictures/badminton/badminton_pho10254241_crop.jpg',},
+    imageUrl:'',},
   ]
 
   export const mockUserData = {

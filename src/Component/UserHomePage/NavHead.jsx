@@ -39,7 +39,7 @@ export default function NavHead({ handleCreateClick }) {
           <div className="h-[85px] w-[100px] flex justify-start">
             <a href="/" className="h-[80px] w-[80px]">
               <img
-                src="./Picture/logo1.png"
+                src="./src/assets/Pic-home/logo1.png"
                 alt="logo1"
                 className="relative "
               />
