@@ -13,13 +13,7 @@ export default function NavHead({ handleCreateClick }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const customStyles = {
     content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      transform: "translate(-50%, -50%) scale(0.75)",
-
-      padding: "30px",
+    
       backgroundColor: "#EADBC8",
     },
     overlay: { zIndex: 1000 },

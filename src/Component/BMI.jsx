@@ -38,10 +38,10 @@ const BMI = () => {
 
   return (
     <div className="grid place-items-center col-span-12 md:col-span-8 lg:col-span-6 2xl:col-span-2 bg-[#EADBC8]  mx-[7.5px] md:mx-[30px]">
-      <div className=" w-3/4">
+      <div className=" ">
         <div className=" card">
           <h1 className=" font-bold text-center text-lg md:text-2xl text-[#102C57]">
-            BMI Calculatorqq
+            BMI Calculator
           </h1>
           <form className="mt-4 text-base lg:text-lg xl:text-2xl">
             <label className="block">
