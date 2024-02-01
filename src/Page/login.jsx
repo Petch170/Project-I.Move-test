@@ -4,16 +4,16 @@ import axios from "axios";
 import { redirect } from "react-router-dom";
 
 function Login() {
-  const [userName, setUserName] = useState();
+  const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
   const handleData = async () => {
     const data = {
-      userName: userName,
+      userName: username,
       password: password,
     };
     // get data
-    // console.log(data);
+    console.log(data);
     try {
       const resposedata = await axios.post("http://127.0.0.1:3001/login", data);
       if (resposedata.status === 200 && resposedata.data) {
