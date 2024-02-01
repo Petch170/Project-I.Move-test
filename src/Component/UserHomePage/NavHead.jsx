@@ -11,6 +11,8 @@ import {
 import { Link } from "react-router-dom";
 export default function NavHead({ handleCreateClick }) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const pathName = window.location.pathname;
+
   const customStyles = {
     content: {
       top: "50%",
@@ -37,7 +39,7 @@ export default function NavHead({ handleCreateClick }) {
           <div className="h-[85px] w-[100px] flex justify-start">
             <a href="/" className="h-[80px] w-[80px]">
               <img
-                src="./Picture/logo1.png"
+                src="./src/assets/Pic-home/logo1.png"
                 alt="logo1"
                 className="relative "
               />
