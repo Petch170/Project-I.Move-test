@@ -20,23 +20,27 @@ import AdminPage from "./Page/members/adminpage.jsx"
 import Login from "./Page/login.jsx";
 import Signup from "./Page/members/signup.jsx";
 import ForgotPassword from "./Page/members/forgotpassword.jsx";
+import ModalForm from "./Component/UserHomePage/ModalForm.jsx";
+import Accordion from "./Component/UserHomePage/Accordion.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
   },
-
-  // {
-  //   path: "/login",
-  //   element: <Contact />,
-  // },
-  // {
-  //   path: "/Aboutus",
-  //   element: <Aboutus />,
-  // },
-
-
+  {
+    path: "/Contact",
+    element: <Contact />,
+  },
+  {
+    path: "/Aboutus",
+    element: <Aboutus />,
+  },
+  {
+    path: "/ModalForm",
+    element: <ModalForm/>,
+  },
+  
   {
     path: "/UserHomePage",
     element: <UserHomePage />,

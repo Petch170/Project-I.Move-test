@@ -16,7 +16,6 @@ const App = () => {
       <Aboutus />
       <Contact/>
       <Footer />
-      <BMI/>
       <Navbarmbh />
     </>
   );
