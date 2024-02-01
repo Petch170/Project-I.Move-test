@@ -93,8 +93,11 @@ export default function NavHead({ handleCreateClick }) {
             <p>Activity</p>
           </div>
         </Link>
-        <div className="flex flex-col justify-center items-center">
-          <img src={handleCreateClick} alt="add activity" />
+        <div
+          className="flex flex-col justify-center items-center"
+          onClick={handleCreateClick}
+        >
+          <img src={plusCircleIcon} alt="add activity" />
         </div>
         <Link to="/user/dashboard">
           <div className="flex flex-col justify-center items-center">
