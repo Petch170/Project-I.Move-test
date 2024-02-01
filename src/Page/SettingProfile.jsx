@@ -2,18 +2,41 @@ import { useForm } from "react-hook-form";
 import { userImage } from "../assets/Picture";
 import { pencilIcon } from "../assets/Icon";
 import { HeaderMobile, NavBar, SettingAside } from "../Component";
+import { useState } from "react";
+import axios from "axios";
 
 const SettingProfile = () => {
+  const [getNewProfile, setGetNewProfile] = useState([]);
+  const [imageName, setImageName] = useState("");
+  const [image, setImage] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+  const editProfile = async (data) => {
+    const response = await axios.patch(
+      "http://localhost:8000/user/editProfile/1",
+      data
+    );
+    if (response.status === 200 && response.data) {
+      setGetNewProfile([...response.data.data]);
+    }
+  };
   const submitForm = (data) => {
-    // console.log(data);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("phoneNumber", data.phoneNumber);
+    formData.append("image", data.image[0]);
+    editProfile(formData);
+    console.log("data", data);
+    console.log("image", data.image[0]);
+    setImageName("");
     reset();
   };
+  console.log("getNewProfile", getNewProfile);
   return (
     <>
       <header>
@@ -25,29 +48,77 @@ const SettingProfile = () => {
         <section className="w-screen px-10 sm:w-fit">
           {/* mobile */}
           <div className="sm:hidden flex justify-end mt-6 relative">
-            <img
-              src={userImage}
-              alt="user image"
-              className="object-cover max-w-[60px]"
+            <input
+              type="file"
+              name="image"
+              id="image-mobile"
+              accept=".png, .jpg, .jpeg"
+              className="inputfile"
+              {...register("image", {
+                required: true,
+              })}
+              onChange={(e) => {
+                setImageName(e.target.files[0].name);
+                setImage(URL.createObjectURL(e.target.files[0]));
+              }}
             />
-            <img
-              src={pencilIcon}
-              alt="pencilIcon"
-              className="absolute bottom-[2px] right-[7px]"
-            />
+            <label htmlFor="image-mobile">
+              <img
+                src={userImage}
+                alt="user image"
+                className="object-cover max-w-[60px]"
+              />
+              <img
+                src={pencilIcon}
+                alt="pencilIcon"
+                className="absolute bottom-[2px] right-[7px]"
+              />
+            </label>
           </div>
           <div className="sm:border-l-2 sm:border-black sm:pl-10">
             <h2 className="text-2xl font-bold my-4">Edit Profile</h2>
-            <div className="flex gap-10 items-center desktop mb-4">
-              <div className="flex flex-col gap-4">
-                <button className="btn">Change Picture</button>
-                <button className="btn">Delete Picture</button>
+            <form
+              action=""
+              onSubmit={handleSubmit(submitForm)}
+              encType="multipart/form-data"
+            >
+              <div className="flex gap-10 items-center desktop mb-4">
+                <div>
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    accept=".png, .jpg, .jpeg"
+                    className="inputfile"
+                    {...register("image", {
+                      required: true,
+                    })}
+                    onChange={(e) => {
+                      setImageName(e.target.files[0].name);
+                      setImage(URL.createObjectURL(e.target.files[0]));
+                    }}
+                  />
+                  <label
+                    htmlFor="image"
+                    className="btn flex justify-center items-center cursor-pointer text-xs"
+                  >
+                    Change Picture (PNG,JPG)
+                  </label>
+                  {imageName ? (
+                    <div className="text-xs text-center mt-2">{imageName}</div>
+                  ) : (
+                    <div></div>
+                  )}
+                  {/* <button className="btn">Delete Picture</button> */}
+                </div>
+                <div>
+                  <img
+                    src={image || userImage}
+                    alt="user image"
+                    className="object-cover aspect-square rounded-full max-w-[150px]"
+                  />
+                </div>
               </div>
-              <div>
-                <img src={userImage} alt="user image" />
-              </div>
-            </div>
-            <form action="" onSubmit={handleSubmit(submitForm)}>
               <div className="mb-4">
                 <label htmlFor="name">Full Name</label>
                 <input
