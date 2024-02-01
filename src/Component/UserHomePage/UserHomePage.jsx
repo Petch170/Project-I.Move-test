@@ -8,7 +8,7 @@ import BMI from "../BMI";
 
 export default function UserHomePage() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const pathName = window.location.pathname;
+
   const customStyles = {
     content: {
       top: "50%",
@@ -59,7 +59,7 @@ export default function UserHomePage() {
                 Latest Activity
               </h2>
             </div>
-            <div className=" sm:hidden col-span-12 flex justify-end pb-4">
+            <div className=" sm:hidden col-span-12 flex justify-end pb-8">
               <div
                 className="rounded-full border-4 border-[#CE9F9F] bg-[#E8E8E8] p-3 pr-3 flex flex-col items-center w-[75px] h-[75px] cursor-pointer"
                 onClick={openModal}
