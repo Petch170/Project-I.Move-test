@@ -8,7 +8,8 @@ function Signup() {
   const [password, setPassword] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [gender, setGender] = useState();
-  const [dob, setDob] = useState('');
+  const [dob, setDob] = useState("");
+  const [typemem , setTypemem] = useState();
 
   const handledata = async () => {
     const data = {
@@ -18,6 +19,7 @@ function Signup() {
       gender: gender,
       dob: dob,
       phoneNumber: phoneNumber,
+      typemem: typemem,
     };
     // console.log(handledata);
     const response = await axios.post("#", data);
@@ -75,6 +77,7 @@ function Signup() {
                 placeholder="Enter Your Name"
                 className="border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setFullname(e.target.value)}
+                required
               ></input>
               <label
                 htmlFor="e-mail"
@@ -87,8 +90,11 @@ function Signup() {
                 id="e-mail"
                 name="e-mail"
                 placeholder="Enter Your E-mail"
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                title="Please enter a valid email address"
                 className="border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setEmail(e.target.value)}
+                required
               ></input>
               <label
                 htmlFor="password"
@@ -101,8 +107,11 @@ function Signup() {
                 id="password"
                 name="password"
                 placeholder="Enter Your Password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+                title="Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one number."
                 className="border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setPassword(e.target.value)}
+                required
               ></input>
               <div className="mt-2">Gender </div>
               <div className="flex flex-row">
@@ -115,6 +124,7 @@ function Signup() {
                   name="gender"
                   value="male"
                   onChange={(e) => setGender(e.target.value)}
+                  required
                 ></input>
                 <label
                   htmlFor="female"
@@ -128,14 +138,16 @@ function Signup() {
                   name="gender"
                   value="female"
                   onChange={(e) => setGender(e.target.value)}
+                  required
                 ></input>
               </div>
-              <label className="mt-2" htmlFor="dob">Date of Birth:</label>
+              <label className="mt-2" htmlFor="dob">
+                Date of Birth:
+              </label>
               <input
                 type="date"
                 id="dob"
                 name="dob"
-                
                 onChange={(e) => setDob(e.target.value)}
                 required
               />
@@ -156,6 +168,7 @@ function Signup() {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 required
               ></input>
+              <input className="hidden" type="text" value="individual" onChange={(e) => setTypemem(e.target.value)}/>
               <div className="mt-5 flex flex-col justify-center">
                 <button
                   className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 border-2 rounded-md"
