@@ -36,10 +36,10 @@ const router = createBrowserRouter([
     path: "/Aboutus",
     element: <Aboutus />,
   },
-  {
-    path: "/ModalForm",
-    element: <ModalForm/>,
-  },
+  // {
+  //   path: "/ModalForm",
+  //   element: <ModalForm/>,
+  // },
   
   {
     path: "/UserHomePage",

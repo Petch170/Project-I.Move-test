@@ -3,29 +3,33 @@ import { Axios } from "axios";
 import Login from "../Page/login";
 import { logo } from "../assets/Picture";
 import UserHomePage from "./UserHomePage/UserHomePage";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate()
   //สถานะการเข้าระบบ
   const [logIn, setLogin] = useState(false);
   //ตรวจสอบสถานะตอนโหลด component
   useEffect(() => {
-    const userLogIn = localStorage.getItem("login");
-    if (userLogIn === "true") {
+    const userLogIn = localStorage.getItem("login");//loginกับหลังบ้าน
+    if (userLogIn) {
       setLogin(true);
+      console.log(userLogIn);
     }
+  
   }, []);
 
   //ตรวจสถานะเมื่อกดstart
   const handleClick = () => {
     //ตรวจผู้ใช้ว่าเคยเข้าระบบไหม
     if (logIn) {
-      return <UserHomePage />;
+      return navigate("/UserHomePage");
     } else {
-      return <Login />;
+      return  navigate("/login");
     }
+    
   };
   
-
   return (
     <div className="">
       <div className="homepage relative">

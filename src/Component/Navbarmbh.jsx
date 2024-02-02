@@ -8,6 +8,7 @@ import {
 } from "../assets/Icon";
 
 const Navbarmbh = () => {
+
   return (
     <>
       {/* mobile */}
@@ -24,11 +25,11 @@ const Navbarmbh = () => {
           <p>Activity</p>
         </div>
         </Link>
-        <Link to="/ModalForm">
+        
         <div className="flex flex-col justify-center items-center text-sm">
           <img src={plusCircleIcon} alt="add activity" />
         </div>
-        </Link>
+       
         <Link to="/user/dashboard">
           <div className="flex flex-col justify-center items-center text-sm">
             <img src={dashboardIcon}  alt="dashboard" />
