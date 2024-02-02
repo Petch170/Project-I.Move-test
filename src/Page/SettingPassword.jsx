@@ -4,27 +4,31 @@ import { useState } from "react";
 import axios from "axios";
 
 const SettingPassword = () => {
-  const [getNewPassword, setGetNewPassword] = useState([]);
+  // const [getNewPassword, setGetNewPassword] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+
   const changePassword = async (data) => {
     const response = await axios.post(
-      "http://localhost:8000/user/changePassword/1",
+      "http://localhost:8000/user/changePassword/65bb0847040f0e16a95a16ec",
       data
     );
     if (response.status === 200 && response.data) {
-      setGetNewPassword([...response.data.data]);
+      // setGetNewPassword([...response.data.data]);
+      // console.log("getNewPassword", getNewPassword);
+      console.log(response.data);
     }
   };
+
   const submitForm = (data) => {
     changePassword(data);
     reset();
   };
-  console.log("getNewPassword", getNewPassword);
+
   return (
     <>
       <header>
@@ -39,7 +43,7 @@ const SettingPassword = () => {
               <h2 className="text-2xl font-bold text-center mb-4 sm:text-left">
                 Password
               </h2>
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label htmlFor="currentPassword">Current password</label>
                 <input
                   type="password"
@@ -60,7 +64,7 @@ const SettingPassword = () => {
                     Password should be at least 6 characters.
                   </p>
                 )}
-              </div>
+              </div> */}
               <div className="mb-4">
                 <label htmlFor="newPassword">New password</label>
                 <input

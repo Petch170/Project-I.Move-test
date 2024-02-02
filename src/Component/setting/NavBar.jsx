@@ -17,10 +17,13 @@ const NavBar = () => {
           <img src={logo} alt="logo" />
           <p className="font-black absolute left-[55px]">I.MOVE</p>
         </div>
-        <div className="flex flex-row  items-center gap-4 p-4">
-          <p>Contact</p>
-          <p>About</p>
-          <p>Home</p>
+        <div className="flex flex-row  items-center gap-8 px-4 py-2">
+          <Link to="/">
+            <p className="font-bold">Contact</p>
+          </Link>
+          <Link to="/">
+            <p className="font-bold">About</p>
+          </Link>
           <div className="flex flex-col bg-white rounded-full justify-center items-center p-2 border border-orange-600">
             <img src={plantIcon} alt="plant" />
             <p className="text-xs">Grow up</p>
@@ -29,17 +32,19 @@ const NavBar = () => {
       </nav>
 
       {/* mobile */}
-      <nav className="sm:hidden grid grid-cols-5 items-center bg-cream py-2 fixed inset-x-0 bottom-0 ">
+      <nav className="sm:hidden grid grid-cols-5 items-center bg-cream py-1 fixed inset-x-0 bottom-0 ">
         <Link to="/">
           <div className="flex flex-col justify-center items-center">
             <img src={homeIcon} alt="home" />
             <p>Home</p>
           </div>
         </Link>
-        <div className="flex flex-col justify-center items-center">
-          <img src={dumbbellIcon} alt="activity" />
-          <p>Activity</p>
-        </div>
+        <Link to="/UserHomePage">
+          <div className="flex flex-col justify-center items-center">
+            <img src={dumbbellIcon} alt="activity" />
+            <p>Activity</p>
+          </div>
+        </Link>
         <div className="flex flex-col justify-center items-center">
           <img src={plusCircleIcon} alt="add activity" />
         </div>
@@ -49,10 +54,12 @@ const NavBar = () => {
             <p>Dashboard</p>
           </div>
         </Link>
-        <div className="flex flex-col justify-center items-center">
-          <img src={userIcon} alt="profile" />
-          <p>Profile</p>
-        </div>
+        <Link to="/Activity">
+          <div className="flex flex-col justify-center items-center">
+            <img src={userIcon} alt="profile" />
+            <p>Profile</p>
+          </div>
+        </Link>
       </nav>
     </>
   );

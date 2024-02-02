@@ -6,15 +6,19 @@ import axios from "axios";
 export const customContext = createContext({});
 const Dashboard = () => {
   const [data, setData] = useState([]);
+
   useEffect(() => {
     const getUserData = async () => {
-      const response = await axios.get("http://localhost:8000/user/activity/1");
+      const response = await axios.get(
+        "http://localhost:8000/user/activity/65bb0847040f0e16a95a16ec"
+      );
       if (response.status === 200 && response.data) {
         setData([...response.data.data]);
       }
     };
     getUserData();
   }, []);
+
   return (
     <customContext.Provider value={{ data }}>
       <header>
@@ -53,7 +57,9 @@ const Dashboard = () => {
               </div>
             </div> */}
           </div>
-          <h2 className="text-center mb-2 font-bold">Total Activity Time (hr)</h2>
+          <h2 className="text-center mb-2 font-bold">
+            Total Activity Time (hr)
+          </h2>
           <PieChartComponent />
           <Stat />
         </section>
