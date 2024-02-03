@@ -20,8 +20,7 @@ export default function NavHead({ handleCreateClick }) {
       right: "auto",
       bottom: "auto",
       transform: "translate(-50%, -50%) scale(0.75)",
-
-      padding: "30px",
+      // padding: "",
       backgroundColor: "#EADBC8",
     },
     overlay: { zIndex: 1000 },
