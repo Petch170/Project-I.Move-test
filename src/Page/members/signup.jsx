@@ -94,7 +94,7 @@ function Signup() {
           <form>
             <div className="flex flex-col items-start ">
               <label htmlFor="Fullname" className="flex flex-row justify-start">
-                Fullname
+                Full name
               </label>
               <input
                 type="text"
@@ -194,7 +194,7 @@ function Signup() {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 required
               ></input>
-              <input className="hidden" type="text" value="individual" onChange={(e) => setTypemem(e.target.value)}/>
+
               <div className="mt-5 flex flex-col justify-center">
                 <button
                   className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 border-2 rounded-md"
@@ -209,7 +209,7 @@ function Signup() {
                 </p>
                 <a
                   className="mt-1 text-center bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 border-2 rounded-md"
-                  href="#"
+                  href="/login"
                 >
                   Login
                 </a>
