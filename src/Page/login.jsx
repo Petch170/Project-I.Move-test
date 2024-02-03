@@ -9,7 +9,7 @@ function Login() {
 
   const handleData = async () => {
     const data = {
-      userName: username,
+      username: username,
       password: password,
     };
     // get data
