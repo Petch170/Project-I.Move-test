@@ -28,7 +28,32 @@ function Signup() {
       typemem: "individual",
     };
     
-
+    if (!fullName || !email || !password || !gender || !dob || !phoneNumber) {
+      alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
+      return;
+    }
+    
+    // ตรวจสอบ pattern ของอีเมล
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // ตรวจสอบ pattern ของพาสเวิร์ด
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    // ตรวจสอบ pattern ของเบอร์โทรศัพท์
+    const phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+    
+    switch (true) {
+      case !emailPattern.test(email):
+        alert("รูปแบบอีเมลไม่ถูกต้อง");
+        return;
+      case !passwordPattern.test(password):
+        alert("รูปแบบพาสเวิร์ดไม่ถูกต้อง");
+        return;
+      case !phonePattern.test(phoneNumber):
+        alert("รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง");
+        return;
+      default:
+        // Continue with the rest of your code
+        break;
+    }
     
     
     const response = await axios.post("http://127.0.0.1:3001/signup", data);
@@ -37,7 +62,7 @@ function Signup() {
     // dont forget encryp password before send data
     // waiting for check something from backend
 
-      if (response.body)
+      if (response.body);
  
   };
 
