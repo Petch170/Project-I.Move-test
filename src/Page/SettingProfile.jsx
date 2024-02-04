@@ -16,15 +16,18 @@ const SettingProfile = () => {
     formState: { errors },
     reset,
   } = useForm();
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const getUserInfo = async () => {
       const response = await axios.get(
-        "http://localhost:8000/user/info/65bb0847040f0e16a95a16ec"
+        `http://localhost:8000/user/info/${userId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200 && response.data) {
         setUserInfo([...response.data.data]);
-        console.log("userInfo", userInfo);
+        // console.log("userInfo", userInfo);
       }
     };
     getUserInfo();
@@ -32,8 +35,9 @@ const SettingProfile = () => {
 
   const editProfile = async (data) => {
     const response = await axios.patch(
-      "http://localhost:8000/user/editProfile/65bb0847040f0e16a95a16ec",
-      data
+      `http://localhost:8000/user/editProfile/${userId}`,
+      data,
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     if (response.status === 200 && response.data) {
       // setGetNewProfile([...response.data.data]);
@@ -90,8 +94,9 @@ const SettingProfile = () => {
                 <label htmlFor="image-mobile">
                   <img
                     src={
-                      `http://localhost:8000/${userInfo[0]?.imagePath}` ||
-                      userImage
+                      userInfo[0]?.imagePath !== ""
+                        ? userInfo[0]?.imagePath
+                        : userImage
                     }
                     alt="user image"
                     className="object-cover aspect-square rounded-full max-w-[60px]"
@@ -135,8 +140,9 @@ const SettingProfile = () => {
                 <div>
                   <img
                     src={
-                      `http://localhost:8000/${userInfo[0]?.imagePath}` ||
-                      userImage
+                      userInfo[0]?.imagePath !== ""
+                        ? userInfo[0]?.imagePath
+                        : userImage
                     }
                     alt="user image"
                     className="object-cover aspect-square rounded-full max-w-[150px]"

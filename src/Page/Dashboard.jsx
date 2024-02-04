@@ -9,8 +9,14 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getUserData = async () => {
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
+      // console.log("token", token);
+      // console.log("userId", userId);
+
       const response = await axios.get(
-        "http://localhost:8000/user/activity/65bb0847040f0e16a95a16ec"
+        `http://localhost:8000/user/activity/${userId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200 && response.data) {
         setData([...response.data.data]);

@@ -1,16 +1,21 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Mock = () => {
   // const [getNewImage, setGetNewImage] = useState([]);
+  // const [token, setToken] = useState("");
+  // const [reload, setReload] = useState(false);
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-  
+
   // const uploadImage = async (data) => {
   //   try {
   //     const response = await axios.patch(
@@ -24,16 +29,30 @@ const Mock = () => {
   //     console.log(error.response.data);
   //   }
   // };
+  // useEffect(() => {
+  //   const getToken = () => {
+  //     setToken(window.localStorage.getItem("user"));
+  //     console.log("token", token);
+  //   };
+  //   getToken();
+  // }, [reload]);
 
   const login = async (data) => {
     try {
-      const response = await axios.post("http://localhost:8000/login", data);
+      const response = await axios.post(
+        "http://localhost:8000/mock/login",
+        data
+      );
       if (response.status === 200 && response.data) {
-        console.log(response.data);
-        localStorage.setItem("user", response.data);
+        // console.log(response.data);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data.userId);
+        navigate("/UserHomePage");
+        // console.log(localStorage);
       }
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
+      setMessage(error.response.data.error.message);
     }
   };
 
@@ -45,7 +64,11 @@ const Mock = () => {
     // formData.append("email", data.email);
     // formData.append("password", data.password);
     login(data);
+    // setToken(window.localStorage.getItem("user"));
+    // console.log("token", token);
+    // setReload(!reload);
     console.log("data", data);
+    console.log("message", message);
     // console.log("formData", formData);
     reset();
   };
@@ -102,9 +125,9 @@ const Mock = () => {
             <p className="errorMsg">password is required.</p>
           )}
         </div>
-
         <button type="submit">Submit</button>
       </form>
+      {message && <p className="text-red-400">{message}</p>}
     </>
   );
 };

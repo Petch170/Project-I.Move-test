@@ -11,11 +11,14 @@ const SettingPassword = () => {
     formState: { errors },
     reset,
   } = useForm();
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   const changePassword = async (data) => {
     const response = await axios.post(
-      "http://localhost:8000/user/changePassword/65bb0847040f0e16a95a16ec",
-      data
+      `http://localhost:8000/user/changePassword/${userId}`,
+      data,
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     if (response.status === 200 && response.data) {
       // setGetNewPassword([...response.data.data]);
