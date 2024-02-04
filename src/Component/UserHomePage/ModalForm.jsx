@@ -17,9 +17,10 @@ export default function ModalForm({
   formType,
   setMockCard,
   mockCard,
-  handleDelete,
+  handleConfirmDelete,
 }) {
   const [inputData, setInputData] = useState(initialValue);
+
   let idCounter = 10;
 
   const generateUniqueId = () => {
@@ -73,7 +74,7 @@ export default function ModalForm({
   };
 
   return (
-    <div className="">
+    <div className="sm:grid-cols-2 p-4 ">
       <div className="flex justify-end cursor-pointer">
         <span class="material-icons-outlined" onClick={closeModal}>
           close
@@ -81,13 +82,19 @@ export default function ModalForm({
       </div>
       <div className="flex flex-col justify-center bg-[#EADBC8]">
         <div className="flex justify-center">
-          <h1 className="font-bold text-[#102C57] text-3xl p-4">
-            Create Activity
-          </h1>
+          {formType === "edit" ? (
+            <h1 className="font-bold text-[#102C57] text-3xl p-4">
+              Edit Activity
+            </h1>
+          ) : (
+            <h1 className="font-bold text-[#102C57] text-3xl p-4">
+              Create Activity
+            </h1>
+          )}
         </div>
         <div className="p-4 text-center	text-[#102C57] font-semibold flex justify-center">
           <label class="bg-[#102C57] hover:bg-cyan-600 duration-150 text-white font-semibold py-2 px-4 rounded cursor-pointer sm:w-1/4 ">
-            <input type="file" class="hidden" /> Upload Image
+            <input type="file" class="inputfile" /> Upload Image
           </label>
         </div>
       </div>
@@ -207,10 +214,10 @@ export default function ModalForm({
         </button>
       </div>
       {formType === "edit" ? (
-        <div className="flex justify-end cursor-pointer">
+        <div className="flex justify-end cursor-pointer ">
           <span
             className="material-icons-outlined"
-            onClick={() => handleDelete(inputData.id)}
+            onClick={() => handleConfirmDelete(inputData.id)}
           >
             delete_sweep
           </span>
