@@ -4,12 +4,12 @@ import axios from "axios";
 import { redirect } from "react-router-dom";
 
 function Login() {
-  const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleData = async () => {
     const data = {
-      username: username,
+      email: email,
       password: password,
     };
     // get data
@@ -47,16 +47,16 @@ function Login() {
         <img className="nav w-14 h-14" src="src\assets\Pic-home\logo1.png" alt="icon" /> <div className="pt-5 flex justify-center font-bold">i-move</div></div>
             <div className="font-bold">Login</div>
           <div id="input" className="mt-3">
-            <label for="username" className="mt-3">
-              Username:
+            <label for="email" className="mt-3">
+              E-Mail:
             </label>{" "}
             <br />
             <input
               type="text"
-              id="username"
-              name="username"
-              placeholder="Enter your username"
-              onChange={(e) => setUserName(e.target.value)}
+              id="email"
+              name="email"
+              placeholder="Enter your E-Mail"
+              onChange={(e) => setEmail(e.target.value)}
               className="mt-2 mb-2 border-solid border-2 border-[#c7c7c7] rounded-md"
             ></input>{" "}
             <br />

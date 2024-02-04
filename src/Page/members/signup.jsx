@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Navbarhome from "../../Component/Navbarhome";
 import axios from "axios";
+import { redirect } from "react-router-dom";
+import Login from "../login";
+
 
 function Signup() {
   const [fullName, setFullname] = useState();
@@ -9,9 +12,12 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState();
   const [gender, setGender] = useState();
   const [dob, setDob] = useState("");
-  const [typemem , setTypemem] = useState();
+
+  
 
   const handledata = async () => {
+
+
     const data = {
       fullName: fullName,
       email: email,
@@ -19,25 +25,20 @@ function Signup() {
       gender: gender,
       dob: dob,
       phoneNumber: phoneNumber,
-      typemem: typemem,
+      typemem: "individual",
     };
-    // console.log(handledata);
-    const response = await axios.post("#", data);
+    
+
+    
+    
+    const response = await axios.post("http://127.0.0.1:3001/signup", data);
     console.log(response);
 
     // dont forget encryp password before send data
     // waiting for check something from backend
 
-    try {
-      if (response.status === 200 && response.data) {
-        await response(data);
-        // redirect here
-      } else {
-        //
-      }
-    } catch (error) {
-      console.log(error);
-    }
+      if (response.body)
+ 
   };
 
   return (
@@ -53,7 +54,7 @@ function Signup() {
         </div>
 
         {/* right side */}
-
+        
         <div className="flex flex-col w-1/2 h-screen justify-center items-center">
           <div className="flex flex-row">
             <img
