@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import ModalForm from "./ModalForm";
 import Accordion from "./Accordion";
@@ -6,6 +6,7 @@ import { mockUserData, userData } from "./mockData";
 import Sidebar from "./Sidebar";
 import NavHead from "./NavHead";
 import DeleteConfirm from "./DeleteConfirm";
+import axios from "axios";
 
 const initialValues = {
   id: undefined,
@@ -26,6 +27,18 @@ export default function ActivityPage() {
   const [confirmDel, setConfirmDel] = useState(false);
   const [initialValue, setInitialValue] = useState(initialValues);
   const [idToDel, setIdtoDel] = useState("");
+  const [cardData, setCardData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get(
+        `http://localhost:8000/api/posts/1/activity/`
+      ); //change when have real userId
+      const data = res.data;
+      setCardData(data);
+    };
+    getData();
+  }, []);
 
   const customStyles = {
     content: {
@@ -167,7 +180,7 @@ export default function ActivityPage() {
               <h1>My Activity</h1>
             </div>
             <Accordion
-              activityCardData={mockCard}
+              activityCardData={cardData}
               handleEditClick={handleEditClick}
             />
           </div>

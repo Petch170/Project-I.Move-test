@@ -101,7 +101,7 @@ export default function NavHead({ handleCreateClick }) {
           </div>
         ) : (
           <div className="flex justify-center">
-            <span className="material-icons-outlined ">face_2</span>
+            <span className="material-icons-outlined">directions_bike</span>
           </div>
         )}
         <Link to="/user/dashboard">

@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavHead from "./NavHead";
 import Sidebar from "./Sidebar";
 import { mockActivity, mockUserData } from "./mockData";
 import Accordion from "./Accordion";
 import Modal from "react-modal";
 import BMI from "../BMI";
+import axios from "axios";
 
 export default function UserHomePage() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [cardData, setCardData] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get(`http://localhost:8000/api/posts`);
+      const data = res.data;
+      setCardData(data);
+    };
+    getData();
+  }, []);
 
   const customStyles = {
     content: {
@@ -72,7 +82,7 @@ export default function UserHomePage() {
             </div>
           </div>
           <div>
-            <Accordion activityCardData={mockActivity} />
+            <Accordion activityCardData={cardData} />
           </div>
         </div>
       </div>
