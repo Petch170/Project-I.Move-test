@@ -1,42 +1,75 @@
 import React, { useState } from "react";
 import Navbarhome from "../../Component/Navbarhome";
 import axios from "axios";
+import { redirect } from "react-router-dom";
+import Login from "../login";
+
 
 function Signup() {
   const [fullName, setFullname] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
+  const [gender, setGender] = useState();
+  const [dob, setDob] = useState("");
+
+  
 
   const handledata = async () => {
+
+
     const data = {
       fullName: fullName,
       email: email,
       password: password,
+      gender: gender,
+      dob: dob,
       phoneNumber: phoneNumber,
+      typemem: "individual",
     };
-    const response = await axios.post("#", data);
+    
+    if (!fullName || !email || !password || !gender || !dob || !phoneNumber) {
+      alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
+      return;
+    }
+    
+    // ตรวจสอบ pattern ของอีเมล
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // ตรวจสอบ pattern ของพาสเวิร์ด
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    // ตรวจสอบ pattern ของเบอร์โทรศัพท์
+    const phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+    
+    switch (true) {
+      case !emailPattern.test(email):
+        alert("รูปแบบอีเมลไม่ถูกต้อง");
+        return;
+      case !passwordPattern.test(password):
+        alert("รูปแบบพาสเวิร์ดไม่ถูกต้อง");
+        return;
+      case !phonePattern.test(phoneNumber):
+        alert("รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง");
+        return;
+      default:
+        // Continue with the rest of your code
+        break;
+    }
+    
+    
+    const response = await axios.post("http://127.0.0.1:3001/signup", data);
     console.log(response);
 
     // dont forget encryp password before send data
     // waiting for check something from backend
 
-    try {
-      if (response.status === 200 && response.data) {
-        await response(data);
-        // redirect here
-      } else {
-        //
-      }
-    } catch (error) {
-      console.log(error);
-    }
+      if (response.body);
+ 
   };
 
   return (
     <>
       <Navbarhome />
-      <body className="flex h-screen w-screen">
+      <div className="flex h-screen w-screen mb-5">
         <div className="flex flex-row w-1/2 h-screen aspect-auto">
           <img
             className="w-full"
@@ -46,7 +79,7 @@ function Signup() {
         </div>
 
         {/* right side */}
-
+        
         <div className="flex flex-col w-1/2 h-screen justify-center items-center">
           <div className="flex flex-row">
             <img
@@ -58,70 +91,133 @@ function Signup() {
           </div>
           <div className="font-bold">Sign Up</div>
           <br />
-          <div className="flex flex-col items-center ">
-            <label
-              htmlFor="Fullname"
-              className="flex flex-row justify-start ml-10"
-            >
-              Fullname
-            </label>  
-            <input
-              type="text"
-              id="Fullname"
-              name="Fullname"
-              placeholder="Enter Your Name"
-              onChange={(e) => setFullname(e.target.value)}
-            ></input>
-            <label
-              htmlFor="e-mail"
-              className="flex flex-row justify-start ml-10"
-            >
-              E-mail
-            </label>
-            <input
-              type="email"
-              id="e-mail"
-              name="e-mail"
-              placeholder="Enter Your E-mail"
-              onChange={(e) => setEmail(e.target.value)}
-            ></input>
-            <label
-              htmlFor="password"
-              className="flex flex-row justify-start ml-10"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter Your Password"
-              onChange={(e) => setPassword(e.target.value)}
-            ></input>
-            <label
-              htmlFor="phonenumber"
-              className="flex flex-row justify-start ml-10"
-            >
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              id="phonenumber"
-              name="phonenumber"
-              placeholder="Enter Your Phone number"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-              title="Please enter phone number in the format xxx-xxx-xxxx"
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              required
-            ></input>
-            <button type="summit" onClick={handledata}>
-              Register
-            </button>
-            <p>Already have an account</p>
-            <a href="#">Login</a>
-          </div>
+          <form>
+            <div className="flex flex-col items-start ">
+              <label htmlFor="Fullname" className="flex flex-row justify-start">
+                Full name
+              </label>
+              <input
+                type="text"
+                id="Fullname"
+                name="Fullname"
+                placeholder="Enter Your Name"
+                className="border-solid border-2 border-[#c7c7c7] rounded-md"
+                onChange={(e) => setFullname(e.target.value)}
+                required
+              ></input>
+              <label
+                htmlFor="e-mail"
+                className="flex flex-row justify-start mt-1"
+              >
+                E-mail
+              </label>
+              <input
+                type="email"
+                id="e-mail"
+                name="e-mail"
+                placeholder="Enter Your E-mail"
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                title="Please enter a valid email address"
+                className="border-solid border-2 border-[#c7c7c7] rounded-md"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              ></input>
+              <label
+                htmlFor="password"
+                className="flex flex-row justify-start mt-1"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter Your Password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+                title="Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one number."
+                className="border-solid border-2 border-[#c7c7c7] rounded-md"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              ></input>
+              <div className="mt-2">Gender </div>
+              <div className="flex flex-row">
+                <label htmlFor="male" className="flex flex-row justify-start ">
+                  Male
+                </label>
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="male"
+                  onChange={(e) => setGender(e.target.value)}
+                  required
+                ></input>
+                <label
+                  htmlFor="female"
+                  className="flex flex-row justify-start ml-3 "
+                >
+                  Female
+                </label>
+                <input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="female"
+                  onChange={(e) => setGender(e.target.value)}
+                  required
+                ></input>
+              </div>
+              <label className="mt-2" htmlFor="dob">
+                Date of Birth:
+              </label>
+              <input
+                type="date"
+                id="dob"
+                name="dob"
+                onChange={(e) => setDob(e.target.value)}
+                required
+              />
+              <label
+                htmlFor="phonenumber"
+                className="flex flex-row justify-start mt-2"
+              >
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phonenumber"
+                name="phonenumber"
+                placeholder="Phone number"
+                className="border-solid border-2 border-[#c7c7c7] rounded-md"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                title="Please enter phone number in the format xxx-xxx-xxxx"
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                required
+              ></input>
+
+              <div className="mt-5 flex flex-col justify-center">
+                <button
+                  className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 border-2 rounded-md"
+                  type="summit"
+                  onClick={handledata}
+                >
+                  Register
+                </button>
+
+                <p className="mt-1 font-bold text-center">
+                  Already have an account
+                </p>
+                <a
+                  className="mt-1 text-center bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 border-2 rounded-md"
+                  href="/login"
+                >
+                  Login
+                </a>
+              </div>
+            </div>
+          </form>
         </div>
-      </body>
+      </div>
     </>
   );
 }
