@@ -23,6 +23,7 @@ import ForgotPassword from "./Page/members/forgotpassword.jsx";
 import ModalForm from "./Component/UserHomePage/ModalForm.jsx";
 import Accordion from "./Component/UserHomePage/Accordion.jsx";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,11 +37,8 @@ const router = createBrowserRouter([
     path: "/Aboutus",
     element: <Aboutus />,
   },
-  // {
-  //   path: "/ModalForm",
-  //   element: <ModalForm/>,
-  // },
-  
+
+
   {
     path: "/UserHomePage",
     element: <UserHomePage />,

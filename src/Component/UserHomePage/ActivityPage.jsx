@@ -95,6 +95,7 @@ export default function ActivityPage() {
 
   return (
     <div>
+       <Navbarmbh handleCreateClick={handleCreateClick} />
       <div className="grid grid-cols-12 ">
         {/* Mobile */}
         <div className=" sm:hidden col-span-12">
@@ -124,7 +125,7 @@ export default function ActivityPage() {
             </div>
           </div>
         </div>
-
+       
         <NavHead handleCreateClick={handleCreateClick} />
         <Sidebar userData={mockUserData} />
 
