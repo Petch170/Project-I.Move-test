@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Axios } from "axios";
 import Login from "../Page/login";
 import { logo } from "../assets/Picture";
 import UserHomePage from "./UserHomePage/UserHomePage";
@@ -16,7 +15,7 @@ const Home = () => {
       setLogin(true);
       console.log(userLogIn);
     }
-  
+
   }, []);
 
   //ตรวจสถานะเมื่อกดstart
@@ -70,7 +69,7 @@ const Home = () => {
         </h2>
         <img
           className="max-w-[350px] h-auto pt-6"
-          src="src/assets/Pic-home/Dashboard-pic.PNG"
+          src="src/assets/Pic-home/Dashboard.png"
           alt="Dashboard"
         />
       </div>
