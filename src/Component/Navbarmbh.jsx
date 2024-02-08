@@ -1,49 +1,79 @@
-import { Link } from "react-router-dom";
-import {
-  dashboardIcon,
-  dumbbellIcon,
-  homeIcon,
-  plusCircleIcon,
-  userIcon,
-} from "../assets/Icon";
+import { useState } from "react"; // import state
+import { logo } from "../assets/Picture";
 
-const Navbarmbh = () => {
+export default function Navbarmbh() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      1;
+    }
+  };
 
   return (
-    <>
-      {/* mobile */}
-      <nav className="sm:hidden grid grid-cols-5 items-center bg-cream py-1 fixed inset-x-0 bottom-0 rounded-t-md ">
-        <Link to="/">
-          <div className="flex flex-col justify-center items-center text-sm">
-            <img src={homeIcon} alt="home" />
-            <p>Home</p>
-          </div>
-        </Link>
-        <Link to="/UserHomePage">
-        <div className="flex flex-col justify-center items-center text-sm">
-          <img src={dumbbellIcon} alt="activity" />
-          <p>Activity</p>
+    <nav className="bg-[#EADBC8] sticky p-2 sm:hidden">
+      <div className="flex items-center justify-between">
+        <div className="navlogobar flex items-center">
+          <img className="nav w-12 h-12" src={logo} alt="icon" />
+          <a className="Logo hover:cursor-pointer font-bold">I.MOVE</a>
         </div>
-        </Link>
-        
-        <div className="flex flex-col justify-center items-center text-sm">
-          <img src={plusCircleIcon} alt="add activity" />
+
+        {/* toggle */}
+        <div className="sm:hidden">
+          <button id="menu-toggle" className="" onClick={toggleMenu}>
+            <svg
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              className="w-6 h-6"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
         </div>
-       
-        <Link to="/user/dashboard">
-          <div className="flex flex-col justify-center items-center text-sm">
-            <img src={dashboardIcon}  alt="dashboard" />
-            <p>Dashboard</p>
-          </div>
-        </Link>
-        <Link to="/Activity">
-        <div className="flex flex-col justify-center items-center text-sm">
-          <img src={userIcon} alt="profile" />
-          <p>Profile</p>
+      </div>
+
+      {/* Mobile */}
+      {isMenuOpen ? (
+        <div className="flex flex-col sm:hidden">
+          <a
+            onClick={() => scrollToSection("contact")}
+            className=" text-center py-2 "
+          >
+            <span className="border-b border-[#102C57] inline-block">
+              Contact
+            </span>
+          </a>
+          <p
+            onClick={() => scrollToSection("aboutus")}
+            className=" text-center  py-2 "
+          >
+            <span className="border-b border-[#102C57] inline-block">
+            About
+            </span>
+          </p>
+          <p className="text-center py-2">
+            <a href="/login" className="inline-block border-b border-[#102C57]">
+              Login
+            </a>
+          </p>
+          <p className="text-center py-2">
+            <a href="/signup" className="inline-block border-b border-[#102C57]">
+              Sign up
+            </a>
+          </p>
         </div>
-        </Link>
-      </nav>
-    </>
+      ) : null}
+    </nav>
+
   );
-};
-export default Navbarmbh;
+}
