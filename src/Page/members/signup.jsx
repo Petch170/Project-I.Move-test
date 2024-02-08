@@ -39,7 +39,7 @@ function Signup() {
         alert("รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง");
         return;
       default:
-        // Continue with the rest of your code
+        console.log("pass");
         break;
     };
 
