@@ -4,20 +4,21 @@ import axios from "axios";
 import { redirect } from "react-router-dom";
 
 function Login() {
-  const [userName, setUserName] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleData = async () => {
     const data = {
-      userName: userName,
+      email: email,
       password: password,
     };
     // get data
-    // console.log(data);
+    console.log(data);
     try {
       const resposedata = await axios.post("http://127.0.0.1:3001/login", data);
       if (resposedata.status === 200 && resposedata.data) {
-        redirect("/UserHomePage")
+        console.log(resposedata);
+        // redirect("/UserHomePage")
       } else {
       }
     } catch (error) {console.log(error);}
@@ -27,9 +28,9 @@ function Login() {
     // <Nav />
     <>
       <Navbarhome />
-      <body class="flex h-screen">
+      <div className="flex h-screen">
         {/* left content */}
-        <div class="flex-1 h-full w-1/2 border-r-4 ">
+        <div className="flex-1 h-full w-1/2 border-r-4 ">
           <div
             id="img"
             className="flex items-center content-center w-full h-full aspect-auto "
@@ -47,20 +48,20 @@ function Login() {
         <img className="nav w-14 h-14" src="src\assets\Pic-home\logo1.png" alt="icon" /> <div className="pt-5 flex justify-center font-bold">i-move</div></div>
             <div className="font-bold">Login</div>
           <div id="input" className="mt-3">
-            <label for="username" className="mt-3">
-              Username:
+            <label for="email" className="mt-3">
+              E-Mail:
             </label>{" "}
             <br />
             <input
               type="text"
-              id="username"
-              name="username"
-              placeholder="Enter your username"
-              onChange={(e) => setUserName(e.target.value)}
+              id="email"
+              name="email"
+              placeholder="Enter your E-Mail"
+              onChange={(e) => setEmail(e.target.value)}
               className="mt-2 mb-2 border-solid border-2 border-[#c7c7c7] rounded-md"
             ></input>{" "}
             <br />
-            <label for="password" className="mt-3">
+            <label htmlFor="password" className="mt-3">
               Password:
             </label>{" "}
             <br />
@@ -87,13 +88,10 @@ function Login() {
             ><div className="pl-5 pr-5 pt-1 pb-1">Login</div>
               
             </button>
-            <button type="reset" className="bg-[#102C57] text-white hover:bg-[#c7c7c7] mr-5 border-2 rounded-md">
-            <div className="pl-5 pr-5 pt-1 pb-1">Clear</div>
-              
-            </button>
+           
           </div>
         </div>
-      </body>
+      </div>
     </>
   );
 }

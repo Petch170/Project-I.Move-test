@@ -5,6 +5,7 @@ import Accordion from "./Accordion";
 import { mockUserData, userData } from "./mockData";
 import Sidebar from "./Sidebar";
 import NavHead from "./NavHead";
+import Navbarmbh from "../Navbarmbh";
 
 const initialValues = {
   id: undefined,
@@ -99,7 +100,11 @@ export default function ActivityPage() {
         <div className=" sm:hidden col-span-12">
           <div className="flex justify-between px-6 py-2 items-center bg-cream">
             <a href="/" className="w-[40px] h-[40px]">
-              <img src="./Picture/logo1.png" alt="logo1" className="" />
+              <img
+                src="./src/assets/Pic-home/logo1.png"
+                alt="logo1"
+                className=""
+              />
             </a>
             <p className="text-[#102C57] font-bold">Proflie</p>
             <a href="/setting">
@@ -119,6 +124,7 @@ export default function ActivityPage() {
             </div>
           </div>
         </div>
+
         <NavHead handleCreateClick={handleCreateClick} />
         <Sidebar userData={mockUserData} />
 
