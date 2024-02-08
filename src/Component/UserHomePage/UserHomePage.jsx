@@ -12,7 +12,7 @@ export default function UserHomePage() {
   const [cardData, setCardData] = useState([]);
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get(`http://localhost:8000/api/posts`);
+      const res = await axios.get(`http://localhost:8000/post/`);
       const data = res.data;
       setCardData(data);
     };

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const initialValues = {
@@ -20,6 +21,7 @@ export default function ModalForm({
   handleConfirmDelete,
 }) {
   const [inputData, setInputData] = useState(initialValue);
+  const [imageFile, setImageFile] = useState();
 
   let idCounter = 10;
 
@@ -32,7 +34,7 @@ export default function ModalForm({
     setInputData((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleSummit = () => {
+  const handleSummit = async () => {
     if (formType === "edit") {
       const updatedMockCard = mockCard.map((card) => {
         if (card.id === inputData.id) {
@@ -56,18 +58,24 @@ export default function ModalForm({
       closeModal();
     } else if (formType === "create") {
       const id = generateUniqueId();
-      const newCard = {
-        id: id,
-        activityName: inputData.activityName,
-        activityType: inputData.activityType,
-        date: inputData.date,
-        durations: inputData.durations,
-        distance: inputData.distance,
-        description: inputData.description,
-        imageUrl:
-          "https://fittoplay.org/globalassets/pictures/badminton/badminton_pho10254241_crop.jpg",
-      };
-      setMockCard([...mockCard, newCard]);
+      const formData = new FormData();
+      formData.append("userId", "0128");
+      // formData.append("id", id);
+      formData.append("activityName", inputData.activityName);
+      formData.append("activityType", inputData.activityType);
+      formData.append("date", inputData.date);
+      formData.append("durations", inputData.durations);
+      formData.append("distance", inputData.distance);
+      formData.append("description", inputData.description);
+      formData.append("imageUrl", inputData.files);
+      const res = await axios.post(`http://localhost:8000/post/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res.status === 201) {
+        console.log("Create Complete!");
+      }
       setInputData(initialValues);
       closeModal();
     }
@@ -92,9 +100,26 @@ export default function ModalForm({
             </h1>
           )}
         </div>
-        <div className="p-4 text-center	text-[#102C57] font-semibold flex justify-center">
+        <div className="p-4 text-center	text-[#102C57] font-semibold flex flex-col items-center">
+          {imageFile ? (
+            <div className="w-[300px] h-[200px] flex justify-center">
+              <img src={imageFile} className="object-scale-down h-full  " />
+            </div>
+          ) : null}
           <label class="bg-[#102C57] hover:bg-cyan-600 duration-150 text-white font-semibold py-2 px-4 rounded cursor-pointer sm:w-1/4 ">
-            <input type="file" class="inputfile" /> Upload Image
+            <input
+              type="file"
+              class="inputfile"
+              accept="image/png, image/gif, image/jpeg"
+              onChange={(ev) => {
+                if (ev) {
+                  handleOnChangeInputData("files", ev.target.files[0]);
+                  setImageFile(URL.createObjectURL(ev.target.files[0]));
+                  console.log(ev.target.files[0]);
+                }
+              }}
+            />{" "}
+            Upload Image
           </label>
         </div>
       </div>

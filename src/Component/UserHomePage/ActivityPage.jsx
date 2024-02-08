@@ -31,9 +31,7 @@ export default function ActivityPage() {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get(
-        `http://localhost:8000/api/posts/1/activity/`
-      ); //change when have real userId
+      const res = await axios.get(`http://localhost:8000/post/0128/`); //change when have real userId
       const data = res.data;
       setCardData(data);
     };
