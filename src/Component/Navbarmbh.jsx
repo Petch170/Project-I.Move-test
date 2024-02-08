@@ -45,19 +45,32 @@ export default function Navbarmbh() {
       {/* Mobile */}
       {isMenuOpen ? (
         <div className="flex flex-col sm:hidden">
-          <p onClick={()=>scrollToSection("contact")} className=" text-center py-1">
+          <a
+            onClick={() => scrollToSection("contact")}
+            className=" text-center py-2 "
+          >
+            <span className="border-b border-[#102C57] inline-block">
               Contact
+            </span>
+          </a>
+          <p
+            onClick={() => scrollToSection("aboutus")}
+            className=" text-center  py-2 "
+          >
+            <span className="border-b border-[#102C57] inline-block">
+            About
+            </span>
           </p>
-          <p onClick={()=>scrollToSection("aboutus")} className=" text-center  py-1">
-              About
-          </p>
-            <p className=" text-center  py-1"><a href="/login">
+          <p className="text-center py-2">
+            <a href="/login" className="inline-block border-b border-[#102C57]">
               Login
-            </a></p>
-            <p className=" text-center py-1"><a href="/signup">
+            </a>
+          </p>
+          <p className="text-center py-2">
+            <a href="/signup" className="inline-block border-b border-[#102C57]">
               Sign up
-            </a></p>
-        
+            </a>
+          </p>
         </div>
       ) : null}
     </nav>
