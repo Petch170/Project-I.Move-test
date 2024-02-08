@@ -42,11 +42,11 @@ const Home = () => {
         </div>
 
         <div className="homewelcome flex flex-col items-center absolute top-[5%] right-0 left-0 md:top-1/3 md:right-0 md:left-1/2 md:-translate-y-1/2 m-[7.5px] md:m-[30px]">
-          <img
+          {/* <img
             src={logo}
             alt="logo"
-            className="sm:hidden grid grid-cols-3 items-center"
-          />
+            className=" grid grid-cols-3 items-center"
+          /> */}
           <h1 className="text-xl md:text-4xl font-bold text-center">
             Welcome to I.Move
           </h1>
@@ -69,7 +69,7 @@ const Home = () => {
           </em>
         </h2>
         <img
-          className="max-w-full h-auto pt-6"
+          className="max-w-[350px] h-auto pt-6"
           src="src/assets/Pic-home/Dashboard-pic.PNG"
           alt="Dashboard"
         />

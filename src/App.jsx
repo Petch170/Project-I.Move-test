@@ -12,12 +12,13 @@ const App = () => {
 
   return (
     <>
+    <Navbarmbh />
       <Navbarhome  />
       <Home />
       <Aboutus />
       <Contact/>
       <Footer />
-      <Navbarmbh />
+    
     </>
   );
 };

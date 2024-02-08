@@ -34,11 +34,6 @@ function Navbarhome() {
           </a>
         </li>
         <li>
-          <a className="hover:cursor-pointer" href="/UserHomePage">
-            mockuseradmin
-          </a>
-        </li>
-        <li>
           <a className="hover:cursor-pointer" href="/signup">
             Sign up
           </a>

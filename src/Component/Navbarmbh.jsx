@@ -1,53 +1,96 @@
-import { Link } from "react-router-dom";
-import {
-  dashboardIcon,
-  dumbbellIcon,
-  homeIcon,
-  plusCircleIcon,
-  userIcon,
-} from "../assets/Icon";
+import { useState } from "react"; // import state
+import { logo } from "../assets/Picture";
+import { bar3 } from "../assets/Icon";
 
-const Navbarmbh = ({ handleCreateClick }) => {
+export default function Header() {
+  const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      1;
+    }
+  };
 
   return (
-    <div>
-      {/* mobile */}
-      <nav className="sm:hidden grid grid-cols-5 items-center bg-cream py-2 fixed inset-x-0 bottom-0 ">
-        <Link to="/">
-          <div className="flex flex-col justify-center items-center ">
-            <img src={homeIcon} alt="home" />
-            <p>Home</p>
+    <div className="flex items-center justify-around bg-[#EADBC8] sm:hidden">
+      <img className="nav w-14 h-14" src={logo} alt="icon" />
+      <a className="Logo font-bold">I.MOVE</a>
+      <nav>
+        <section className="MOBILE-MENU flex sm:hidden">
+          <div
+            className="HAMBURGER-ICON space-y-[5px]"
+            onClick={() => setIsNavOpen((prev) => !prev)} // toggle isNavOpen state on click
+          >
+            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
+            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
+            <span className="block h-0.5 w- animate-pulse bg-gray-600"></span>
           </div>
-        </Link>
-        <Link to="/UserHomePage">
-          <div className="flex flex-col justify-center items-center ">
-            <img src={dumbbellIcon} alt="activity" />
-            <p>Activity</p>
-          </div>
-        </Link>
 
-        <div className="flex flex-col justify-center items-center" onClick={handleCreateClick}>
-          <img
-            src={plusCircleIcon}
-            alt="add activity"
-            onClick={handleCreateClick}
-          />
-        </div>
-
-        <Link to="/user/dashboard">
-          <div className="flex flex-col justify-center items-center">
-            <img src={dashboardIcon} alt="dashboard" />
-            <p>Dashboard</p>
+          <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
+            <div
+              className="CROSS-ICON absolute top-0 right-0 px-2 py-5"
+              onClick={() => setIsNavOpen(false)}
+            >
+              <img className="nav w-14 h-14" src={bar3} alt="icon" />
+              {/* <svg className="h-8 w-8 text-[#102C57]" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round">
+              </svg> */}
+              <svg>
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </div>
+            <div className="flex flex-col gap-1 text-sm md:text-lg ">
+              <p
+                onClick={() => scrollToSection("contact")}
+                className="border-b border-[#102C57] my-2 uppercase"
+              >
+                Contact
+              </p>
+              <p
+                onClick={() => scrollToSection("aboutus")}
+                className="border-b border-[#102C57] my-2 uppercase"
+              >
+                About
+              </p>
+              <a
+                className="border-b border-[#102C57] my-2 uppercase"
+                href="/login"
+              >
+                Login
+              </a>
+              <a
+                className="border-b border-[#102C57] my-2 uppercase"
+                href="/signup"
+              >
+                Sign up
+              </a>
+            </div>
           </div>
-        </Link>
-        <Link to="/Activity">
-          <div className="flex flex-col justify-center items-center ">
-            <img src={userIcon} alt="profile" />
-            <p>Profile</p>
-          </div>
-        </Link>
+        </section>
       </nav>
+      <style>{`
+      .hideMenuNav {
+        display: none;
+      }
+      .showMenuNav {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background: white;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+    `}</style>
     </div>
   );
-};
-export default Navbarmbh;
+}
