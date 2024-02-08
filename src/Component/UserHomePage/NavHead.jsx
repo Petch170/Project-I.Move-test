@@ -92,12 +92,18 @@ export default function NavHead({ handleCreateClick }) {
             <p>Activity</p>
           </div>
         </Link>
-        <div
-          className="flex flex-col justify-center items-center"
-          onClick={handleCreateClick}
-        >
-          <img src={plusCircleIcon} alt="add activity" />
-        </div>
+        {pathName === "/Activity" ? (
+          <div
+            className="flex flex-col justify-center items-center"
+            onClick={handleCreateClick}
+          >
+            <img src={plusCircleIcon} alt="add activity" />
+          </div>
+        ) : (
+          <div className="flex justify-center">
+            <span className="material-icons-outlined">directions_bike</span>
+          </div>
+        )}
         <Link to="/user/dashboard">
           <div className="flex flex-col justify-center items-center">
             <img src={dashboardIcon} alt="dashboard" />

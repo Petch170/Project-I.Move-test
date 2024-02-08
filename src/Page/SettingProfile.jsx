@@ -2,28 +2,50 @@ import { useForm } from "react-hook-form";
 import { userImage } from "../assets/Picture";
 import { pencilIcon } from "../assets/Icon";
 import { HeaderMobile, NavBar, SettingAside } from "../Component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const SettingProfile = () => {
-  const [getNewProfile, setGetNewProfile] = useState([]);
-  const [imageName, setImageName] = useState("");
-  const [image, setImage] = useState(null);
+  // const [getNewProfile, setGetNewProfile] = useState([]);
+  // const [imageName, setImageName] = useState("");
+  const [userInfo, setUserInfo] = useState([]);
+  const [reload, setReload] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const response = await axios.get(
+        `http://localhost:8000/user/info/${userId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.status === 200 && response.data) {
+        setUserInfo([...response.data.data]);
+        // console.log("userInfo", userInfo);
+      }
+    };
+    getUserInfo();
+  }, [reload]);
+
   const editProfile = async (data) => {
     const response = await axios.patch(
-      "http://localhost:8000/user/editProfile/1",
-      data
+      `http://localhost:8000/user/editProfile/${userId}`,
+      data,
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     if (response.status === 200 && response.data) {
-      setGetNewProfile([...response.data.data]);
+      // setGetNewProfile([...response.data.data]);
+      // console.log("getNewProfile", getNewProfile);
+      setReload(!reload);
     }
   };
+
   const submitForm = (data) => {
     const formData = new FormData();
     formData.append("name", data.name);
@@ -33,10 +55,10 @@ const SettingProfile = () => {
     editProfile(formData);
     console.log("data", data);
     console.log("image", data.image[0]);
-    setImageName("");
+    // setImageName("");
     reset();
   };
-  console.log("getNewProfile", getNewProfile);
+
   return (
     <>
       <header>
@@ -46,35 +68,6 @@ const SettingProfile = () => {
       <main className="sm:grid sm:grid-cols-3">
         <SettingAside />
         <section className="w-screen px-10 sm:w-fit">
-          {/* mobile */}
-          <div className="sm:hidden flex justify-end mt-6 relative">
-            <input
-              type="file"
-              name="image"
-              id="image-mobile"
-              accept=".png, .jpg, .jpeg"
-              className="inputfile"
-              {...register("image", {
-                required: true,
-              })}
-              onChange={(e) => {
-                setImageName(e.target.files[0].name);
-                setImage(URL.createObjectURL(e.target.files[0]));
-              }}
-            />
-            <label htmlFor="image-mobile">
-              <img
-                src={userImage}
-                alt="user image"
-                className="object-cover max-w-[60px]"
-              />
-              <img
-                src={pencilIcon}
-                alt="pencilIcon"
-                className="absolute bottom-[2px] right-[7px]"
-              />
-            </label>
-          </div>
           <div className="sm:border-l-2 sm:border-black sm:pl-10">
             <h2 className="text-2xl font-bold my-4">Edit Profile</h2>
             <form
@@ -82,6 +75,39 @@ const SettingProfile = () => {
               onSubmit={handleSubmit(submitForm)}
               encType="multipart/form-data"
             >
+              {/* mobile */}
+              <div className="sm:hidden flex justify-end mt-6 relative">
+                <input
+                  type="file"
+                  name="image"
+                  id="image-mobile"
+                  accept=".png, .jpg, .jpeg"
+                  className="inputfile"
+                  {...register("image", {
+                    required: true,
+                  })}
+                  // onChange={(e) => {
+                  //   setImageName(e.target.files[0].name);
+                  //   setImage(URL.createObjectURL(e.target.files[0]));
+                  // }}
+                />
+                <label htmlFor="image-mobile">
+                  <img
+                    src={
+                      userInfo[0]?.imagePath !== ""
+                        ? userInfo[0]?.imagePath
+                        : userImage
+                    }
+                    alt="user image"
+                    className="object-cover aspect-square rounded-full max-w-[60px]"
+                  />
+                  <img
+                    src={pencilIcon}
+                    alt="pencilIcon"
+                    className="absolute bottom-[2px] right-[7px]"
+                  />
+                </label>
+              </div>
               <div className="flex gap-10 items-center desktop mb-4">
                 <div>
                   <input
@@ -93,10 +119,10 @@ const SettingProfile = () => {
                     {...register("image", {
                       required: true,
                     })}
-                    onChange={(e) => {
-                      setImageName(e.target.files[0].name);
-                      setImage(URL.createObjectURL(e.target.files[0]));
-                    }}
+                    // onChange={(e) => {
+                    //   setImageName(e.target.files[0].name);
+                    //   setImage(URL.createObjectURL(e.target.files[0]));
+                    // }}
                   />
                   <label
                     htmlFor="image"
@@ -104,16 +130,20 @@ const SettingProfile = () => {
                   >
                     Change Picture (PNG,JPG)
                   </label>
-                  {imageName ? (
+                  {/* {imageName ? (
                     <div className="text-xs text-center mt-2">{imageName}</div>
                   ) : (
                     <div></div>
-                  )}
+                  )} */}
                   {/* <button className="btn">Delete Picture</button> */}
                 </div>
                 <div>
                   <img
-                    src={image || userImage}
+                    src={
+                      userInfo[0]?.imagePath !== ""
+                        ? userInfo[0]?.imagePath
+                        : userImage
+                    }
                     alt="user image"
                     className="object-cover aspect-square rounded-full max-w-[150px]"
                   />

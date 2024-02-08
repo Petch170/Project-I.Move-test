@@ -19,7 +19,7 @@ export default function Sidebar({ userData }) {
         </div>
         {/* choose direction */}
         <div>
-          <div className="text-[#102C57] font-bold text-base flex flex-col gap-3 p-3">
+          <div className="text-[#102C57] font-bold text-base flex flex-col gap-6 p-3">
             <div className="flex items-center cursor-pointer">
               <span class="material-icons-outlined">house</span>
               <a href="/UserHomePage">Home</a>

@@ -4,25 +4,25 @@ const Aboutus = () => {
   const data = [
     {
       id: 0,
-      image: "src/assets/Pic-home/swim.jpg",
+      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
       name: "petch",
       position: "Web Developers",
     },
     {
       id: 1,
-      image: "src/assets/Pic-home/swim.jpg",
+      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
       name: "nan",
       position: "Web Developers",
     },
     {
       id: 2,
-      image: "src/assets/Pic-home/swim.jpg",
+      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
       name: "boy",
       position: "Web Developers",
     },
     {
       id: 3,
-      image: "src/assets/Pic-home/swim.jpg",
+      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
       name: "jane",
       position: "Web Developers",
     },
@@ -57,7 +57,7 @@ const Aboutus = () => {
         <h1 className=" text-center text-lg md:text-2xl font-semibold text-[#102C57] underline pb-3">
           Our Dream Team
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 lg:px-28">
           {data.map((member) => (
             <div
               key={member.id}
@@ -66,7 +66,7 @@ const Aboutus = () => {
               <img
                 src={member.image}
                 alt={member.name}
-                className=" w-full h-auto"
+                className=" w-[150px]  h-[200px]"
               />
               <h3 className="text-lg md:text-xl">{member.name}</h3>
               <p className="text-sm md:text-lg">

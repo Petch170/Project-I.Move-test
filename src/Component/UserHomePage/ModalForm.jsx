@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const initialValues = {
@@ -17,9 +18,11 @@ export default function ModalForm({
   formType,
   setMockCard,
   mockCard,
-  handleDelete,
+  handleConfirmDelete,
 }) {
   const [inputData, setInputData] = useState(initialValue);
+  const [imageFile, setImageFile] = useState();
+
   let idCounter = 10;
 
   const generateUniqueId = () => {
@@ -31,7 +34,7 @@ export default function ModalForm({
     setInputData((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleSummit = () => {
+  const handleSummit = async () => {
     if (formType === "edit") {
       const updatedMockCard = mockCard.map((card) => {
         if (card.id === inputData.id) {
@@ -55,25 +58,31 @@ export default function ModalForm({
       closeModal();
     } else if (formType === "create") {
       const id = generateUniqueId();
-      const newCard = {
-        id: id,
-        activityName: inputData.activityName,
-        activityType: inputData.activityType,
-        date: inputData.date,
-        durations: inputData.durations,
-        distance: inputData.distance,
-        description: inputData.description,
-        imageUrl:
-          "https://fittoplay.org/globalassets/pictures/badminton/badminton_pho10254241_crop.jpg",
-      };
-      setMockCard([...mockCard, newCard]);
+      const formData = new FormData();
+      formData.append("userId", "0128");
+      // formData.append("id", id);
+      formData.append("activityName", inputData.activityName);
+      formData.append("activityType", inputData.activityType);
+      formData.append("date", inputData.date);
+      formData.append("durations", inputData.durations);
+      formData.append("distance", inputData.distance);
+      formData.append("description", inputData.description);
+      formData.append("imageUrl", inputData.files);
+      const res = await axios.post(`http://localhost:8000/post/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res.status === 201) {
+        console.log("Create Complete!");
+      }
       setInputData(initialValues);
       closeModal();
     }
   };
 
   return (
-    <div className="">
+    <div className="sm:grid-cols-2 p-4 ">
       <div className="flex justify-end cursor-pointer">
         <span class="material-icons-outlined" onClick={closeModal}>
           close
@@ -81,13 +90,36 @@ export default function ModalForm({
       </div>
       <div className="flex flex-col justify-center bg-[#EADBC8]">
         <div className="flex justify-center">
-          <h1 className="font-bold text-[#102C57] text-3xl p-4">
-            Create Activity
-          </h1>
+          {formType === "edit" ? (
+            <h1 className="font-bold text-[#102C57] text-3xl p-4">
+              Edit Activity
+            </h1>
+          ) : (
+            <h1 className="font-bold text-[#102C57] text-3xl p-4">
+              Create Activity
+            </h1>
+          )}
         </div>
-        <div className="p-4 text-center	text-[#102C57] font-semibold flex justify-center">
+        <div className="p-4 text-center	text-[#102C57] font-semibold flex flex-col items-center">
+          {imageFile ? (
+            <div className="w-[300px] h-[200px] flex justify-center">
+              <img src={imageFile} className="object-scale-down h-full  " />
+            </div>
+          ) : null}
           <label class="bg-[#102C57] hover:bg-cyan-600 duration-150 text-white font-semibold py-2 px-4 rounded cursor-pointer sm:w-1/4 ">
-            <input type="file" class="hidden" /> Upload Image
+            <input
+              type="file"
+              class="inputfile"
+              accept="image/png, image/gif, image/jpeg"
+              onChange={(ev) => {
+                if (ev) {
+                  handleOnChangeInputData("files", ev.target.files[0]);
+                  setImageFile(URL.createObjectURL(ev.target.files[0]));
+                  console.log(ev.target.files[0]);
+                }
+              }}
+            />{" "}
+            Upload Image
           </label>
         </div>
       </div>
@@ -207,10 +239,10 @@ export default function ModalForm({
         </button>
       </div>
       {formType === "edit" ? (
-        <div className="flex justify-end cursor-pointer">
+        <div className="flex justify-end cursor-pointer ">
           <span
             className="material-icons-outlined"
-            onClick={() => handleDelete(inputData.id)}
+            onClick={() => handleConfirmDelete(inputData.id)}
           >
             delete_sweep
           </span>
