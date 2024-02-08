@@ -10,7 +10,9 @@ const Setting = () => {
         {/* mobile */}
         <div className="sm:hidden flex justify-between py-2 px-4">
           <div className="flex flex-row justify-center items-center">
-            <img src={leftArrowIcon} alt="leftArrowIcon" />
+            <Link to="/UserHomePage">
+              <img src={leftArrowIcon} alt="leftArrowIcon" />
+            </Link>
           </div>
           <h1 className="text-2xl font-bold">Settings</h1>
           <div className="flex flex-row justify-center items-center">
@@ -42,15 +44,21 @@ const Setting = () => {
             <img src={userIcon} alt="userIcon" />
             <p className="font-bold text-lg">Other</p>
           </div>
-          <button className="border border-gray-400 rounded-lg py-2 my-2 font-bold">
-            Policy
-          </button>
-          <button className="border border-gray-400 rounded-lg py-2 my-2 font-bold">
-            About Us
-          </button>
-          <button className="border border-gray-400 rounded-lg py-2 my-2 font-bold">
-            Contact
-          </button>
+          <Link to="/UserHomePage">
+            <button className=" w-full border border-gray-400 rounded-lg py-2 my-2 font-bold">
+              Home
+            </button>
+          </Link>
+          <Link to="/">
+            <button className=" w-full border border-gray-400 rounded-lg py-2 my-2 font-bold">
+              About Us
+            </button>
+          </Link>
+          <Link to="/">
+            <button className=" w-full border border-gray-400 rounded-lg py-2 my-2 font-bold">
+              Contact
+            </button>
+          </Link>
           <button className="border border-gray-400 rounded-lg py-2 my-2 font-bold bg-gray-300">
             Log Out
           </button>
