@@ -24,7 +24,7 @@ export default function Navbarmbh() {
           <a className="Logo hover:cursor-pointer font-bold">I.MOVE</a>
         </div>
 
-        {/* troggle */}
+        {/* toggle */}
         <div className="sm:hidden">
           <button id="menu-toggle" className="" onClick={toggleMenu}>
             <svg
@@ -74,5 +74,6 @@ export default function Navbarmbh() {
         </div>
       ) : null}
     </nav>
+
   );
 }
