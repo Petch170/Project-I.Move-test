@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import ModalForm from "./ModalForm";
 import Accordion from "./Accordion";
 import { mockUserData, userData } from "./mockData";
 import Sidebar from "./Sidebar";
 import NavHead from "./NavHead";
-import Navbarmbh from "../Navbarmbh";
+import DeleteConfirm from "./DeleteConfirm";
+import axios from "axios";
 
 const initialValues = {
   id: undefined,
@@ -23,8 +24,20 @@ export default function ActivityPage() {
   const [formType, setFormType] = useState();
   const [mockCard, setMockCard] = useState(userData);
   const [imageFile, setImageFile] = useState("");
+  const [confirmDel, setConfirmDel] = useState(false);
   const [initialValue, setInitialValue] = useState(initialValues);
-  console.log(mockUserData);
+  const [idToDel, setIdtoDel] = useState("");
+  const [cardData, setCardData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get(`http://localhost:8000/post/0128/`); //change when have real userId
+      const data = res.data;
+      setCardData(data);
+    };
+    getData();
+  }, []);
+
   const customStyles = {
     content: {
       top: "50%",
@@ -37,11 +50,26 @@ export default function ActivityPage() {
     },
     overlay: { zIndex: 1000 },
   };
+  const customDelStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      transform: "translate(-50%, -50%) scale(0.75)",
+      padding: "30px",
+      backgroundColor: "#EADBC8",
+    },
+    overlay: { zIndex: 1001 },
+  };
   function openModal() {
     setIsOpen(true);
   }
   function closeModal() {
     setIsOpen(false);
+  }
+  function closeConfirm() {
+    setConfirmDel(false);
   }
   const handleCreate = (
     activityName,
@@ -67,8 +95,8 @@ export default function ActivityPage() {
   const handleDelete = (id) => {
     const newData = mockCard.filter((item) => item.id !== id);
     setMockCard(newData);
-    openModal(false);
-    setIsOpen(true);
+    setConfirmDel(false);
+    closeModal();
   };
 
   const handleCreateClick = () => {
@@ -91,6 +119,11 @@ export default function ActivityPage() {
     console.log(item);
     setIsOpen(true);
     setFormType("edit");
+  };
+
+  const handleConfirmDelete = (id) => {
+    setConfirmDel((prev) => !prev);
+    setIdtoDel(id);
   };
 
   return (
@@ -145,7 +178,7 @@ export default function ActivityPage() {
               <h1>My Activity</h1>
             </div>
             <Accordion
-              activityCardData={mockCard}
+              activityCardData={cardData}
               handleEditClick={handleEditClick}
             />
           </div>
@@ -162,7 +195,18 @@ export default function ActivityPage() {
               formType={formType}
               setMockCard={setMockCard}
               mockCard={mockCard}
+              handleConfirmDelete={handleConfirmDelete}
+            />
+          </Modal>
+          <Modal
+            isOpen={confirmDel}
+            style={customDelStyles}
+            onRequestClose={closeConfirm}
+          >
+            <DeleteConfirm
               handleDelete={handleDelete}
+              id={idToDel}
+              closeConfirm={closeConfirm}
             />
           </Modal>
         </div>
