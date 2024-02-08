@@ -3,7 +3,7 @@ import Navbarhome from "../../Component/Navbarhome";
 import axios from "axios";
 import { redirect } from "react-router-dom";
 import Login from "../login";
-
+import { Navbarmember } from "../../Component/Register/Navforregister";
 
 function Signup() {
   const [fullName, setFullname] = useState();
@@ -13,33 +13,21 @@ function Signup() {
   const [gender, setGender] = useState();
   const [dob, setDob] = useState("");
 
-  
+
 
   const handledata = async () => {
-
-
-    const data = {
-      fullName: fullName,
-      email: email,
-      password: password,
-      gender: gender,
-      dob: dob,
-      phoneNumber: phoneNumber,
-      typemem: "individual",
-    };
-    
     if (!fullName || !email || !password || !gender || !dob || !phoneNumber) {
       alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
       return;
     }
-    
+
     // ตรวจสอบ pattern ของอีเมล
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     // ตรวจสอบ pattern ของพาสเวิร์ด
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     // ตรวจสอบ pattern ของเบอร์โทรศัพท์
     const phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
-    
+
     switch (true) {
       case !emailPattern.test(email):
         alert("รูปแบบอีเมลไม่ถูกต้อง");
@@ -53,22 +41,37 @@ function Signup() {
       default:
         // Continue with the rest of your code
         break;
+    };
+
+    const data = {
+      fullName: fullName,
+      email: email,
+      password: password,
+      gender: gender,
+      dob: dob,
+      phoneNumber: phoneNumber,
+      typemem: "individual",
+    };
+
+        try {
+      const response = await axios.post(
+        "https://immove.onrender.com/signup",
+        data
+      );
+      console.log(response);
+
+      // Redirect to login page after successful signup
+      // history.push("/login");
+    } catch (error) {
+      console.error("Signup error:", error);
+      // Handle signup error, show appropriate message to user
+      alert("Signup failed. Please try again.");
     }
-    
-    
-    const response = await axios.post("http://127.0.0.1:3001/signup", data);
-    console.log(response);
-
-    // dont forget encryp password before send data
-    // waiting for check something from backend
-
-      if (response.body);
- 
   };
 
   return (
     <>
-      <Navbarhome />
+      <Navbarmember />
       <div className="flex h-screen w-screen mb-5">
         <div className="flex flex-row w-1/2 h-screen aspect-auto">
           <img
@@ -79,7 +82,7 @@ function Signup() {
         </div>
 
         {/* right side */}
-        
+
         <div className="flex flex-col w-1/2 h-screen justify-center items-center">
           <div className="flex flex-row">
             <img

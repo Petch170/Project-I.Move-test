@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbarhome from "../Component/Navbarhome";
 import axios from "axios";
 import { redirect } from "react-router-dom";
+import { Navbarmember } from "../Component/Register/Navforregister";
 
 function Login() {
   const [email, setEmail] = useState();
@@ -27,7 +28,7 @@ function Login() {
   return (
     // <Nav />
     <>
-      <Navbarhome />
+      <Navbarmember />
       <div className="flex h-screen">
         {/* left content */}
         <div className="flex-1 h-full w-1/2 border-r-4 ">
