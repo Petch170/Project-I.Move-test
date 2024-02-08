@@ -2,15 +2,32 @@ import { useForm } from "react-hook-form";
 import { HeaderMobile, NavBar, SettingAside } from "../Component";
 import { useState } from "react";
 import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 const SettingPassword = () => {
   // const [getNewPassword, setGetNewPassword] = useState([]);
+  let password;
+  const formSchema = Yup.object().shape({
+    newPassword: Yup.string()
+      .required("Password is required")
+      .min(6, "Password length should be at least 6 characters")
+      .max(12, "Password cannot exceed more than 12 characters"),
+    retypePassword: Yup.string()
+      .required("Re-type Password is required")
+      .min(6, "Password length should be at least 6 characters")
+      .max(12, "Password cannot exceed more than 12 characters")
+      .oneOf([Yup.ref("newPassword")], "Passwords do not match"),
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+    watch,
+  } = useForm({ mode: "onTouched", resolver: yupResolver(formSchema) });
+  password = watch("newPassword", "");
+
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
@@ -76,19 +93,17 @@ const SettingPassword = () => {
                   id="newPassword"
                   placeholder="Your new password"
                   className="block w-full mt-1 rounded-lg p-2 border border-black"
-                  {...register("newPassword", {
-                    required: true,
-                    minLength: 6,
-                  })}
+                  {...register("newPassword")}
                 />
-                {errors.newPassword?.type === "required" && (
+                {/* {errors.newPassword?.type === "required" && (
                   <p className="errorMsg">Password is required.</p>
                 )}
                 {errors.newPassword?.type === "minLength" && (
                   <p className="errorMsg">
                     Password should be at least 6 characters.
                   </p>
-                )}
+                )} */}
+                <p className="errorMsg">{errors.newPassword?.message}</p>
               </div>
               <div className="mb-4">
                 <label htmlFor="retypePassword">Re-type Password</label>
@@ -98,19 +113,18 @@ const SettingPassword = () => {
                   id="retypePassword"
                   placeholder="Re-type your password"
                   className="block w-full mt-1 rounded-lg p-2 border border-black"
-                  {...register("retypePassword", {
-                    required: true,
-                    minLength: 6,
-                  })}
+                  {...register("retypePassword")}
                 />
-                {errors.retypePassword?.type === "required" && (
+                {/* {errors.retypePassword?.type === "required" && (
                   <p className="errorMsg">Password is required.</p>
                 )}
                 {errors.retypePassword?.type === "minLength" && (
                   <p className="errorMsg">
                     Password should be at least 6 characters.
                   </p>
-                )}
+                )} */}
+
+                <p className="errorMsg">{errors.retypePassword?.message}</p>
               </div>
               <div className="flex justify-center sm:justify-end">
                 <button type="submit" className="btn mt-2">
