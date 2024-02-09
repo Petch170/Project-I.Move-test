@@ -3,24 +3,26 @@ import Navbarhome from "../Component/Navbarhome";
 import axios from "axios";
 import { redirect } from "react-router-dom";
 import { Navbarmember } from "../Component/Register/Navforregister";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+ 
   const handleData = async () => {
     const data = {
       email: email,
       password: password,
     };
     // get data
-    console.log(data);
+    // console.log(data);
     try {
-      const resposedata = await axios.post("http://127.0.0.1:3001/login", data);
-      if (resposedata.status === 200 && resposedata.data) {
-        console.log(resposedata);
-        // redirect("/UserHomePage")
-      } else {
+      const resposedata = await axios.post("https://immove.onrender.com/login", data);
+      if (resposedata.status === 200 && resposedata.data.token != null) {
+        localStorage.setItem("token",resposedata.data.token)
+        // console.log(resposedata);
+        useNavigate("/UserHomePage")
       }
     } catch (error) {console.log(error);}
   };
@@ -49,7 +51,7 @@ function Login() {
         <img className="nav w-14 h-14" src="src\assets\Pic-home\logo1.png" alt="icon" /> <div className="pt-5 flex justify-center font-bold">i-move</div></div>
             <div className="font-bold">Login</div>
           <div id="input" className="mt-3">
-            <label for="email" className="mt-3">
+            <label htmlFor="email" className="mt-3">
               E-Mail:
             </label>{" "}
             <br />
