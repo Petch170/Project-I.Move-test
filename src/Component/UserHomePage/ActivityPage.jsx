@@ -29,7 +29,8 @@ export default function ActivityPage() {
   const [initialValue, setInitialValue] = useState(initialValues);
   const [idToDel, setIdtoDel] = useState("");
   const [cardData, setCardData] = useState([]);
-
+  const [reRender, setReRender] = useState(false);
+  console.log(reRender);
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get(`http://localhost:8000/post/0128/`); //change when have real userId
@@ -37,7 +38,7 @@ export default function ActivityPage() {
       setCardData(data);
     };
     getData();
-  }, []);
+  }, [reRender]);
   console.log(cardData);
   const customStyles = {
     content: {
@@ -72,27 +73,6 @@ export default function ActivityPage() {
   function closeConfirm() {
     setConfirmDel(false);
   }
-  const handleCreate = (
-    activityName,
-    activityType,
-    date,
-    durations,
-    distance,
-    description
-  ) => {
-    const newUser = {
-      activityName: activityName,
-      activityType: activityType,
-      date: date,
-      durations: durations,
-      distance: distance,
-      description: description,
-      imageUrl:
-        "https://fittoplay.org/globalassets/pictures/badminton/badminton_pho10254241_crop.jpg",
-    };
-    setMockCard([...mockCard, newUser]);
-    console.log(mockCard);
-  };
 
   const handleDelete = async (cardId) => {
     console.log(cardId);
@@ -104,6 +84,7 @@ export default function ActivityPage() {
         enqueueSnackbar("That was easy!", { variant: "success" });
         setConfirmDel(false);
         closeModal();
+        setReRender((prev) => !prev);
       }
     } catch (error) {
       // If an error occurs during the deletion process, log the error or show an error message to the user
@@ -203,12 +184,12 @@ export default function ActivityPage() {
           >
             <ModalForm
               closeModal={closeModal}
-              handleCreate={handleCreate}
               initialValue={initialValue}
               formType={formType}
               setMockCard={setMockCard}
               mockCard={mockCard}
               handleConfirmDelete={handleConfirmDelete}
+              setReRender={setReRender}
             />
           </Modal>
           <Modal

@@ -17,16 +17,10 @@ export default function ModalForm({
   initialValue,
   formType,
   handleConfirmDelete,
+  setReRender,
 }) {
   const [inputData, setInputData] = useState(initialValue);
   const [imageFile, setImageFile] = useState();
-
-  let idCounter = 10;
-
-  const generateUniqueId = () => {
-    idCounter += 1;
-    return `00${idCounter}`; // adjust the format as needed
-  };
 
   const handleOnChangeInputData = (key, value) => {
     setInputData((prev) => ({ ...prev, [key]: value }));
@@ -57,6 +51,7 @@ export default function ModalForm({
       }
       setInputData(initialValues);
       closeModal();
+      setReRender((prev) => !prev);
     } else if (formType === "create") {
       const formData = new FormData();
       formData.append("userId", "0128");
@@ -77,6 +72,7 @@ export default function ModalForm({
       }
       setInputData(initialValues);
       closeModal();
+      setReRender((prev) => !prev);
     }
   };
 
