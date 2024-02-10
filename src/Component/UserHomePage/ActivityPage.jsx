@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import NavHead from "./NavHead";
 import DeleteConfirm from "./DeleteConfirm";
 import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 
 const initialValues = {
   id: undefined,
@@ -37,7 +38,7 @@ export default function ActivityPage() {
     };
     getData();
   }, []);
-
+  console.log(cardData);
   const customStyles = {
     content: {
       top: "50%",
@@ -92,11 +93,22 @@ export default function ActivityPage() {
     setMockCard([...mockCard, newUser]);
     console.log(mockCard);
   };
-  const handleDelete = (id) => {
-    const newData = mockCard.filter((item) => item.id !== id);
-    setMockCard(newData);
-    setConfirmDel(false);
-    closeModal();
+
+  const handleDelete = async (cardId) => {
+    console.log(cardId);
+    try {
+      const response = await axios.delete(
+        `http://localhost:8000/delete/post/${cardId}`
+      );
+      if (response.status === 200) {
+        enqueueSnackbar("That was easy!", { variant: "success" });
+        setConfirmDel(false);
+        closeModal();
+      }
+    } catch (error) {
+      // If an error occurs during the deletion process, log the error or show an error message to the user
+      console.error("Error deleting card:", error.message);
+    }
   };
 
   const handleCreateClick = () => {
@@ -107,7 +119,7 @@ export default function ActivityPage() {
 
   const handleEditClick = (item) => {
     setInitialValue({
-      id: item.id,
+      id: item._id,
       activityName: item.activityName,
       activityType: item.activityType,
       date: item.date,
@@ -128,7 +140,6 @@ export default function ActivityPage() {
 
   return (
     <div>
-       <Navbarmbh handleCreateClick={handleCreateClick} />
       <div className="grid grid-cols-12 ">
         {/* Mobile */}
         <div className=" sm:hidden col-span-12">
@@ -158,7 +169,7 @@ export default function ActivityPage() {
             </div>
           </div>
         </div>
-       
+
         <NavHead handleCreateClick={handleCreateClick} />
         <Sidebar userData={mockUserData} />
 
@@ -181,6 +192,7 @@ export default function ActivityPage() {
             <Accordion
               activityCardData={cardData}
               handleEditClick={handleEditClick}
+              editButtonShow={true}
             />
           </div>
           <Modal

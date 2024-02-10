@@ -16,8 +16,6 @@ export default function ModalForm({
   closeModal,
   initialValue,
   formType,
-  setMockCard,
-  mockCard,
   handleConfirmDelete,
 }) {
   const [inputData, setInputData] = useState(initialValue);
@@ -36,31 +34,32 @@ export default function ModalForm({
 
   const handleSummit = async () => {
     if (formType === "edit") {
-      const updatedMockCard = mockCard.map((card) => {
-        if (card.id === inputData.id) {
-          // If the id matches, update the card with new data from inputData
-          return {
-            ...card,
-            activityName: inputData.activityName,
-            activityType: inputData.activityType,
-            date: inputData.date,
-            durations: inputData.durations,
-            distance: inputData.distance,
-            description: inputData.description,
-          };
-        } else {
-          return card;
+      const formData = new FormData();
+      formData.append("userId", "0128");
+      formData.append("activityName", inputData.activityName);
+      formData.append("activityType", inputData.activityType);
+      formData.append("date", inputData.date);
+      formData.append("durations", inputData.durations);
+      formData.append("distance", inputData.distance);
+      formData.append("description", inputData.description);
+      formData.append("imageUrl", inputData.files);
+      const res = await axios.put(
+        `http://localhost:8000/edit/post/${inputData.id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
-      // Now, updatedMockCard contains the array with the updated object
-      setMockCard(updatedMockCard);
+      );
+      if (res.status === 201) {
+        console.log("Create Complete!");
+      }
       setInputData(initialValues);
       closeModal();
     } else if (formType === "create") {
-      const id = generateUniqueId();
       const formData = new FormData();
       formData.append("userId", "0128");
-      // formData.append("id", id);
       formData.append("activityName", inputData.activityName);
       formData.append("activityType", inputData.activityType);
       formData.append("date", inputData.date);
