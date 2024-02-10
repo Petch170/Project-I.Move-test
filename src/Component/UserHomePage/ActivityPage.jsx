@@ -24,7 +24,7 @@ export default function ActivityPage() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [formType, setFormType] = useState();
   const [mockCard, setMockCard] = useState(userData);
-  const [imageFile, setImageFile] = useState("");
+  const [imageFile, setImageFile] = useState();
   const [confirmDel, setConfirmDel] = useState(false);
   const [initialValue, setInitialValue] = useState(initialValues);
   const [idToDel, setIdtoDel] = useState("");
@@ -81,7 +81,7 @@ export default function ActivityPage() {
         `http://localhost:8000/delete/post/${cardId}`
       );
       if (response.status === 200) {
-        enqueueSnackbar("That was easy!", { variant: "success" });
+        enqueueSnackbar("Deleted successfully", { variant: "success" });
         setConfirmDel(false);
         closeModal();
         setReRender((prev) => !prev);
@@ -93,6 +93,7 @@ export default function ActivityPage() {
   };
 
   const handleCreateClick = () => {
+    setImageFile(undefined);
     setInitialValue(initialValues);
     setFormType("create");
     openModal(true);
@@ -109,6 +110,7 @@ export default function ActivityPage() {
       description: item.description,
       files: undefined,
     });
+    setImageFile(item.imageUrl);
     console.log(item);
     setIsOpen(true);
     setFormType("edit");
@@ -190,6 +192,8 @@ export default function ActivityPage() {
               mockCard={mockCard}
               handleConfirmDelete={handleConfirmDelete}
               setReRender={setReRender}
+              imageFile={imageFile}
+              setImageFile={setImageFile}
             />
           </Modal>
           <Modal

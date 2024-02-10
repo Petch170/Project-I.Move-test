@@ -1,4 +1,5 @@
 import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 import React, { useState } from "react";
 
 const initialValues = {
@@ -18,15 +19,17 @@ export default function ModalForm({
   formType,
   handleConfirmDelete,
   setReRender,
+  imageFile,
+  setImageFile,
 }) {
   const [inputData, setInputData] = useState(initialValue);
-  const [imageFile, setImageFile] = useState();
 
   const handleOnChangeInputData = (key, value) => {
     setInputData((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSummit = async () => {
+    console.log(inputData.files);
     if (formType === "edit") {
       const formData = new FormData();
       formData.append("userId", "0128");
@@ -36,7 +39,10 @@ export default function ModalForm({
       formData.append("durations", inputData.durations);
       formData.append("distance", inputData.distance);
       formData.append("description", inputData.description);
-      formData.append("imageUrl", inputData.files);
+      if (inputData.files) {
+        formData.append("imageUrl", inputData.files);
+      }
+      formData.append("oldImageUrl", imageFile);
       const res = await axios.put(
         `http://localhost:8000/edit/post/${inputData.id}`,
         formData,
@@ -46,7 +52,8 @@ export default function ModalForm({
           },
         }
       );
-      if (res.status === 201) {
+      if (res.status === 200) {
+        enqueueSnackbar("Edited successfully", { variant: "success" });
         console.log("Create Complete!");
       }
       setInputData(initialValues);
@@ -68,6 +75,7 @@ export default function ModalForm({
         },
       });
       if (res.status === 201) {
+        enqueueSnackbar("Create activity successfully", { variant: "success" });
         console.log("Create Complete!");
       }
       setInputData(initialValues);
