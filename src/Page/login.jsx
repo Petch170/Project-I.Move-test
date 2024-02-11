@@ -5,6 +5,9 @@ import { redirect } from "react-router-dom";
 import { Navbarmember } from "../Component/Register/Navforregister";
 import { useNavigate } from "react-router-dom";
 
+import { jwtDecode } from "jwt-decode";
+
+
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -21,6 +24,12 @@ function Login() {
       const resposedata = await axios.post("https://immove.onrender.com/login", data);
       if (resposedata.status === 200 && resposedata.data.token != null) {
         localStorage.setItem("token",resposedata.data.token)
+
+        const gettoken = localStorage.getItem("token");
+        const decodetoke = jwtDecode(gettoken);
+        console.log(decodetoke);
+
+        
         // console.log(resposedata);
         useNavigate("/UserHomePage")
       }
