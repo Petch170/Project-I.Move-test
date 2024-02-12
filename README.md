@@ -43,3 +43,5 @@ module.exports = {
 npm install @mui/material @emotion/react @emotion/styled
 
 npm install react-scroll
+
+npm install notistack
