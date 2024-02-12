@@ -1,29 +1,30 @@
 import React from "react";
+import samoy from "/Pic-home/samoy.jpg"
 
 const Aboutus = () => {
   const data = [
     {
       id: 0,
-      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
-      name: "petch",
+      image: samoy,
+      name: "Sojirat",
       position: "Web Developers",
     },
     {
       id: 1,
-      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
-      name: "nan",
+      image: samoy,
+      name: "Wiphaphorn",
       position: "Web Developers",
     },
     {
       id: 2,
-      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
-      name: "boy",
+      image: samoy,
+      name: "Cheartsak",
       position: "Web Developers",
     },
     {
       id: 3,
-      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
-      name: "jane",
+      image: samoy,
+      name: "Jetsalit",
       position: "Web Developers",
     },
   ];
@@ -68,8 +69,8 @@ const Aboutus = () => {
                 alt={member.name}
                 className=" w-[150px]  h-[200px]"
               />
-              <h3 className="text-lg md:text-xl">{member.name}</h3>
-              <p className="text-sm md:text-lg">
+              <h3 className="text-base md:text-lg">{member.name}</h3>
+              <p className="text-sm md:text-base">
                 {member.position}
               </p>
             </div>

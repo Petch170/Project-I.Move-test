@@ -3,6 +3,8 @@ import Login from "../Page/login";
 import { logo } from "../assets/Picture";
 import UserHomePage from "./UserHomePage/UserHomePage";
 import { useNavigate } from "react-router-dom";
+import run from "/Pic-home/run1.jpg"
+import dash from "/Pic-home/Dashboard.png"
 
 const Home = () => {
   const navigate = useNavigate()
@@ -35,7 +37,7 @@ const Home = () => {
         <div className="Picbox relative h-[638px]">
           <img
             className="banner h-full w-full object-cover opacity-2"
-            src="src/assets/Pic-home/run1.jpg"
+            src={run}
             alt="run"
           />
         </div>
@@ -69,7 +71,7 @@ const Home = () => {
         </h2>
         <img
           className="max-w-[350px] h-auto pt-6"
-          src="src/assets/Pic-home/Dashboard.png"
+          src={dash}
           alt="Dashboard"
         />
       </div>
