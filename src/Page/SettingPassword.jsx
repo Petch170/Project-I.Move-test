@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 const SettingPassword = () => {
-  // const [getNewPassword, setGetNewPassword] = useState([]);
+  const [message, setMessage] = useState("");
   let password;
   const formSchema = Yup.object().shape({
     newPassword: Yup.string()
@@ -46,6 +46,7 @@ const SettingPassword = () => {
 
   const submitForm = (data) => {
     changePassword(data);
+    setMessage("Password changing is successful");
     reset();
   };
 
@@ -85,6 +86,9 @@ const SettingPassword = () => {
                   </p>
                 )}
               </div> */}
+              {message && (
+                <p className="font-bold text-green-500 mb-4">{message}</p>
+              )}
               <div className="mb-4">
                 <label htmlFor="newPassword">New password</label>
                 <input

@@ -50,7 +50,7 @@ const NavBar = () => {
             className="flex flex-col bg-[#E8E8E8] rounded-full justify-center items-center p-2 border-4 border-[#CE9F9F] w-[75px] aspect-square cursor-pointer"
             onClick={openModal}
           >
-            <span class="material-icons-outlined">volunteer_activism</span>
+            <span className="material-icons-outlined">volunteer_activism</span>
             <p className="text-xs font-bold">BMI</p>
           </div>
         </div>

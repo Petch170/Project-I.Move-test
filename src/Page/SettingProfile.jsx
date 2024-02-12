@@ -15,6 +15,7 @@ const SettingProfile = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm();
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
