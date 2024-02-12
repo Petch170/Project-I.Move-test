@@ -12,7 +12,7 @@ function Login() {
   const [password, setPassword] = useState();
   const [saveData, setSaveData] = useState("");
   // console.log(saveData);
-  
+
   const navigate = useNavigate();
 
   const handleData = async () => {
@@ -38,7 +38,6 @@ function Login() {
 
   useEffect(() => {
     const fetchData = async () => {
-      
       const gettoken = localStorage.getItem("token");
       // console.log(gettoken);
       const decode = jwtDecode(gettoken);
@@ -48,11 +47,14 @@ function Login() {
       // console.log(lala);
       try {
         if (gettoken != null) {
-          const response = await axios.post("https://immove.onrender.com/data", lala);
+          const response = await axios.post(
+            "https://immove.onrender.com/data",
+            lala
+          );
           // console.log(response.data); // Example of processing data
-          
+
           setSaveData(response.data);
-          navigate("/UserHomePage")
+          navigate("/UserHomePage");
         }
       } catch (error) {
         console.error("Error fetching data:", error);
