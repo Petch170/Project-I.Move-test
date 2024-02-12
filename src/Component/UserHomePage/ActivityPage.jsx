@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import NavHead from "./NavHead";
 import DeleteConfirm from "./DeleteConfirm";
 import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 
 const initialValues = {
   id: undefined,
@@ -23,11 +24,12 @@ export default function ActivityPage() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [formType, setFormType] = useState();
   const [mockCard, setMockCard] = useState(userData);
-  const [imageFile, setImageFile] = useState("");
+  const [imageFile, setImageFile] = useState();
   const [confirmDel, setConfirmDel] = useState(false);
   const [initialValue, setInitialValue] = useState(initialValues);
   const [idToDel, setIdtoDel] = useState("");
   const [cardData, setCardData] = useState([]);
+  const [reRender, setReRender] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -36,8 +38,8 @@ export default function ActivityPage() {
       setCardData(data);
     };
     getData();
-  }, []);
-
+  }, [reRender]);
+  console.log(cardData);
   const customStyles = {
     content: {
       top: "50%",
@@ -71,35 +73,27 @@ export default function ActivityPage() {
   function closeConfirm() {
     setConfirmDel(false);
   }
-  const handleCreate = (
-    activityName,
-    activityType,
-    date,
-    durations,
-    distance,
-    description
-  ) => {
-    const newUser = {
-      activityName: activityName,
-      activityType: activityType,
-      date: date,
-      durations: durations,
-      distance: distance,
-      description: description,
-      imageUrl:
-        "https://fittoplay.org/globalassets/pictures/badminton/badminton_pho10254241_crop.jpg",
-    };
-    setMockCard([...mockCard, newUser]);
-    console.log(mockCard);
-  };
-  const handleDelete = (id) => {
-    const newData = mockCard.filter((item) => item.id !== id);
-    setMockCard(newData);
-    setConfirmDel(false);
-    closeModal();
+
+  const handleDelete = async (cardId) => {
+    console.log(cardId);
+    try {
+      const response = await axios.delete(
+        `http://localhost:8000/delete/post/${cardId}`
+      );
+      if (response.status === 200) {
+        enqueueSnackbar("Deleted successfully", { variant: "success" });
+        setConfirmDel(false);
+        closeModal();
+        setReRender((prev) => !prev);
+      }
+    } catch (error) {
+      // If an error occurs during the deletion process, log the error or show an error message to the user
+      console.error("Error deleting card:", error.message);
+    }
   };
 
   const handleCreateClick = () => {
+    setImageFile(undefined);
     setInitialValue(initialValues);
     setFormType("create");
     openModal(true);
@@ -107,7 +101,7 @@ export default function ActivityPage() {
 
   const handleEditClick = (item) => {
     setInitialValue({
-      id: item.id,
+      id: item._id,
       activityName: item.activityName,
       activityType: item.activityType,
       date: item.date,
@@ -116,6 +110,7 @@ export default function ActivityPage() {
       description: item.description,
       files: undefined,
     });
+    setImageFile(item.imageUrl);
     console.log(item);
     setIsOpen(true);
     setFormType("edit");
@@ -168,7 +163,7 @@ export default function ActivityPage() {
             </h1>
             <button
               onClick={handleCreateClick}
-              className="bg-[#102C57] rounded-lg text-white font-medium p-3 hover:bg-cyan-600 hidden sm:block"
+              className="bg-[#102C57] rounded-lg text-white font-medium p-3 hover:bg-cyan-600 hidden sm:block shadow-xl"
             >
               Create Activity
             </button>
@@ -180,6 +175,7 @@ export default function ActivityPage() {
             <Accordion
               activityCardData={cardData}
               handleEditClick={handleEditClick}
+              editButtonShow={true}
             />
           </div>
           <Modal
@@ -190,12 +186,14 @@ export default function ActivityPage() {
           >
             <ModalForm
               closeModal={closeModal}
-              handleCreate={handleCreate}
               initialValue={initialValue}
               formType={formType}
               setMockCard={setMockCard}
               mockCard={mockCard}
               handleConfirmDelete={handleConfirmDelete}
+              setReRender={setReRender}
+              imageFile={imageFile}
+              setImageFile={setImageFile}
             />
           </Modal>
           <Modal

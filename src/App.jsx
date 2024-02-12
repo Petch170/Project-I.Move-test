@@ -7,16 +7,18 @@ import Footer from "./Component/Footer";
 import Navbarmbh from "./Component/Navbarmbh";
 import BMI from "./Component/BMI";
 
+
 const App = () => {
 
   return (
     <>
+    <Navbarmbh />
       <Navbarhome  />
       <Home />
       <Aboutus />
       <Contact/>
       <Footer />
-      <Navbarmbh />
+    
     </>
   );
 };

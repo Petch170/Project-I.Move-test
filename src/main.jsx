@@ -16,12 +16,11 @@ import ActivityPage from "./Component/UserHomePage/ActivityPage.jsx";
 import Home from "./Component/Home.jsx";
 import Contact from "./Component/Contact.jsx";
 import Aboutus from "./Component/Aboutus.jsx";
-import AdminPage from "./Page/members/adminpage.jsx"
+import AdminPage from "./Page/members/adminpage.jsx";
 import Login from "./Page/login.jsx";
 import Signup from "./Page/members/signup.jsx";
 import ForgotPassword from "./Page/members/forgotpassword.jsx";
-import ModalForm from "./Component/UserHomePage/ModalForm.jsx";
-import Accordion from "./Component/UserHomePage/Accordion.jsx";
+import { SnackbarProvider } from "notistack";
 
 const router = createBrowserRouter([
   {
@@ -36,11 +35,7 @@ const router = createBrowserRouter([
     path: "/Aboutus",
     element: <Aboutus />,
   },
-  // {
-  //   path: "/ModalForm",
-  //   element: <ModalForm/>,
-  // },
-  
+
   {
     path: "/UserHomePage",
     element: <UserHomePage />,
@@ -85,7 +80,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <SnackbarProvider>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </SnackbarProvider>
 );

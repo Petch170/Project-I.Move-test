@@ -1,4 +1,5 @@
 import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 import React, { useState } from "react";
 
 const initialValues = {
@@ -16,51 +17,51 @@ export default function ModalForm({
   closeModal,
   initialValue,
   formType,
-  setMockCard,
-  mockCard,
   handleConfirmDelete,
+  setReRender,
+  imageFile,
+  setImageFile,
 }) {
   const [inputData, setInputData] = useState(initialValue);
-  const [imageFile, setImageFile] = useState();
-
-  let idCounter = 10;
-
-  const generateUniqueId = () => {
-    idCounter += 1;
-    return `00${idCounter}`; // adjust the format as needed
-  };
 
   const handleOnChangeInputData = (key, value) => {
     setInputData((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSummit = async () => {
+    console.log(inputData.files);
     if (formType === "edit") {
-      const updatedMockCard = mockCard.map((card) => {
-        if (card.id === inputData.id) {
-          // If the id matches, update the card with new data from inputData
-          return {
-            ...card,
-            activityName: inputData.activityName,
-            activityType: inputData.activityType,
-            date: inputData.date,
-            durations: inputData.durations,
-            distance: inputData.distance,
-            description: inputData.description,
-          };
-        } else {
-          return card;
-        }
-      });
-      // Now, updatedMockCard contains the array with the updated object
-      setMockCard(updatedMockCard);
-      setInputData(initialValues);
-      closeModal();
-    } else if (formType === "create") {
-      const id = generateUniqueId();
       const formData = new FormData();
       formData.append("userId", "0128");
-      // formData.append("id", id);
+      formData.append("activityName", inputData.activityName);
+      formData.append("activityType", inputData.activityType);
+      formData.append("date", inputData.date);
+      formData.append("durations", inputData.durations);
+      formData.append("distance", inputData.distance);
+      formData.append("description", inputData.description);
+      if (inputData.files) {
+        formData.append("imageUrl", inputData.files);
+      }
+      formData.append("oldImageUrl", imageFile);
+      const res = await axios.put(
+        `http://localhost:8000/edit/post/${inputData.id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (res.status === 200) {
+        enqueueSnackbar("Edited successfully", { variant: "success" });
+        console.log("Create Complete!");
+      }
+      setInputData(initialValues);
+      closeModal();
+      setReRender((prev) => !prev);
+    } else if (formType === "create") {
+      const formData = new FormData();
+      formData.append("userId", "0128");
       formData.append("activityName", inputData.activityName);
       formData.append("activityType", inputData.activityType);
       formData.append("date", inputData.date);
@@ -74,10 +75,12 @@ export default function ModalForm({
         },
       });
       if (res.status === 201) {
+        enqueueSnackbar("Create activity successfully", { variant: "success" });
         console.log("Create Complete!");
       }
       setInputData(initialValues);
       closeModal();
+      setReRender((prev) => !prev);
     }
   };
 
@@ -95,7 +98,7 @@ export default function ModalForm({
               Edit Activity
             </h1>
           ) : (
-            <h1 className="font-bold text-[#102C57] text-3xl p-4">
+            <h1 className="font-bold text-[#102C57] text-3xl p-4 ">
               Create Activity
             </h1>
           )}
@@ -126,6 +129,7 @@ export default function ModalForm({
       <div className="grid sm:grid-cols-2  bg-[#EADBC8] ">
         <div className="p-4 text-[#102C57] font-semibold">
           <label for="Activity Name">Activity Name : </label>
+
           <input
             type="text"
             id="Activity Name"
@@ -232,7 +236,7 @@ export default function ModalForm({
       </div>
       <div className="flex justify-center">
         <button
-          className="bg-[#102C57] rounded-lg text-white font-medium p-1 m-4 hover:bg-cyan-600 w-1/4"
+          className="bg-[#102C57] rounded-lg text-white font-medium p-1 m-4 hover:bg-cyan-600 w-1/4 shadow-xl"
           onClick={handleSummit}
         >
           Summit
