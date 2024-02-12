@@ -1,4 +1,4 @@
-import React from "react";
+
 import samoy from "/Pic-home/samoy.jpg"
 
 const Aboutus = () => {

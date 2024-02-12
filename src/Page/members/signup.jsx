@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbarhome from "../../Component/Navbarhome";
 import axios from "axios";
 import { redirect } from "react-router-dom";
 import Login from "../login";
-
+import { Navbarmember } from "../../Component/Register/Navforregister";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [fullName, setFullname] = useState();
@@ -12,34 +14,52 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState();
   const [gender, setGender] = useState();
   const [dob, setDob] = useState("");
+  const [saveData, setSaveData] = useState();
 
-  
+  const navigate = useNavigate();
 
-  const handledata = async () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const gettoken = localStorage.getItem("token");
+      // console.log(gettoken);
+      const decode = jwtDecode(gettoken);
+      // console.log(decode);
+      const email = decode.email;
+      const lala = { email: email };
+      // console.log(lala);
+      try {
+        if (gettoken != null) {
+          const response = await axios.post(
+            "https://immove.onrender.com/data",
+            lala
+          );
+          // console.log(response.data); // Example of processing data
 
-
-    const data = {
-      fullName: fullName,
-      email: email,
-      password: password,
-      gender: gender,
-      dob: dob,
-      phoneNumber: phoneNumber,
-      typemem: "individual",
+          setSaveData(response.data);
+          navigate("/UserHomePage");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
-    
+
+    fetchData();
+  }, []);
+
+  const handledata = async (e) => {
+    e.preventDefault();
     if (!fullName || !email || !password || !gender || !dob || !phoneNumber) {
       alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
       return;
     }
-    
+  
     // ตรวจสอบ pattern ของอีเมล
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     // ตรวจสอบ pattern ของพาสเวิร์ด
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     // ตรวจสอบ pattern ของเบอร์โทรศัพท์
     const phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
-    
+  
     switch (true) {
       case !emailPattern.test(email):
         alert("รูปแบบอีเมลไม่ถูกต้อง");
@@ -51,24 +71,40 @@ function Signup() {
         alert("รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง");
         return;
       default:
-        // Continue with the rest of your code
+        console.log("pass");
         break;
     }
-    
-    
-    const response = await axios.post("http://127.0.0.1:3001/signup", data);
-    console.log(response);
-
-    // dont forget encryp password before send data
-    // waiting for check something from backend
-
-      if (response.body);
- 
+  
+    const data = {
+      fullName: fullName,
+      email: email,
+      password: password,
+      gender: gender,
+      dob: dob,
+      phoneNumber: phoneNumber,
+      typemem: "individual",
+    };
+  
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/signup", data);
+      console.log(response);
+      if (response.status === 200 && response.data) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      if (error.response.status === 400 && error.response.data.error === 'Email already exists') {
+        alert("error: Email already exists");
+      } else {
+        alert("Signup failed. Please try again.");
+      }
+    }
   };
+  
 
   return (
     <>
-      <Navbarhome />
+      <Navbarmember />
       <div className="flex h-screen w-screen mb-5">
         <div className="flex flex-row w-1/2 h-screen aspect-auto">
           <img
@@ -79,7 +115,7 @@ function Signup() {
         </div>
 
         {/* right side */}
-        
+
         <div className="flex flex-col w-1/2 h-screen justify-center items-center">
           <div className="flex flex-row">
             <img
@@ -91,7 +127,7 @@ function Signup() {
           </div>
           <div className="font-bold">Sign Up</div>
           <br />
-          <form>
+          <form onSubmit={handledata}>
             <div className="flex flex-col items-start ">
               <label htmlFor="Fullname" className="flex flex-row justify-start">
                 Full name
@@ -199,7 +235,7 @@ function Signup() {
                 <button
                   className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 border-2 rounded-md"
                   type="summit"
-                  onClick={handledata}
+                 
                 >
                   Register
                 </button>
