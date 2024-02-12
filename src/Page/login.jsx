@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbarhome from "../Component/Navbarhome";
 import axios from "axios";
-import { redirect } from "react-router-dom";
 import { Navbarmember } from "../Component/Register/Navforregister";
 import { useNavigate } from "react-router-dom";
 
@@ -63,7 +62,7 @@ function Login() {
   }, []);
 
   return (
-    // <Nav />
+    
     <>
       <Navbarmember />
       <div className="flex h-screen">
