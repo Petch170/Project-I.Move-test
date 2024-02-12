@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Accordion = ({ activityCardData, handleEditClick }) => {
+const Accordion = ({ activityCardData, handleEditClick, editButtonShow }) => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -27,12 +27,14 @@ const Accordion = ({ activityCardData, handleEditClick }) => {
                       {item.fullname}
                     </span>
                   </div>
-                  <span
-                    className="material-icons-outlined p-2 z-[1] cursor-pointer"
-                    onClick={() => handleEditClick(item)}
-                  >
-                    edit
-                  </span>
+                  {editButtonShow ? (
+                    <span
+                      className="material-icons-outlined p-2 z-[1] cursor-pointer"
+                      onClick={() => handleEditClick(item)}
+                    >
+                      edit
+                    </span>
+                  ) : null}
                 </div>
                 {/* PicContainer */}
                 <div className="w-full h-[220px]">
@@ -78,11 +80,15 @@ const Accordion = ({ activityCardData, handleEditClick }) => {
                   </div>
                   <div>
                     <p className="text-[#102C57] font-bold">Durations</p>
-                    <p>{item.durations}</p>
+                    <p>
+                      {item.durations > 59
+                        ? `${(item.durations / 60).toFixed(2)} hr`
+                        : `${item.durations} min`}
+                    </p>
                   </div>
                   <div>
                     <p className="text-[#102C57] font-bold">Distance</p>
-                    <p>{item.distance}</p>
+                    <p>{`${item.distance / 1000}km`}</p>
                   </div>
                   <div className="flex flex-col col-span-2 justify-center">
                     <p className="text-[#102C57] font-bold">Description</p>

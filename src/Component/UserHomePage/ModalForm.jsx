@@ -1,3 +1,5 @@
+import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 import React, { useState } from "react";
 
 const initialValues = {
@@ -15,65 +17,75 @@ export default function ModalForm({
   closeModal,
   initialValue,
   formType,
-  setMockCard,
-  mockCard,
-  handleDelete,
+  handleConfirmDelete,
+  setReRender,
+  imageFile,
+  setImageFile,
 }) {
   const [inputData, setInputData] = useState(initialValue);
-  let idCounter = 10;
-
-  const generateUniqueId = () => {
-    idCounter += 1;
-    return `00${idCounter}`; // adjust the format as needed
-  };
 
   const handleOnChangeInputData = (key, value) => {
     setInputData((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleSummit = () => {
+  const handleSummit = async () => {
+    console.log(inputData.files);
     if (formType === "edit") {
-      const updatedMockCard = mockCard.map((card) => {
-        if (card.id === inputData.id) {
-          // If the id matches, update the card with new data from inputData
-          return {
-            ...card,
-            activityName: inputData.activityName,
-            activityType: inputData.activityType,
-            date: inputData.date,
-            durations: inputData.durations,
-            distance: inputData.distance,
-            description: inputData.description,
-          };
-        } else {
-          return card;
+      const formData = new FormData();
+      formData.append("userId", "0128");
+      formData.append("activityName", inputData.activityName);
+      formData.append("activityType", inputData.activityType);
+      formData.append("date", inputData.date);
+      formData.append("durations", inputData.durations);
+      formData.append("distance", inputData.distance);
+      formData.append("description", inputData.description);
+      if (inputData.files) {
+        formData.append("imageUrl", inputData.files);
+      }
+      formData.append("oldImageUrl", imageFile);
+      const res = await axios.put(
+        `http://localhost:8000/edit/post/${inputData.id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-      });
-      // Now, updatedMockCard contains the array with the updated object
-      setMockCard(updatedMockCard);
+      );
+      if (res.status === 200) {
+        enqueueSnackbar("Edited successfully", { variant: "success" });
+        console.log("Create Complete!");
+      }
       setInputData(initialValues);
       closeModal();
+      setReRender((prev) => !prev);
     } else if (formType === "create") {
-      const id = generateUniqueId();
-      const newCard = {
-        id: id,
-        activityName: inputData.activityName,
-        activityType: inputData.activityType,
-        date: inputData.date,
-        durations: inputData.durations,
-        distance: inputData.distance,
-        description: inputData.description,
-        imageUrl:
-          "https://fittoplay.org/globalassets/pictures/badminton/badminton_pho10254241_crop.jpg",
-      };
-      setMockCard([...mockCard, newCard]);
+      const formData = new FormData();
+      formData.append("userId", "0128");
+      formData.append("activityName", inputData.activityName);
+      formData.append("activityType", inputData.activityType);
+      formData.append("date", inputData.date);
+      formData.append("durations", inputData.durations);
+      formData.append("distance", inputData.distance);
+      formData.append("description", inputData.description);
+      formData.append("imageUrl", inputData.files);
+      const res = await axios.post(`http://localhost:8000/post/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res.status === 201) {
+        enqueueSnackbar("Create activity successfully", { variant: "success" });
+        console.log("Create Complete!");
+      }
       setInputData(initialValues);
       closeModal();
+      setReRender((prev) => !prev);
     }
   };
 
   return (
-    <div className="">
+    <div className="sm:grid-cols-2 p-4 ">
       <div className="flex justify-end cursor-pointer">
         <span class="material-icons-outlined" onClick={closeModal}>
           close
@@ -81,19 +93,43 @@ export default function ModalForm({
       </div>
       <div className="flex flex-col justify-center bg-[#EADBC8]">
         <div className="flex justify-center">
-          <h1 className="font-bold text-[#102C57] text-3xl p-4">
-            Create Activity
-          </h1>
+          {formType === "edit" ? (
+            <h1 className="font-bold text-[#102C57] text-3xl p-4">
+              Edit Activity
+            </h1>
+          ) : (
+            <h1 className="font-bold text-[#102C57] text-3xl p-4 ">
+              Create Activity
+            </h1>
+          )}
         </div>
-        <div className="p-4 text-center	text-[#102C57] font-semibold flex justify-center">
+        <div className="p-4 text-center	text-[#102C57] font-semibold flex flex-col items-center">
+          {imageFile ? (
+            <div className="w-[300px] h-[200px] flex justify-center">
+              <img src={imageFile} className="object-scale-down h-full  " />
+            </div>
+          ) : null}
           <label class="bg-[#102C57] hover:bg-cyan-600 duration-150 text-white font-semibold py-2 px-4 rounded cursor-pointer sm:w-1/4 ">
-            <input type="file" class="hidden" /> Upload Image
+            <input
+              type="file"
+              class="inputfile"
+              accept="image/png, image/gif, image/jpeg"
+              onChange={(ev) => {
+                if (ev) {
+                  handleOnChangeInputData("files", ev.target.files[0]);
+                  setImageFile(URL.createObjectURL(ev.target.files[0]));
+                  console.log(ev.target.files[0]);
+                }
+              }}
+            />{" "}
+            Upload Image
           </label>
         </div>
       </div>
       <div className="grid sm:grid-cols-2  bg-[#EADBC8] ">
         <div className="p-4 text-[#102C57] font-semibold">
           <label for="Activity Name">Activity Name : </label>
+
           <input
             type="text"
             id="Activity Name"
@@ -200,17 +236,17 @@ export default function ModalForm({
       </div>
       <div className="flex justify-center">
         <button
-          className="bg-[#102C57] rounded-lg text-white font-medium p-1 m-4 hover:bg-cyan-600 w-1/4"
+          className="bg-[#102C57] rounded-lg text-white font-medium p-1 m-4 hover:bg-cyan-600 w-1/4 shadow-xl"
           onClick={handleSummit}
         >
           Summit
         </button>
       </div>
       {formType === "edit" ? (
-        <div className="flex justify-end cursor-pointer">
+        <div className="flex justify-end cursor-pointer ">
           <span
             className="material-icons-outlined"
-            onClick={() => handleDelete(inputData.id)}
+            onClick={() => handleConfirmDelete(inputData.id)}
           >
             delete_sweep
           </span>
