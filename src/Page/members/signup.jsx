@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Navbarhome from "../../Component/Navbarhome";
 import axios from "axios";
 import { redirect } from "react-router-dom";
 import Login from "../login";
 import { Navbarmember } from "../../Component/Register/Navforregister";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+
 
 function Signup() {
   const [fullName, setFullname] = useState();
@@ -106,9 +106,9 @@ function Signup() {
     <>
       <Navbarmember />
       <div className="flex h-screen w-screen mb-5">
-        <div className="flex flex-row w-1/2 h-screen aspect-auto">
+        <div className="flex-row w-1/2 h-screen aspect-auto hidden md:flex">
           <img
-            className="w-full"
+            className="w-auto h-auto"
             src="https://images.unsplash.com/photo-1704999638827-cd0a7fed5c1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHx8"
             alt="picture"
           />
@@ -116,14 +116,14 @@ function Signup() {
 
         {/* right side */}
 
-        <div className="flex flex-col w-1/2 h-screen justify-center items-center">
+        <div className="flex-1 flex justify-center h-full items-center flex-col">
           <div className="flex flex-row">
             <img
               className="nav w-14 h-14"
-              src="src\assets\Pic-home\logo1.png"
+              src="public\Pic-home\logo1.png"
               alt="icon"
             />{" "}
-            <div className="pt-5 flex justify-center font-bold">i-move</div>
+            <div className="pt-5 flex justify-center font-bold text-xl">i-move</div>
           </div>
           <div className="font-bold">Sign Up</div>
           <br />
