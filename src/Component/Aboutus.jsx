@@ -6,25 +6,25 @@ const Aboutus = () => {
     {
       id: 0,
       image: samoy,
-      name: "petch",
+      name: "Sojirat",
       position: "Web Developers",
     },
     {
       id: 1,
       image: samoy,
-      name: "nan",
+      name: "Wiphaphorn",
       position: "Web Developers",
     },
     {
       id: 2,
       image: samoy,
-      name: "boy",
+      name: "Cheartsak",
       position: "Web Developers",
     },
     {
       id: 3,
       image: samoy,
-      name: "jane",
+      name: "Jetsalit",
       position: "Web Developers",
     },
   ];
@@ -69,8 +69,8 @@ const Aboutus = () => {
                 alt={member.name}
                 className=" w-[150px]  h-[200px]"
               />
-              <h3 className="text-lg md:text-xl">{member.name}</h3>
-              <p className="text-sm md:text-lg">
+              <h3 className="text-base md:text-lg">{member.name}</h3>
+              <p className="text-sm md:text-base">
                 {member.position}
               </p>
             </div>

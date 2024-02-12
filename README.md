@@ -41,3 +41,5 @@ module.exports = {
 
 - Install Material UI
 npm install @mui/material @emotion/react @emotion/styled
+
+npm install react-scroll
