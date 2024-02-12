@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Login from "../Page/login";
 import { logo } from "../assets/Picture";
-import UserHomePage from "./UserHomePage/UserHomePage";
-import { useNavigate } from "react-router-dom";
-import run from "/Pic-home/run1.jpg"
 import dash from "/Pic-home/Dashboard.png"
+import run from "/Pic-home/run1.jpg"
+
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate()

@@ -1,12 +1,8 @@
 import React from "react";
-import facebook from "/Pic-home/facebook.png"
-import instragram from "/Pic-home/instagram.png"
-import twitter from "/Pic-home/twitter.png"
-import youtube from "/Pic-home/youtube.png"
-
-
-
-
+import facebook from "/Pic-home/facebook_3488302.png"
+import twiter from '/Pic-home/twitter.png'
+import instragram from "/Pic-home/instagram_2111463.png"
+import youtube from "/Pic-home/youtube_1384060.png"
 const Contact = () => {
   const brand = [
     {
@@ -18,7 +14,7 @@ const Contact = () => {
     {
       id: 1,
       name: "twitter",
-      logo: twitter,
+      logo: twiter,
       url: "#",
     },
     {
