@@ -82,7 +82,7 @@ export default function UserHomePage() {
             </div>
           </div>
           <div>
-            <Accordion activityCardData={cardData} />
+            <Accordion activityCardData={cardData} editButtonShow={false} />
           </div>
         </div>
       </div>

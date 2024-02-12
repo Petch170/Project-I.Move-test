@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Accordion = ({ activityCardData, handleEditClick }) => {
+const Accordion = ({ activityCardData, handleEditClick, editButtonShow }) => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -27,12 +27,14 @@ const Accordion = ({ activityCardData, handleEditClick }) => {
                       {item.fullname}
                     </span>
                   </div>
-                  <span
-                    className="material-icons-outlined p-2 z-[1] cursor-pointer"
-                    onClick={() => handleEditClick(item)}
-                  >
-                    edit
-                  </span>
+                  {editButtonShow ? (
+                    <span
+                      className="material-icons-outlined p-2 z-[1] cursor-pointer"
+                      onClick={() => handleEditClick(item)}
+                    >
+                      edit
+                    </span>
+                  ) : null}
                 </div>
                 {/* PicContainer */}
                 <div className="w-full h-[220px]">
