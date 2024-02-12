@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Login from "../Page/login";
 import { logo } from "../assets/Picture";
-import UserHomePage from "./UserHomePage/UserHomePage";
+import dash from "/Pic-home/Dashboard.png"
+import run from "/Pic-home/run1.jpg"
+
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -35,7 +36,7 @@ const Home = () => {
         <div className="Picbox relative h-[638px]">
           <img
             className="banner h-full w-full object-cover opacity-2"
-            src="src/assets/Pic-home/run1.jpg"
+            src={run}
             alt="run"
           />
         </div>
@@ -69,7 +70,7 @@ const Home = () => {
         </h2>
         <img
           className="max-w-[350px] h-auto pt-6"
-          src="src/assets/Pic-home/Dashboard.png"
+          src={dash}
           alt="Dashboard"
         />
       </div>

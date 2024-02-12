@@ -1,28 +1,32 @@
 import React from "react";
+import facebook from "/Pic-home/facebook_3488302.png"
+import twiter from '/Pic-home/twitter.png'
+import instragram from "/Pic-home/instagram_2111463.png"
+import youtube from "/Pic-home/youtube_1384060.png"
 const Contact = () => {
   const brand = [
     {
       id: 0,
       name: "facebook",
-      logo: "src/assets/Pic-home/facebook_3488302.png",
+      logo: facebook,
       url: "#",
     },
     {
       id: 1,
       name: "twitter",
-      logo: "src/assets/Pic-home/twitter_5968830.png",
+      logo: twiter,
       url: "#",
     },
     {
       id: 2,
       name: "Instragram",
-      logo: "src/assets/Pic-home/instagram_2111463.png",
+      logo: instragram,
       url: "#",
     },
     {
       id: 3,
       name: "youtube",
-      logo: "src/assets/Pic-home/youtube_1384060.png",
+      logo: youtube,
       url: "#",
     },
   ];
