@@ -4,6 +4,7 @@ import axios from "axios";
 import { redirect } from "react-router-dom";
 import Login from "../login";
 import { Navbarmember } from "../../Component/Register/Navforregister";
+import { jwtDecode } from "jwt-decode";
 
 function Signup() {
   const [fullName, setFullname] = useState();
@@ -12,6 +13,32 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState();
   const [gender, setGender] = useState();
   const [dob, setDob] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      
+      const gettoken = localStorage.getItem("token");
+      // console.log(gettoken);
+      const decode = jwtDecode(gettoken);
+      // console.log(decode);
+      const email = decode.email;
+      const lala = { email: email };
+      // console.log(lala);
+      try {
+        if (gettoken != null) {
+          const response = await axios.post("https://immove.onrender.com/data", lala);
+          // console.log(response.data); // Example of processing data
+          
+          setSaveData(response.data);
+          navigate("/UserHomePage")
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 
 
