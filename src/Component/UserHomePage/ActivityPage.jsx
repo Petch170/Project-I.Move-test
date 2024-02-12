@@ -30,7 +30,7 @@ export default function ActivityPage() {
   const [idToDel, setIdtoDel] = useState("");
   const [cardData, setCardData] = useState([]);
   const [reRender, setReRender] = useState(false);
-  console.log(reRender);
+
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get(`http://localhost:8000/post/0128/`); //change when have real userId
@@ -163,7 +163,7 @@ export default function ActivityPage() {
             </h1>
             <button
               onClick={handleCreateClick}
-              className="bg-[#102C57] rounded-lg text-white font-medium p-3 hover:bg-cyan-600 hidden sm:block"
+              className="bg-[#102C57] rounded-lg text-white font-medium p-3 hover:bg-cyan-600 hidden sm:block shadow-xl"
             >
               Create Activity
             </button>

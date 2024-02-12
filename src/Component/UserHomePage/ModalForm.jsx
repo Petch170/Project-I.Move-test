@@ -98,7 +98,7 @@ export default function ModalForm({
               Edit Activity
             </h1>
           ) : (
-            <h1 className="font-bold text-[#102C57] text-3xl p-4">
+            <h1 className="font-bold text-[#102C57] text-3xl p-4 ">
               Create Activity
             </h1>
           )}
@@ -129,6 +129,7 @@ export default function ModalForm({
       <div className="grid sm:grid-cols-2  bg-[#EADBC8] ">
         <div className="p-4 text-[#102C57] font-semibold">
           <label for="Activity Name">Activity Name : </label>
+
           <input
             type="text"
             id="Activity Name"
@@ -235,7 +236,7 @@ export default function ModalForm({
       </div>
       <div className="flex justify-center">
         <button
-          className="bg-[#102C57] rounded-lg text-white font-medium p-1 m-4 hover:bg-cyan-600 w-1/4"
+          className="bg-[#102C57] rounded-lg text-white font-medium p-1 m-4 hover:bg-cyan-600 w-1/4 shadow-xl"
           onClick={handleSummit}
         >
           Summit
