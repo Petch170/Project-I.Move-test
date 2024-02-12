@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../../../back-end-imove"
+		},
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../career-switcher-mongodb"
+		},
+		{
+			"path": "../../../nodejs-basic-course"
+		}
+	],
+	"settings": {}
+}

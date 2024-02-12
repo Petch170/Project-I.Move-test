@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbarhome from "../Component/Navbarhome";
 import axios from "axios";
-import { redirect } from "react-router-dom";
 import { Navbarmember } from "../Component/Register/Navforregister";
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +23,7 @@ function Login() {
     // console.log(data);
     try {
       const resposedata = await axios.post(
-        "https://immove.onrender.com/login",
+        "http://127.0.0.1:8000/login",
         data
       );
       if (resposedata.status === 200 && resposedata.data.token != null) {
@@ -63,7 +62,7 @@ function Login() {
   }, []);
 
   return (
-    // <Nav />
+    
     <>
       <Navbarmember />
       <div className="flex h-screen">

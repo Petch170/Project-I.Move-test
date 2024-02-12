@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbarhome from "../../Component/Navbarhome";
 import axios from "axios";
 import { redirect } from "react-router-dom";
@@ -20,7 +20,6 @@ function Signup() {
 
   useEffect(() => {
     const fetchData = async () => {
-      
       const gettoken = localStorage.getItem("token");
       // console.log(gettoken);
       const decode = jwtDecode(gettoken);
@@ -30,11 +29,14 @@ function Signup() {
       // console.log(lala);
       try {
         if (gettoken != null) {
-          const response = await axios.post("https://immove.onrender.com/data", lala);
+          const response = await axios.post(
+            "https://immove.onrender.com/data",
+            lala
+          );
           // console.log(response.data); // Example of processing data
-          
+
           setSaveData(response.data);
-          navigate("/UserHomePage")
+          navigate("/UserHomePage");
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -44,21 +46,20 @@ function Signup() {
     fetchData();
   }, []);
 
-
-
-  const handledata = async () => {
+  const handledata = async (e) => {
+    e.preventDefault();
     if (!fullName || !email || !password || !gender || !dob || !phoneNumber) {
       alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
       return;
     }
-
+  
     // ตรวจสอบ pattern ของอีเมล
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     // ตรวจสอบ pattern ของพาสเวิร์ด
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     // ตรวจสอบ pattern ของเบอร์โทรศัพท์
     const phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
-
+  
     switch (true) {
       case !emailPattern.test(email):
         alert("รูปแบบอีเมลไม่ถูกต้อง");
@@ -72,8 +73,8 @@ function Signup() {
       default:
         console.log("pass");
         break;
-    };
-
+    }
+  
     const data = {
       fullName: fullName,
       email: email,
@@ -83,22 +84,23 @@ function Signup() {
       phoneNumber: phoneNumber,
       typemem: "individual",
     };
-
-        try {
-      const response = await axios.post(
-        "https://immove.onrender.com/signup",
-        data
-      );
+  
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/signup", data);
       console.log(response);
-
-      // Redirect to login page after successful signup
-      // history.push("/login");
+      if (response.status === 200 && response.data) {
+        navigate("/login");
+      }
     } catch (error) {
       console.error("Signup error:", error);
-      // Handle signup error, show appropriate message to user
-      alert("Signup failed. Please try again.");
+      if (error.response.status === 400 && error.response.data.error === 'Email already exists') {
+        alert("error: Email already exists");
+      } else {
+        alert("Signup failed. Please try again.");
+      }
     }
   };
+  
 
   return (
     <>
@@ -125,7 +127,7 @@ function Signup() {
           </div>
           <div className="font-bold">Sign Up</div>
           <br />
-          <form>
+          <form onSubmit={handledata}>
             <div className="flex flex-col items-start ">
               <label htmlFor="Fullname" className="flex flex-row justify-start">
                 Full name
@@ -233,7 +235,7 @@ function Signup() {
                 <button
                   className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 border-2 rounded-md"
                   type="summit"
-                  onClick={handledata}
+                 
                 >
                   Register
                 </button>
