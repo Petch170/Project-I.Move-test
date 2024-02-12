@@ -1,28 +1,29 @@
 import React from "react";
+import samoy from "/Pic-home/samoy.jpg"
 
 const Aboutus = () => {
   const data = [
     {
       id: 0,
-      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
+      image: samoy,
       name: "petch",
       position: "Web Developers",
     },
     {
       id: 1,
-      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
+      image: samoy,
       name: "nan",
       position: "Web Developers",
     },
     {
       id: 2,
-      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
+      image: samoy,
       name: "boy",
       position: "Web Developers",
     },
     {
       id: 3,
-      image: "src/assets/Pic-home/IMG_20240202_105738.jpg",
+      image: samoy,
       name: "jane",
       position: "Web Developers",
     },
