@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { set } from "react-hook-form";
+import { Navbarmember } from "../../Component/Register/Navforregister";
 
 function ForgotPassword() {
 
@@ -25,6 +26,8 @@ function ForgotPassword() {
   };
 
   return (
+    <>
+    <Navbarmember />
     <body className="flex flex-col h-screen w-screen justify-center">
       <div className="flex flex-col w-full justify-center items-center">
         <div>i-Move</div>
@@ -53,7 +56,7 @@ function ForgotPassword() {
         Summit
       </button>
     </body>
-  );
+    </>);
 }
 
 export default ForgotPassword;

@@ -14,7 +14,8 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState();
   const [gender, setGender] = useState();
   const [dob, setDob] = useState("");
-  const [saveData, setSaveData] = useState();
+  // const [saveData, setSaveData] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
 
   const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ function Signup() {
           );
           // console.log(response.data); // Example of processing data
 
-          setSaveData(response.data);
+          // setSaveData(response.data);
           navigate("/UserHomePage");
         }
       } catch (error) {
@@ -48,7 +49,7 @@ function Signup() {
 
   const handledata = async (e) => {
     e.preventDefault();
-    if (!fullName || !email || !password || !gender || !dob || !phoneNumber) {
+    if (!fullName || !email || !password || !confirmPassword || !gender || !dob || !phoneNumber) {
       alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
       return;
     }
@@ -73,6 +74,11 @@ function Signup() {
       default:
         console.log("pass");
         break;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Password and Confirm Password do not match");
+      return;
     }
   
     const data = {
@@ -173,6 +179,23 @@ function Signup() {
                 title="Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one number."
                 className="border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setPassword(e.target.value)}
+                required
+              ></input>
+              <label
+                htmlFor="confirm-password"
+                className="flex flex-row justify-start mt-1"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm Password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+                title="Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one number."
+                className="border-solid border-2 border-[#c7c7c7] rounded-md"
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               ></input>
               <div className="mt-2">Gender </div>
