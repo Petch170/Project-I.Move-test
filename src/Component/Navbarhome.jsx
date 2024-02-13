@@ -1,5 +1,5 @@
 import React from "react";
-import { logo } from "../assets/Picture";
+import logo1 from "/Pic-home/logo1.png";
 
 function Navbarhome() {
 
@@ -16,7 +16,7 @@ function Navbarhome() {
       <div className="navlogobar flex  items-center">
         <img
           className="nav w-14 h-14"
-          src={logo}
+          src={logo1}
           alt="icon"
         />
         <a className="Logo hover:cursor-pointer font-bold">I.MOVE</a>
