@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Accordion = ({ activityCardData, handleEditClick, editButtonShow }) => {
   const [activeIndex, setActiveIndex] = useState(null);
-
+  console.log(activityCardData);
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
     console.log(activeIndex);
@@ -22,9 +22,17 @@ const Accordion = ({ activityCardData, handleEditClick, editButtonShow }) => {
                 {/* CardHeader */}
                 <div className=" flex justify-between ">
                   <div className="flex">
-                    <img src={item.profilepic} className="w-10 h-10 p-2 " />
+                    {item.userDetails?.imagePath ? (
+                      <img
+                        src={item.userDetails.imagePath}
+                        className="w-10 h-10 p-2 "
+                      />
+                    ) : (
+                      <img src="./Pic-home/user-circle-2.svg" alt="user" />
+                    )}
+
                     <span className="pl-2 pt-2 text-[#102C57] font-bold  ">
-                      {item.fullname}
+                      {item.userDetails.fullName}
                     </span>
                   </div>
                   {editButtonShow ? (
