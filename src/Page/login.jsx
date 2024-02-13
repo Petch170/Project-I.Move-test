@@ -88,7 +88,7 @@ function Login() {
               src="public\Pic-home\logo1.png"
               alt="icon"
             />{" "}
-            <div className="pt-5 flex justify-center font-bold text-xl">i-move</div>
+            <div className=" flex flex-col justify-center font-bold text-xl">i-move</div>
           </div>
           <div className="font-bold">Login</div>
           <div id="input" className="mt-3">
@@ -118,7 +118,7 @@ function Login() {
               className="mt-2 border-solid border-2 border-[#c7c7c7] rounded-md"
             ></input>
             <div id="forgotpassword" className="flex flex-row justify-end ">
-              <a href="#" className="text-xs flex justify-end">
+              <a href="/forgotpassword" className="text-xs flex justify-end">
                 Forgot password
               </a>
             </div>

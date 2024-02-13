@@ -128,8 +128,8 @@ function Signup() {
               className="nav w-14 h-14"
               src="public\Pic-home\logo1.png"
               alt="icon"
-            />{" "}
-            <div className="pt-5 flex justify-center font-bold text-xl">i-move</div>
+            />
+            <div className=" flex flex-col justify-center font-bold text-xl">i-move</div>
           </div>
           <div className="font-bold">Sign Up</div>
           <br />
