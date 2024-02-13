@@ -21,6 +21,7 @@ export default function ModalForm({
   setReRender,
   imageFile,
   setImageFile,
+  userId,
 }) {
   const [inputData, setInputData] = useState(initialValue);
 
@@ -32,7 +33,6 @@ export default function ModalForm({
     console.log(inputData.files);
     if (formType === "edit") {
       const formData = new FormData();
-      formData.append("userId", "0128");
       formData.append("activityName", inputData.activityName);
       formData.append("activityType", inputData.activityType);
       formData.append("date", inputData.date);
@@ -61,7 +61,7 @@ export default function ModalForm({
       setReRender((prev) => !prev);
     } else if (formType === "create") {
       const formData = new FormData();
-      formData.append("userId", "0128");
+      formData.append("userId", userId);
       formData.append("activityName", inputData.activityName);
       formData.append("activityType", inputData.activityType);
       formData.append("date", inputData.date);
@@ -85,8 +85,8 @@ export default function ModalForm({
   };
 
   return (
-    <div className="sm:grid-cols-2 p-4 ">
-      <div className="flex justify-end cursor-pointer">
+    <div className=" sm:grid-cols-2 p-4 ">
+      <div className="flex justify-end cursor-pointer ">
         <span class="material-icons-outlined" onClick={closeModal}>
           close
         </span>

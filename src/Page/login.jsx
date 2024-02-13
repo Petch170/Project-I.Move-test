@@ -4,7 +4,6 @@ import axios from "axios";
 import { Navbarmember } from "../Component/Register/Navforregister";
 import { useNavigate } from "react-router-dom";
 
-
 import { jwtDecode } from "jwt-decode";
 
 function Login() {
@@ -12,7 +11,7 @@ function Login() {
   const [password, setPassword] = useState();
   const [saveData, setSaveData] = useState("");
   // console.log(saveData);
-  
+
   const navigate = useNavigate();
 
   const handleData = async () => {
@@ -23,10 +22,7 @@ function Login() {
     // get data
     // console.log(data);
     try {
-      const resposedata = await axios.post(
-        "http://127.0.0.1:8000/login",
-        data
-      );
+      const resposedata = await axios.post("http://127.0.0.1:8000/login", data);
       if (resposedata.status === 200 && resposedata.data.token != null) {
         localStorage.setItem("token", resposedata.data.token);
         navigate("/UserHomePage");
@@ -38,7 +34,6 @@ function Login() {
 
   useEffect(() => {
     const fetchData = async () => {
-      
       const gettoken = localStorage.getItem("token");
       // console.log(gettoken);
       const decode = jwtDecode(gettoken);
@@ -50,9 +45,9 @@ function Login() {
         if (gettoken != null) {
           const response = await axios.post("http://127.0.0.1:8000/data", lala);
           // console.log(response.data); // Example of processing data
-          
+
           setSaveData(response.data);
-          navigate("/UserHomePage")
+          navigate("/UserHomePage");
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -63,7 +58,6 @@ function Login() {
   }, []);
 
   return (
-    
     <>
       <Navbarmember />
       <div className="flex h-screen">
@@ -75,7 +69,8 @@ function Login() {
           >
             <img
               src="https://images.unsplash.com/photo-1705078368218-6252bc56a644?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8"
-              alt="image left" className="min-w-full min-h-full"
+              alt="image left"
+              className="min-w-full min-h-full"
             />
           </div>
         </div>
@@ -88,7 +83,9 @@ function Login() {
               src="public\Pic-home\logo1.png"
               alt="icon"
             />{" "}
-            <div className=" flex flex-col justify-center font-bold text-xl">i-move</div>
+            <div className=" flex flex-col justify-center font-bold text-xl">
+              i-move
+            </div>
           </div>
           <div className="font-bold">Login</div>
           <div id="input" className="mt-3">

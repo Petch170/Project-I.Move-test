@@ -15,7 +15,9 @@ export default function UserHomePage() {
       const res = await axios.get(`http://localhost:8000/post/`);
       const data = res.data;
       setCardData(data);
+      console.log(data);
     };
+
     getData();
   }, []);
 
@@ -46,7 +48,7 @@ export default function UserHomePage() {
           <div className="flex justify-between px-6 py-2 items-center bg-cream">
             <a href="/" className="h-[40px] w-[40px]">
               <img
-                src="./src/assets/Pic-home/logo1.png"
+                src="./Pic-home/logo1.png"
                 alt="logo1"
                 className="relative "
               />
@@ -58,7 +60,7 @@ export default function UserHomePage() {
           </div>
         </div>
         <NavHead />
-        <Sidebar userData={mockUserData} />
+        <Sidebar />
         <div className="col-span-12 sm:col-span-9 p-3 m-5 ">
           <div className="flex justify-between">
             <div>
