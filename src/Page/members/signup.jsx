@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Navbarhome from "../../Component/Navbarhome";
 import axios from "axios";
 import { redirect } from "react-router-dom";
 import Login from "../login";
 import { Navbarmember } from "../../Component/Register/Navforregister";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+
 
 function Signup() {
   const [fullName, setFullname] = useState();
@@ -14,7 +14,8 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState();
   const [gender, setGender] = useState();
   const [dob, setDob] = useState("");
-  const [saveData, setSaveData] = useState();
+  // const [saveData, setSaveData] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
 
   const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ function Signup() {
           );
           // console.log(response.data); // Example of processing data
 
-          setSaveData(response.data);
+          // setSaveData(response.data);
           navigate("/UserHomePage");
         }
       } catch (error) {
@@ -48,7 +49,7 @@ function Signup() {
 
   const handledata = async (e) => {
     e.preventDefault();
-    if (!fullName || !email || !password || !gender || !dob || !phoneNumber) {
+    if (!fullName || !email || !password || !confirmPassword || !gender || !dob || !phoneNumber) {
       alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
       return;
     }
@@ -73,6 +74,11 @@ function Signup() {
       default:
         console.log("pass");
         break;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Password and Confirm Password do not match");
+      return;
     }
   
     const data = {
@@ -106,9 +112,9 @@ function Signup() {
     <>
       <Navbarmember />
       <div className="flex h-screen w-screen mb-5">
-        <div className="flex flex-row w-1/2 h-screen aspect-auto">
+        <div className="flex-row w-1/2 h-screen aspect-auto hidden md:flex">
           <img
-            className="w-full"
+            className="w-auto h-auto"
             src="https://images.unsplash.com/photo-1704999638827-cd0a7fed5c1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHx8"
             alt="picture"
           />
@@ -116,14 +122,14 @@ function Signup() {
 
         {/* right side */}
 
-        <div className="flex flex-col w-1/2 h-screen justify-center items-center">
+        <div className="flex-1 flex justify-center h-full items-center flex-col">
           <div className="flex flex-row">
             <img
               className="nav w-14 h-14"
-              src="src\assets\Pic-home\logo1.png"
+              src="public\Pic-home\logo1.png"
               alt="icon"
-            />{" "}
-            <div className="pt-5 flex justify-center font-bold">i-move</div>
+            />
+            <div className=" flex flex-col justify-center font-bold text-xl">i-move</div>
           </div>
           <div className="font-bold">Sign Up</div>
           <br />
@@ -173,6 +179,23 @@ function Signup() {
                 title="Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one number."
                 className="border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setPassword(e.target.value)}
+                required
+              ></input>
+              <label
+                htmlFor="confirm-password"
+                className="flex flex-row justify-start mt-1"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm Password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+                title="Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one number."
+                className="border-solid border-2 border-[#c7c7c7] rounded-md"
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               ></input>
               <div className="mt-2">Gender </div>
