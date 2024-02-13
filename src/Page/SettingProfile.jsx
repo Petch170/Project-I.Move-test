@@ -6,17 +6,34 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const SettingProfile = () => {
-  // const [getNewProfile, setGetNewProfile] = useState([]);
-  // const [imageName, setImageName] = useState("");
   const [userInfo, setUserInfo] = useState([]);
   const [reload, setReload] = useState(false);
+  const [message, setMessage] = useState("");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-    setValue,
-  } = useForm();
+  } = useForm({
+    defaultValues: async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/user/info/${userId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        if (response.status === 200 && response.data) {
+          return {
+            name: response.data.data[0]?.fullName,
+            email: response.data.data[0]?.email,
+            phoneNumber: response.data.data[0]?.phone,
+          };
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
@@ -28,22 +45,23 @@ const SettingProfile = () => {
       );
       if (response.status === 200 && response.data) {
         setUserInfo([...response.data.data]);
-        // console.log("userInfo", userInfo);
       }
     };
     getUserInfo();
   }, [reload]);
 
   const editProfile = async (data) => {
-    const response = await axios.patch(
-      `http://localhost:8000/user/editProfile/${userId}`,
-      data,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    if (response.status === 200 && response.data) {
-      // setGetNewProfile([...response.data.data]);
-      // console.log("getNewProfile", getNewProfile);
-      setReload(!reload);
+    try {
+      const response = await axios.patch(
+        `http://localhost:8000/user/editProfile/${userId}`,
+        data,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.status === 200 && response.data) {
+        setReload(!reload);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -54,10 +72,7 @@ const SettingProfile = () => {
     formData.append("phoneNumber", data.phoneNumber);
     formData.append("image", data.image[0]);
     editProfile(formData);
-    console.log("data", data);
-    console.log("image", data.image[0]);
-    // setImageName("");
-    reset();
+    setMessage("Profile editing is successful");
   };
 
   return (
@@ -71,6 +86,9 @@ const SettingProfile = () => {
         <section className="w-screen px-10 sm:w-fit">
           <div className="sm:border-l-2 sm:border-black sm:pl-10">
             <h2 className="text-2xl font-bold my-4">Edit Profile</h2>
+            {message && (
+              <p className="font-bold text-green-600 mb-4">{message}</p>
+            )}
             <form
               action=""
               onSubmit={handleSubmit(submitForm)}
@@ -120,10 +138,6 @@ const SettingProfile = () => {
                     {...register("image", {
                       required: true,
                     })}
-                    // onChange={(e) => {
-                    //   setImageName(e.target.files[0].name);
-                    //   setImage(URL.createObjectURL(e.target.files[0]));
-                    // }}
                   />
                   <label
                     htmlFor="image"
@@ -131,12 +145,9 @@ const SettingProfile = () => {
                   >
                     Change Picture (PNG,JPG)
                   </label>
-                  {/* {imageName ? (
-                    <div className="text-xs text-center mt-2">{imageName}</div>
-                  ) : (
-                    <div></div>
-                  )} */}
-                  {/* <button className="btn">Delete Picture</button> */}
+                  {errors.image?.type === "required" && (
+                    <p className="errorMsg">Picture file is required.</p>
+                  )}
                 </div>
                 <div>
                   <img
@@ -196,10 +207,16 @@ const SettingProfile = () => {
                   className="block w-full mt-1 rounded-lg p-2 border border-black"
                   {...register("phoneNumber", {
                     required: true,
+                    pattern: /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/,
                   })}
                 />
                 {errors.phoneNumber?.type === "required" && (
                   <p className="errorMsg">Phone number is required.</p>
+                )}
+                {errors.phoneNumber?.type === "pattern" && (
+                  <p className="errorMsg">
+                    Phone number pattern is 000-000-0000.
+                  </p>
                 )}
               </div>
               <div className="flex justify-center sm:justify-end">

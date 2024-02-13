@@ -8,6 +8,7 @@ import * as Yup from "yup";
 const SettingPassword = () => {
   const [message, setMessage] = useState("");
   let password;
+
   const formSchema = Yup.object().shape({
     newPassword: Yup.string()
       .required("Password is required")
@@ -19,6 +20,7 @@ const SettingPassword = () => {
       .max(12, "Password cannot exceed more than 12 characters")
       .oneOf([Yup.ref("newPassword")], "Passwords do not match"),
   });
+
   const {
     register,
     handleSubmit,
@@ -32,15 +34,17 @@ const SettingPassword = () => {
   const userId = localStorage.getItem("userId");
 
   const changePassword = async (data) => {
-    const response = await axios.post(
-      `http://localhost:8000/user/changePassword/${userId}`,
-      data,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    if (response.status === 200 && response.data) {
-      // setGetNewPassword([...response.data.data]);
-      // console.log("getNewPassword", getNewPassword);
-      console.log(response.data);
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/user/changePassword/${userId}`,
+        data,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.status === 200 && response.data) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -64,31 +68,10 @@ const SettingPassword = () => {
               <h2 className="text-2xl font-bold text-center mb-4 sm:text-left">
                 Password
               </h2>
-              {/* <div className="mb-4">
-                <label htmlFor="currentPassword">Current password</label>
-                <input
-                  type="password"
-                  name="currentPassword"
-                  id="currentPassword"
-                  placeholder="Your current password"
-                  className="block w-full w-min-[350px] mt-1 rounded-lg p-2 border border-black"
-                  {...register("currentPassword", {
-                    required: true,
-                    minLength: 6,
-                  })}
-                />
-                {errors.currentPassword?.type === "required" && (
-                  <p className="errorMsg">Password is required.</p>
-                )}
-                {errors.currentPassword?.type === "minLength" && (
-                  <p className="errorMsg">
-                    Password should be at least 6 characters.
-                  </p>
-                )}
-              </div> */}
               {message && (
-                <p className="font-bold text-green-500 mb-4">{message}</p>
+                <p className="font-bold text-green-600 mb-4">{message}</p>
               )}
+
               <div className="mb-4">
                 <label htmlFor="newPassword">New password</label>
                 <input
@@ -99,16 +82,9 @@ const SettingPassword = () => {
                   className="block w-full mt-1 rounded-lg p-2 border border-black"
                   {...register("newPassword")}
                 />
-                {/* {errors.newPassword?.type === "required" && (
-                  <p className="errorMsg">Password is required.</p>
-                )}
-                {errors.newPassword?.type === "minLength" && (
-                  <p className="errorMsg">
-                    Password should be at least 6 characters.
-                  </p>
-                )} */}
                 <p className="errorMsg">{errors.newPassword?.message}</p>
               </div>
+
               <div className="mb-4">
                 <label htmlFor="retypePassword">Re-type Password</label>
                 <input
@@ -119,20 +95,12 @@ const SettingPassword = () => {
                   className="block w-full mt-1 rounded-lg p-2 border border-black"
                   {...register("retypePassword")}
                 />
-                {/* {errors.retypePassword?.type === "required" && (
-                  <p className="errorMsg">Password is required.</p>
-                )}
-                {errors.retypePassword?.type === "minLength" && (
-                  <p className="errorMsg">
-                    Password should be at least 6 characters.
-                  </p>
-                )} */}
-
                 <p className="errorMsg">{errors.retypePassword?.message}</p>
               </div>
+
               <div className="flex justify-center sm:justify-end">
                 <button type="submit" className="btn mt-2">
-                  Save password
+                  Submit
                 </button>
               </div>
             </form>

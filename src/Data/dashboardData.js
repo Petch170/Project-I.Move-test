@@ -2,11 +2,8 @@
 const getStatData = (data) => {
   const statData = [];
   for (let activity of data) {
-    const distance = Number(activity.distance.split(" ")[0]);
-    const time =
-      activity.durations.split(" ")[1] === "minute"
-        ? Number(activity.durations.split(" ")[0]) / 60
-        : Number(activity.durations.split(" ")[0]);
+    const distance = Number(activity.distance) / 1000;
+    const time = Number(activity.durations) / 60;
     const checkActivity = statData.find(
       (check) => check.label === activity.activityType
     );
