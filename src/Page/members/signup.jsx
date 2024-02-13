@@ -1,11 +1,11 @@
-import React, { useState,useEffect } from "react";
-import Navbarhome from "../../Component/Navbarhome";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { redirect } from "react-router-dom";
 import Login from "../login";
 import { Navbarmember } from "../../Component/Register/Navforregister";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+
 
 function Signup() {
   const [fullName, setFullname] = useState();
@@ -14,13 +14,13 @@ function Signup() {
   const [phoneNumber, setPhoneNumber] = useState();
   const [gender, setGender] = useState();
   const [dob, setDob] = useState("");
-  const [saveData, setSaveData] = useState();
+  // const [saveData, setSaveData] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      
       const gettoken = localStorage.getItem("token");
       // console.log(gettoken);
       const decode = jwtDecode(gettoken);
@@ -30,11 +30,14 @@ function Signup() {
       // console.log(lala);
       try {
         if (gettoken != null) {
-          const response = await axios.post("https://immove.onrender.com/data", lala);
+          const response = await axios.post(
+            "https://immove.onrender.com/data",
+            lala
+          );
           // console.log(response.data); // Example of processing data
-          
-          setSaveData(response.data);
-          navigate("/UserHomePage")
+
+          // setSaveData(response.data);
+          navigate("/UserHomePage");
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -44,21 +47,20 @@ function Signup() {
     fetchData();
   }, []);
 
-
-
-  const handledata = async () => {
-    if (!fullName || !email || !password || !gender || !dob || !phoneNumber) {
+  const handledata = async (e) => {
+    e.preventDefault();
+    if (!fullName || !email || !password || !confirmPassword || !gender || !dob || !phoneNumber) {
       alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
       return;
     }
-
+  
     // ตรวจสอบ pattern ของอีเมล
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     // ตรวจสอบ pattern ของพาสเวิร์ด
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     // ตรวจสอบ pattern ของเบอร์โทรศัพท์
     const phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
-
+  
     switch (true) {
       case !emailPattern.test(email):
         alert("รูปแบบอีเมลไม่ถูกต้อง");
@@ -72,8 +74,13 @@ function Signup() {
       default:
         console.log("pass");
         break;
-    };
+    }
 
+    if (password !== confirmPassword) {
+      alert("Password and Confirm Password do not match");
+      return;
+    }
+  
     const data = {
       fullName: fullName,
       email: email,
@@ -83,30 +90,31 @@ function Signup() {
       phoneNumber: phoneNumber,
       typemem: "individual",
     };
-
-        try {
-      const response = await axios.post(
-        "https://immove.onrender.com/signup",
-        data
-      );
+  
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/signup", data);
       console.log(response);
-
-      // Redirect to login page after successful signup
-      // history.push("/login");
+      if (response.status === 200 && response.data) {
+        navigate("/login");
+      }
     } catch (error) {
       console.error("Signup error:", error);
-      // Handle signup error, show appropriate message to user
-      alert("Signup failed. Please try again.");
+      if (error.response.status === 400 && error.response.data.error === 'Email already exists') {
+        alert("error: Email already exists");
+      } else {
+        alert("Signup failed. Please try again.");
+      }
     }
   };
+  
 
   return (
     <>
       <Navbarmember />
       <div className="flex h-screen w-screen mb-5">
-        <div className="flex flex-row w-1/2 h-screen aspect-auto">
+        <div className="flex-row w-1/2 h-screen aspect-auto hidden md:flex">
           <img
-            className="w-full"
+            className="w-auto h-auto"
             src="https://images.unsplash.com/photo-1704999638827-cd0a7fed5c1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHx8"
             alt="picture"
           />
@@ -114,18 +122,18 @@ function Signup() {
 
         {/* right side */}
 
-        <div className="flex flex-col w-1/2 h-screen justify-center items-center">
+        <div className="flex-1 flex justify-center h-full items-center flex-col">
           <div className="flex flex-row">
             <img
               className="nav w-14 h-14"
-              src="src\assets\Pic-home\logo1.png"
+              src="public\Pic-home\logo1.png"
               alt="icon"
-            />{" "}
-            <div className="pt-5 flex justify-center font-bold">i-move</div>
+            />
+            <div className=" flex flex-col justify-center font-bold text-xl">i-move</div>
           </div>
           <div className="font-bold">Sign Up</div>
           <br />
-          <form>
+          <form onSubmit={handledata}>
             <div className="flex flex-col items-start ">
               <label htmlFor="Fullname" className="flex flex-row justify-start">
                 Full name
@@ -171,6 +179,23 @@ function Signup() {
                 title="Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one number."
                 className="border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setPassword(e.target.value)}
+                required
+              ></input>
+              <label
+                htmlFor="confirm-password"
+                className="flex flex-row justify-start mt-1"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm Password"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+                title="Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one number."
+                className="border-solid border-2 border-[#c7c7c7] rounded-md"
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               ></input>
               <div className="mt-2">Gender </div>
@@ -233,7 +258,7 @@ function Signup() {
                 <button
                   className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 border-2 rounded-md"
                   type="summit"
-                  onClick={handledata}
+                 
                 >
                   Register
                 </button>

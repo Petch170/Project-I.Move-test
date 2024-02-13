@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import ModalForm from "./ModalForm";
 import Accordion from "./Accordion";
-import { mockUserData, userData } from "./mockData";
 import Sidebar from "./Sidebar";
 import NavHead from "./NavHead";
 import DeleteConfirm from "./DeleteConfirm";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
+import { jwtDecode } from "jwt-decode";
 
 const initialValues = {
   id: undefined,
@@ -23,23 +23,36 @@ const initialValues = {
 export default function ActivityPage() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [formType, setFormType] = useState();
-  const [mockCard, setMockCard] = useState(userData);
   const [imageFile, setImageFile] = useState();
   const [confirmDel, setConfirmDel] = useState(false);
   const [initialValue, setInitialValue] = useState(initialValues);
   const [idToDel, setIdtoDel] = useState("");
   const [cardData, setCardData] = useState([]);
   const [reRender, setReRender] = useState(false);
+  const [userId, setUserId] = useState();
+  const [userInfo, setUserinfo] = useState();
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get(`http://localhost:8000/post/0128/`); //change when have real userId
+      const gettoken = localStorage.getItem("token");
+      const decode = jwtDecode(gettoken);
+      const email = decode.email;
+      const response = await axios.get(
+        `http://localhost:8000/user/data/${email}`
+      );
+      console.log(response);
+      const userData = response.data;
+      const newUserInfo = userData[0];
+      setUserinfo(newUserInfo);
+      const userId = userData[0].userId;
+      setUserId(userId);
+      const res = await axios.get(`http://localhost:8000/post/${userId}/`);
       const data = res.data;
       setCardData(data);
     };
     getData();
   }, [reRender]);
-  console.log(cardData);
+  console.log(userInfo);
   const customStyles = {
     content: {
       top: "50%",
@@ -128,11 +141,7 @@ export default function ActivityPage() {
         <div className=" sm:hidden col-span-12">
           <div className="flex justify-between px-6 py-2 items-center bg-cream">
             <a href="/" className="w-[40px] h-[40px]">
-              <img
-                src="./src/assets/Pic-home/logo1.png"
-                alt="logo1"
-                className=""
-              />
+              <img src="./Pic-home/logo1.png" alt="logo1" />
             </a>
             <p className="text-[#102C57] font-bold">Proflie</p>
             <a href="/setting">
@@ -141,20 +150,24 @@ export default function ActivityPage() {
           </div>
           <div className="flex flex-col items-center">
             <div className="w-24 h-24 p-3 ">
-              <img
-                src={mockUserData.profilepic}
-                alt="Profile picture"
-                className="rounded-full w-full h-full"
-              />
+              {userInfo?.imagePath ? (
+                <img
+                  src={userInfo?.imagePath}
+                  alt="Profile picture"
+                  className="rounded-full w-full h-full"
+                />
+              ) : (
+                <img src="./Pic-home/user-circle-2.svg" alt="user" />
+              )}
             </div>
             <div className="font-bold">
-              <p>{mockUserData.fullname}</p>
+              <p>{userInfo?.fullName}</p>
             </div>
           </div>
         </div>
 
         <NavHead handleCreateClick={handleCreateClick} />
-        <Sidebar userData={mockUserData} />
+        <Sidebar userData={userInfo} />
 
         <div className="col-span-12 sm:col-span-9 p-3 m-5 ">
           <div className="flex justify-between  ">
@@ -188,12 +201,11 @@ export default function ActivityPage() {
               closeModal={closeModal}
               initialValue={initialValue}
               formType={formType}
-              setMockCard={setMockCard}
-              mockCard={mockCard}
               handleConfirmDelete={handleConfirmDelete}
               setReRender={setReRender}
               imageFile={imageFile}
               setImageFile={setImageFile}
+              userId={userId}
             />
           </Modal>
           <Modal

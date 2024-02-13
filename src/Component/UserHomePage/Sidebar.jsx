@@ -1,20 +1,39 @@
-import React, { useState } from "react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import React, { useEffect, useState } from "react";
 
-export default function Sidebar({ userData }) {
-  console.log(userData);
+export default function Sidebar() {
+  const [userData, setUserData] = useState();
+  useEffect(() => {
+    const getData = async () => {
+      const gettoken = localStorage.getItem("token");
+      const decode = jwtDecode(gettoken);
+      const email = decode.email;
+      const response = await axios.get(
+        `http://localhost:8000/user/data/${email}`
+      );
+      const data = response.data;
+      setUserData(data[0]);
+    };
+    getData();
+  }, []);
   return (
     <div className="flex flex-col justify-between items-center col-span-3 border-r-4 border-[#102C57] p-3 m-5 h-[100vh] max-sm:hidden">
       <div>
         <div className="flex items-center">
           <div className="w-28 h-28 p-3 ">
-            <img
-              src={userData.profilepic}
-              alt="Profile picture"
-              className="rounded-full"
-            />
+            {userData?.imagePath ? (
+              <img
+                src={userData?.imagePath}
+                alt="Profile picture"
+                className="rounded-full "
+              />
+            ) : (
+              <img src="./Pic-home/user-circle-2.svg" alt="user" />
+            )}
           </div>
           <div className="font-bold">
-            <p>{userData.fullname}</p>
+            <p>{userData?.fullName}</p>
           </div>
         </div>
         {/* choose direction */}
