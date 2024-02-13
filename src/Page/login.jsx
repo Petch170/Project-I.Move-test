@@ -22,10 +22,7 @@ function Login() {
     // get data
     // console.log(data);
     try {
-      const resposedata = await axios.post(
-        "http://127.0.0.1:8000/login",
-        data
-      );
+      const resposedata = await axios.post("http://127.0.0.1:8000/login", data);
       if (resposedata.status === 200 && resposedata.data.token != null) {
         localStorage.setItem("token", resposedata.data.token);
         navigate("/UserHomePage");
@@ -46,10 +43,7 @@ function Login() {
       // console.log(lala);
       try {
         if (gettoken != null) {
-          const response = await axios.post(
-            "https://immove.onrender.com/data",
-            lala
-          );
+          const response = await axios.post("http://127.0.0.1:8000/data", lala);
           // console.log(response.data); // Example of processing data
 
           setSaveData(response.data);
@@ -64,19 +58,19 @@ function Login() {
   }, []);
 
   return (
-    
     <>
       <Navbarmember />
       <div className="flex h-screen">
         {/* left content */}
-        <div className="flex-1 h-full w-1/2 border-r-4 ">
+        <div className="flex-1 h-full w-1/2 border-r-4 hidden md:flex">
           <div
             id="img"
-            className="flex items-center content-center w-full h-full aspect-auto "
+            className="items-center content-center w-screen h-screen aspect-auto"
           >
             <img
               src="https://images.unsplash.com/photo-1705078368218-6252bc56a644?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8"
               alt="image left"
+              className="min-w-full min-h-full"
             />
           </div>
         </div>
@@ -86,10 +80,12 @@ function Login() {
           <div className="flex flex-row">
             <img
               className="nav w-14 h-14"
-              src="src\assets\Pic-home\logo1.png"
+              src="public\Pic-home\logo1.png"
               alt="icon"
             />{" "}
-            <div className="pt-5 flex justify-center font-bold">i-move</div>
+            <div className=" flex flex-col justify-center font-bold text-xl">
+              i-move
+            </div>
           </div>
           <div className="font-bold">Login</div>
           <div id="input" className="mt-3">
@@ -119,7 +115,7 @@ function Login() {
               className="mt-2 border-solid border-2 border-[#c7c7c7] rounded-md"
             ></input>
             <div id="forgotpassword" className="flex flex-row justify-end ">
-              <a href="#" className="text-xs flex justify-end">
+              <a href="/forgotpassword" className="text-xs flex justify-end">
                 Forgot password
               </a>
             </div>
