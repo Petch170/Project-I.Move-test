@@ -26,7 +26,7 @@ export default function Sidebar() {
               <img
                 src={userData?.imagePath}
                 alt="Profile picture"
-                className="rounded-full"
+                className="rounded-full "
               />
             ) : (
               <img src="./Pic-home/user-circle-2.svg" alt="user" />

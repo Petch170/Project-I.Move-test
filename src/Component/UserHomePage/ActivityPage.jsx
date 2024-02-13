@@ -150,11 +150,15 @@ export default function ActivityPage() {
           </div>
           <div className="flex flex-col items-center">
             <div className="w-24 h-24 p-3 ">
-              <img
-                src={userInfo?.imagePath}
-                alt="Profile picture"
-                className="rounded-full w-full h-full"
-              />
+              {userInfo?.imagePath ? (
+                <img
+                  src={userInfo?.imagePath}
+                  alt="Profile picture"
+                  className="rounded-full w-full h-full"
+                />
+              ) : (
+                <img src="./Pic-home/user-circle-2.svg" alt="user" />
+              )}
             </div>
             <div className="font-bold">
               <p>{userInfo?.fullName}</p>

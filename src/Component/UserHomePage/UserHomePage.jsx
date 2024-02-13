@@ -15,7 +15,9 @@ export default function UserHomePage() {
       const res = await axios.get(`http://localhost:8000/post/`);
       const data = res.data;
       setCardData(data);
+      console.log(data);
     };
+
     getData();
   }, []);
 
@@ -58,7 +60,7 @@ export default function UserHomePage() {
           </div>
         </div>
         <NavHead />
-        <Sidebar userData={mockUserData} />
+        <Sidebar />
         <div className="col-span-12 sm:col-span-9 p-3 m-5 ">
           <div className="flex justify-between">
             <div>
