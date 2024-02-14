@@ -1,6 +1,7 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
+import { handleLogOut } from "../../helper/LogOut";
 
 export default function Sidebar() {
   const [userData, setUserData] = useState();
@@ -59,7 +60,7 @@ export default function Sidebar() {
         </div>
       </div>
       <div>
-        <button className="bg-[#102C57] w-[100px] h-[30px] rounded-lg text-white font-medium ">
+        <button className="bg-[#102C57] w-[100px] h-[30px] rounded-lg text-white font-medium " onClick={handleLogOut}>
           Log out
         </button>
       </div>

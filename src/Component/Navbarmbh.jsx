@@ -1,5 +1,5 @@
 import { useState } from "react"; // import state
-import { logo } from "../assets/Picture";
+import logo1 from "/Pic-home/logo1.png";
 
 export default function Navbarmbh() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +20,7 @@ export default function Navbarmbh() {
     <nav className="bg-[#EADBC8] sticky p-2 sm:hidden">
       <div className="flex items-center justify-between">
         <div className="navlogobar flex items-center">
-          <img className="nav w-12 h-12" src={logo} alt="icon" />
+          <img className="nav w-12 h-12" src={logo1} alt="icon" />
           <a className="Logo hover:cursor-pointer font-bold">I.MOVE</a>
         </div>
 

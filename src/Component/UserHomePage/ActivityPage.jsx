@@ -8,6 +8,7 @@ import DeleteConfirm from "./DeleteConfirm";
 import axios from "axios";
 import { enqueueSnackbar } from "notistack";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   id: undefined,
@@ -31,10 +32,15 @@ export default function ActivityPage() {
   const [reRender, setReRender] = useState(false);
   const [userId, setUserId] = useState();
   const [userInfo, setUserinfo] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
       const gettoken = localStorage.getItem("token");
+      if (!gettoken){
+        navigate("/login");
+         enqueueSnackbar("Please login first", { variant: "warning"})
+       }
       const decode = jwtDecode(gettoken);
       const email = decode.email;
       const response = await axios.get(
