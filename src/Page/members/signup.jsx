@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { redirect } from "react-router-dom";
 import Login from "../login";
 import { Navbarmember } from "../../Component/Register/Navforregister";
 import { jwtDecode } from "jwt-decode";
@@ -112,12 +111,17 @@ function Signup() {
     <>
       <Navbarmember />
       <div className="flex h-screen w-screen mb-5">
-        <div className="flex-row w-1/2 h-screen aspect-auto hidden md:flex">
-          <img
-            className="w-auto h-auto"
-            src="https://images.unsplash.com/photo-1704999638827-cd0a7fed5c1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHx8"
-            alt="picture"
-          />
+      <div className="flex-1 h-full w-1/2 border-r-4 hidden md:flex">
+          <div
+            id="img"
+            className="items-center content-center w-screen h-screen aspect-auto"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1704999638827-cd0a7fed5c1c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHx8"
+              alt="image left"
+              className="min-w-full min-h-full"
+            />
+          </div>
         </div>
 
         {/* right side */}
