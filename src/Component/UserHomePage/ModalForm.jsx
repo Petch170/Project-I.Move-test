@@ -36,7 +36,7 @@ export default function ModalForm({
     setInputData((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleSummit = async () => {
+  const handleSubmit = async () => {
     if (
       !inputData.activityName ||
       !inputData.activityType ||
@@ -101,6 +101,7 @@ export default function ModalForm({
         enqueueSnackbar("Create activity successfully", { variant: "success" });
         console.log("Create Complete!");
       }
+     
       setInputData(initialValues);
       closeModal();
       setReRender((prev) => !prev);
@@ -266,10 +267,11 @@ export default function ModalForm({
       <div className="flex justify-center">
         <button
           className="bg-[#102C57] rounded-lg text-white font-medium p-1 m-4 hover:bg-cyan-600 w-1/4 shadow-xl"
-          onClick={handleSummit}
+          onClick={handleSubmit}
         >
-          Summit
+         Submit
         </button>
+        
       </div>
       {formType === "edit" ? (
         <div className="flex justify-end cursor-pointer ">
