@@ -1,64 +1,27 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Navbarmember } from "../../Component/Register/Navforregister";
-import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [showInput, setShowInput] = useState(false); // สร้าง state เพื่อเก็บค่าเพื่อแสดงหรือซ่อน ID
   const [submitted, setSubmitted] = useState(false); // สร้าง state เพื่อติดตามว่า "Submit" ถูกกดหรือไม่
-  const [dob, setDOB] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
 
-  const navigate = useNavigate();
-
-  const handleData = async (e) => {
-    e.preventDefault();
-    const responseEmail = await axios.get(
-      `http://127.0.0.1:8000/api?email=${email}`
-    );
-    // console.log(responseEmail);
-    try {
-      if (responseEmail.status === 200 && responseEmail.data === "Match Email") {
-        setShowInput(true); // เปลี่ยนค่า state เมื่ออีเมลไม่ถูกต้อง
-        setSubmitted(true); // เปลี่ยนค่า state เมื่อ "Submit" ไม่มีอีเมลถูกต้อง
-      } else {
-        setShowInput(false); // เปลี่ยนค่า state เมื่ออีเมลถูกต้อง
-        setSubmitted(false); // เปลี่ยนค่า state เมื่อ "Submit" มีอีเมลถูกต้อง
-        alert("Invalid Email");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onsubmittt = (e) => {
-    e.preventDefault();
-  }
-
-
-
-  const handleData2 = async () => {
-    const data = {
+  const handleData = async () => {
+    const getemail = {
       email: email,
-      password: password,
     };
 
-    if (password != confirmPassword) {
-      alert("Password didn't Match");
-    }
-
-    const responseEmail = await axios.get(
-      `http://127.0.0.1:8000/api/?email=${email}`
-    );
+    const responseEmail = await axios.post("#", getemail);
+    console.log(responseEmail);
     try {
-      if (responseEmail.dob === dob) {
-        await axios.put("/updatepassword", data);
-        alert("Succesfull");
-        navigate("/login");
+      if (responseEmail.status === 200 && responseEmail.data) {
+        console.log(responseEmail);
+        setShowInput(true); // เปลี่ยนค่า state เมื่ออีเมลถูกต้อง
+        setSubmitted(true); // เปลี่ยนค่า state เมื่อ "Submit" ถูกกด
       } else {
-        alert("Invalite Date of Birth");
+        setShowInput(false); // เปลี่ยนค่า state เมื่ออีเมลไม่ถูกต้อง
+        setSubmitted(true); // เปลี่ยนค่า state เมื่อ "Submit" ถูกกด
       }
     } catch (error) {
       console.log(error);
@@ -68,8 +31,7 @@ function ForgotPassword() {
   return (
     <>
       <Navbarmember />
-      
-      <form onSubmit={onsubmittt}>
+      <form>
         <div className="flex flex-col h-screen justify-start pt-40">
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-row">
@@ -104,18 +66,10 @@ function ForgotPassword() {
               required
             />
           </div>
-          <div
-            className={`flex-col justify-center items-center ${showInput ? "" : "hidden"}`}
-          >
+          <div className={`flex-col justify-center items-center ${showInput ? "" : "hidden"}`} id="changpassword">
             <div>
               <label htmlFor="date">Date of Birth:</label>
-              <input
-                type="date"
-                id="date"
-                name="date"
-                className="ml-2 mt-2"
-                onChange={(e) => setDOB(e.target.value)}
-              ></input>
+              <input type="date" id="date" name="date" className="ml-2 mt-2"></input>
             </div>
             <div className="mt-2">
               <label htmlFor="password">Password:</label>
@@ -125,7 +79,6 @@ function ForgotPassword() {
                 name="password"
                 placeholder="Enter Your Password"
                 className="ml-2"
-                onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
             <div className="mt-2">
@@ -136,7 +89,6 @@ function ForgotPassword() {
                 name="confirmpassword"
                 placeholder="Enter Your Password"
                 className="ml-2"
-                onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
           </div>
@@ -148,16 +100,16 @@ function ForgotPassword() {
                 className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 pr-2 pl-2 border-2 rounded-md"
                 onClick={handleData}
               >
-                Submit1
+                Submit
               </button>
             )}
-            {submitted && (
+            {showInput && (
               <button
-                type="submit"
+                type="button"
                 className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 pr-2 pl-2 border-2 rounded-md"
-                onClick={handleData2}
+                onClick={() => setShowInput(false)}
               >
-                Submit2
+                New Submit
               </button>
             )}
           </div>

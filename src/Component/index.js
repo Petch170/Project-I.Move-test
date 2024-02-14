@@ -1,7 +1,8 @@
 import PieChartComponent from "./Dashboard/PieChart";
 import Stat from "./Dashboard/Stat";
-import HeaderMobile from "./Setting/HeaderMobile";
-import NavBar from "./Setting/NavBar";
-import SettingAside from "./Setting/SettingAside";
+import HeaderMobile from "./Settings/HeaderMobile";
+import NavBar from "./Settings/NavBar";
+import SettingAside from "./Settings/SettingAside";
+// change path
+export { PieChartComponent, Stat, HeaderMobile, NavBar, SettingAside };
 
-export { NavBar, SettingAside, HeaderMobile, PieChartComponent, Stat };
