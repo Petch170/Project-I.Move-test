@@ -3,8 +3,6 @@ import {
   dashboardIcon,
   dumbbellIcon,
   homeIcon,
-  plantIcon,
-  plusCircleIcon,
   userIcon,
 } from "../../assets/Icon";
 import { logo } from "../../assets/Picture";
@@ -50,7 +48,7 @@ const NavBar = () => {
             className="flex flex-col bg-[#E8E8E8] rounded-full justify-center items-center p-2 border-4 border-[#CE9F9F] w-[75px] aspect-square cursor-pointer"
             onClick={openModal}
           >
-            <span class="material-icons-outlined">volunteer_activism</span>
+            <span className="material-icons-outlined">volunteer_activism</span>
             <p className="text-xs font-bold">BMI</p>
           </div>
         </div>
@@ -65,7 +63,7 @@ const NavBar = () => {
       </nav>
 
       {/* mobile */}
-      <nav className="sm:hidden grid grid-cols-5 items-center bg-cream py-1 fixed inset-x-0 bottom-0 ">
+      <nav className="sm:hidden grid grid-cols-4 items-center bg-cream py-1 fixed inset-x-0 bottom-0 ">
         <Link to="/">
           <div className="flex flex-col justify-center items-center">
             <img src={homeIcon} alt="home" />
@@ -78,9 +76,6 @@ const NavBar = () => {
             <p>Activity</p>
           </div>
         </Link>
-        <div className="flex flex-col justify-center items-center">
-          <img src={plusCircleIcon} alt="add activity" />
-        </div>
         <Link to="/user/dashboard">
           <div className="flex flex-col justify-center items-center">
             <img src={dashboardIcon} alt="dashboard" />

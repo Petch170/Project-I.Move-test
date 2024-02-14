@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import { homeIcon, lockIcon, policyIcon, userIcon } from "../../assets/Icon";
+import { useNavigate } from "react-router-dom";
 
 const SettingAside = () => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <aside className="desktop flex flex-row justify-center">
       <div>
@@ -32,7 +39,9 @@ const SettingAside = () => {
         </div>
         <div className="grid grid-cols-2">
           <div></div>
-          <button className="btn mt-2">Log out</button>
+          <button className="btn mt-2" onClick={() => logout()}>
+            Log out
+          </button>
         </div>
       </div>
     </aside>
