@@ -18,18 +18,15 @@ function ForgotPassword() {
     const responseEmail = await axios.get(
       `http://127.0.0.1:8000/api?email=${email}`
     );
-    console.log(responseEmail);
+    // console.log(responseEmail);
     try {
-      if (responseEmail.status === 200) {
-        console.log(responseEmail);
-        console.log("sdassssss");
+      if (responseEmail.status === 200 && responseEmail.data === "Match Email") {
         setShowInput(true); // เปลี่ยนค่า state เมื่ออีเมลไม่ถูกต้อง
         setSubmitted(true); // เปลี่ยนค่า state เมื่อ "Submit" ไม่มีอีเมลถูกต้อง
       } else {
-        console.log(responseEmail);
-        console.log("uyu56u567567");
         setShowInput(false); // เปลี่ยนค่า state เมื่ออีเมลถูกต้อง
         setSubmitted(false); // เปลี่ยนค่า state เมื่อ "Submit" มีอีเมลถูกต้อง
+        alert("Invalid Email");
       }
     } catch (error) {
       console.log(error);
@@ -71,6 +68,7 @@ function ForgotPassword() {
   return (
     <>
       <Navbarmember />
+      
       <form onSubmit={onsubmittt}>
         <div className="flex flex-col h-screen justify-start pt-40">
           <div className="flex flex-col justify-center items-center">
