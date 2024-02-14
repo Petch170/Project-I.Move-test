@@ -16,7 +16,6 @@ import ActivityPage from "./Component/UserHomePage/ActivityPage.jsx";
 import Home from "./Component/Home.jsx";
 import Contact from "./Component/Contact.jsx";
 import Aboutus from "./Component/Aboutus.jsx";
-import AdminPage from "./Page/members/adminpage.jsx";
 import Login from "./Page/login.jsx";
 import Signup from "./Page/members/signup.jsx";
 import ForgotPassword from "./Page/members/forgotpassword.jsx";
@@ -59,10 +58,7 @@ const router = createBrowserRouter([
     path: "/Activity",
     element: <ActivityPage />,
   },
-  {
-    path: "/admin",
-    element: <AdminPage />,
-  },
+
   {
     path: "/login",
     element: <Login />,

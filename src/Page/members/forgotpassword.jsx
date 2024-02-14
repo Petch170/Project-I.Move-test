@@ -75,7 +75,7 @@ function ForgotPassword() {
             <div className="flex flex-row">
               <img
                 className="nav w-14 h-14"
-                src="public\Pic-home\logo1.png"
+                src="/Pic-home/logo1.png"
                 alt="icon"
               />
               <div className=" flex flex-col justify-center font-bold text-xl">
