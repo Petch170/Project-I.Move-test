@@ -109,7 +109,7 @@ export default function ModalForm({
   };
 
   return (
-    <div className=" sm:grid-cols-2 p-4 ">
+    <div className=" sm:grid-cols-2 p-4">
       <div className="flex justify-end cursor-pointer ">
         <span class="material-icons-outlined" onClick={closeModal}>
           close
@@ -128,11 +128,13 @@ export default function ModalForm({
           )}
         </div>
         <div className="p-4 text-center	text-[#102C57] font-semibold flex flex-col items-center">
+          <div>
           {imageFile ? (
             <div className="w-[300px] h-[200px] flex justify-center">
-              <img src={imageFile} className="object-scale-down h-full  " />
+              <img src={imageFile} className="object-scale-down h-full " />
             </div>
           ) : null}
+          </div>
           <label class="bg-[#102C57] hover:bg-cyan-600 duration-150 text-white font-semibold py-2 px-4 rounded cursor-pointer sm:w-1/4 ">
             <input
               type="file"
@@ -148,13 +150,12 @@ export default function ModalForm({
             />{" "}
             Upload Image
           </label>
-          {validate.files ? (<span className="text-red-500">{validate.files}</span>):null}
+          {validate.files ? (<span className="text-red-500 font-thin">{validate.files}</span>):null}
         </div>
       </div>
       <div className="grid sm:grid-cols-2  bg-[#EADBC8] ">
-        <div className="p-4 text-[#102C57] font-semibold">
+        <div className="px-4 py-1 sm:p-4 text-[#102C57] font-semibold">
           <label for="Activity Name">Activity Name : </label>
-
           <input
             type="text"
             id="Activity Name"
@@ -164,10 +165,14 @@ export default function ModalForm({
               handleOnChangeInputData("activityName", ev.target.value)
             }
             defaultValue={inputData.activityName}
-          ></input>
-          {validate.activityName ? (<span className="text-red-500">{validate.activityName}</span>):null}
+          >
+
+          </input>
+          <div>
+          {validate.activityName ? (<span className="text-red-500 font-thin">{validate.activityName}</span>):null}
+          </div>
         </div>
-        <div className="p-4 text-[#102C57] font-semibold flex flex-col">
+        <div className="px-4 py-1 sm:p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Activity Type">Activity Type : </label>
           <select
             id="Activity Type"
@@ -185,9 +190,9 @@ export default function ModalForm({
             <option value="Badminton">Badminton</option>
             <option value="Walking">Walking</option>
           </select>
-          {validate.activityType ? (<span className="text-red-500">{validate.activityType}</span>):null}
+          {validate.activityType ? (<span className="text-red-500 font-thin">{validate.activityType}</span>):null}
         </div>
-        <div className="p-4 text-[#102C57] font-semibold flex flex-col">
+        <div className="px-4 py-1 sm:p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Date">Date : </label>
           <input
             type="date"
@@ -197,9 +202,9 @@ export default function ModalForm({
             onChange={(ev) => handleOnChangeInputData("date", ev.target.value)}
             defaultValue={inputData.date}
           ></input>
-          {validate.date ? (<span className="text-red-500">{validate.date}</span>):null}
+          {validate.date ? (<span className="text-red-500 font-thin">{validate.date}</span>):null}
         </div>
-        <div className="p-4 text-[#102C57] font-semibold flex flex-col">
+        <div className="px-4 py-1 sm:p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Durations">Durations : </label>
 
           <select
@@ -218,11 +223,11 @@ export default function ModalForm({
             <option value={120}>2 hr</option>
             <option value={180}>3 hr</option>
             <option value={240}>4 hr</option>
-            <option value={350}>5 hr</option>
+            <option value={300}>5 hr</option>
           </select>
-          {validate.durations ? (<span className="text-red-500">{validate.durations}</span>):null}
+          {validate.durations ? (<span className="text-red-500 font-thin">{validate.durations}</span>):null}
         </div>
-        <div className="p-4 text-[#102C57] font-semibold flex flex-col">
+        <div className="px-4 py-1 sm:p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Distance">Distance : </label>
           <select
             id="Distance"
@@ -246,9 +251,9 @@ export default function ModalForm({
             <option value={10000}>10 km</option>
             <option value={20000}>20 km</option>
           </select>
-          {validate.distance ? (<span className="text-red-500">{validate.distance}</span>):null}
+          {validate.distance ? (<span className="text-red-500 font-thin">{validate.distance}</span>):null}
         </div>
-        <div className="p-4 text-[#102C57] font-semibold flex flex-col">
+        <div className="px-4 py-1 sm:p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Description" className="">
             Description :
           </label>
