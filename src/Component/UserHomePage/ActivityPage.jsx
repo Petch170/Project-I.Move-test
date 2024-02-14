@@ -36,8 +36,8 @@ export default function ActivityPage() {
 
   useEffect(() => {
     const getData = async () => {
-      const getToken = localStorage.getItem("token");
-      if (!getToken){
+      const gettoken = localStorage.getItem("token");
+      if (!gettoken){
         navigate("/login");
          enqueueSnackbar("Please login first", { variant: "warning"})
        }

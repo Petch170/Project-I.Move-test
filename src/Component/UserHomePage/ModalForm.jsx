@@ -12,7 +12,6 @@ const initialValues = {
   description: "",
   files: undefined,
 };
-
 export default function ModalForm({
   closeModal,
   initialValue,
@@ -24,13 +23,37 @@ export default function ModalForm({
   userId,
 }) {
   const [inputData, setInputData] = useState(initialValue);
+  const [validate, setValidate] = useState({
+    activityName: "",
+    activityType: "",
+    date: "",
+    durations: "",
+    distance: "",
+    files: "",
+  });
 
   const handleOnChangeInputData = (key, value) => {
     setInputData((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSummit = async () => {
-    console.log(inputData.files);
+    if (
+      !inputData.activityName ||
+      !inputData.activityType ||
+      !inputData.date ||
+      !inputData.durations ||
+      !inputData.distance
+    ) {
+      setValidate({
+        activityName: !inputData.activityName ? "Activity Name is required" : "",
+        activityType: !inputData.activityType ? "Activity Type is required" : "",
+        date: !inputData.date ? "Date is required" : "",
+        durations: !inputData.durations ? "Durations is required" : "",
+        distance: !inputData.distance ? "Distance is required" : "",
+        files: !inputData.files ? "Image is required" : "",
+      });
+      return;
+    }
     if (formType === "edit") {
       const formData = new FormData();
       formData.append("activityName", inputData.activityName);
@@ -124,6 +147,7 @@ export default function ModalForm({
             />{" "}
             Upload Image
           </label>
+          {validate.files ? (<span className="text-red-500">{validate.files}</span>):null}
         </div>
       </div>
       <div className="grid sm:grid-cols-2  bg-[#EADBC8] ">
@@ -140,6 +164,7 @@ export default function ModalForm({
             }
             defaultValue={inputData.activityName}
           ></input>
+          {validate.activityName ? (<span className="text-red-500">{validate.activityName}</span>):null}
         </div>
         <div className="p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Activity Type">Activity Type : </label>
@@ -159,6 +184,7 @@ export default function ModalForm({
             <option value="Badminton">Badminton</option>
             <option value="Walking">Walking</option>
           </select>
+          {validate.activityType ? (<span className="text-red-500">{validate.activityType}</span>):null}
         </div>
         <div className="p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Date">Date : </label>
@@ -170,6 +196,7 @@ export default function ModalForm({
             onChange={(ev) => handleOnChangeInputData("date", ev.target.value)}
             defaultValue={inputData.date}
           ></input>
+          {validate.date ? (<span className="text-red-500">{validate.date}</span>):null}
         </div>
         <div className="p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Durations">Durations : </label>
@@ -192,6 +219,7 @@ export default function ModalForm({
             <option value={240}>4 hr</option>
             <option value={350}>5 hr</option>
           </select>
+          {validate.durations ? (<span className="text-red-500">{validate.durations}</span>):null}
         </div>
         <div className="p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Distance">Distance : </label>
@@ -217,6 +245,7 @@ export default function ModalForm({
             <option value={10000}>10 km</option>
             <option value={20000}>20 km</option>
           </select>
+          {validate.distance ? (<span className="text-red-500">{validate.distance}</span>):null}
         </div>
         <div className="p-4 text-[#102C57] font-semibold flex flex-col">
           <label for="Description" className="">
