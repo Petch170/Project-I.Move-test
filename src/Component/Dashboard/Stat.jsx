@@ -17,7 +17,7 @@ const Stat = () => {
     <div className="flex flex-col gap-6 my-4 sm:flex sm:flex-row sm:justify-center sm:gap-8">
       <div className="flex flex-col justify-center items-center border-2 border-black rounded-lg py-4 sm:px-10">
         <p className="underline underline-offset-4">Total Time</p>
-        <p className="text-3xl bold mt-2">{totalTime} hr</p>
+        <p className="text-3xl bold mt-2">{totalTime.toFixed(2)} hr</p>
       </div>
       <div className="flex flex-col justify-center items-center border-2 border-black rounded-lg py-4 sm:px-10">
         <p className="underline underline-offset-4">Total Distance</p>

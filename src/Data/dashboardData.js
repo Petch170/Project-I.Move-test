@@ -1,4 +1,3 @@
-// swimming & badminton don't have distance value
 const getStatData = (data) => {
   const statData = [];
   for (let activity of data) {

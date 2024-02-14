@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { HeaderMobile, NavBar, SettingAside } from "../Component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { jwtDecode } from "jwt-decode";
 
 const SettingPassword = () => {
   const [message, setMessage] = useState("");
@@ -30,11 +31,11 @@ const SettingPassword = () => {
   } = useForm({ mode: "onTouched", resolver: yupResolver(formSchema) });
   password = watch("newPassword", "");
 
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
-
   const changePassword = async (data) => {
     try {
+      const token = localStorage.getItem("token");
+      const decode = jwtDecode(token);
+      const userId = decode.data.userId;
       const response = await axios.post(
         `http://localhost:8000/user/changePassword/${userId}`,
         data,

@@ -7,13 +7,14 @@ const Setting = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
-    navigate("/mock");
+    navigate("/login");
   };
 
   return (
     <>
       <header>
         <NavBar />
+
         {/* mobile */}
         <div className="sm:hidden flex justify-between py-2 px-4">
           <div className="flex flex-row justify-center items-center">

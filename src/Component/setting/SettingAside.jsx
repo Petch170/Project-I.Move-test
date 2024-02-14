@@ -6,7 +6,7 @@ const SettingAside = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
-    navigate("/mock");
+    navigate("/login");
   };
 
   return (

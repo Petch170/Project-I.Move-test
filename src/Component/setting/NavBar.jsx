@@ -3,8 +3,6 @@ import {
   dashboardIcon,
   dumbbellIcon,
   homeIcon,
-  plantIcon,
-  plusCircleIcon,
   userIcon,
 } from "../../assets/Icon";
 import { logo } from "../../assets/Picture";
@@ -65,7 +63,7 @@ const NavBar = () => {
       </nav>
 
       {/* mobile */}
-      <nav className="sm:hidden grid grid-cols-5 items-center bg-cream py-1 fixed inset-x-0 bottom-0 ">
+      <nav className="sm:hidden grid grid-cols-4 items-center bg-cream py-1 fixed inset-x-0 bottom-0 ">
         <Link to="/">
           <div className="flex flex-col justify-center items-center">
             <img src={homeIcon} alt="home" />
@@ -78,9 +76,6 @@ const NavBar = () => {
             <p>Activity</p>
           </div>
         </Link>
-        <div className="flex flex-col justify-center items-center">
-          <img src={plusCircleIcon} alt="add activity" />
-        </div>
         <Link to="/user/dashboard">
           <div className="flex flex-col justify-center items-center">
             <img src={dashboardIcon} alt="dashboard" />
