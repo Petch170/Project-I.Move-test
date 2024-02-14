@@ -42,11 +42,11 @@ export default function ActivityPage() {
          enqueueSnackbar("Please login first", { variant: "warning"})
        }
       const decode = jwtDecode(gettoken);
-      const email = decode.email;
+      const email = decode.data.email;
       const response = await axios.get(
         `http://localhost:8000/user/data/${email}`
       );
-      console.log(response);
+      console.log(decode);
       const userData = response.data;
       const newUserInfo = userData[0];
       setUserinfo(newUserInfo);

@@ -218,7 +218,7 @@ export default function ModalForm({
             <option value={120}>2 hr</option>
             <option value={180}>3 hr</option>
             <option value={240}>4 hr</option>
-            <option value={350}>5 hr</option>
+            <option value={300}>5 hr</option>
           </select>
           {validate.durations ? (<span className="text-red-500">{validate.durations}</span>):null}
         </div>
