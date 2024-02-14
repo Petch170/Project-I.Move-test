@@ -1,12 +1,20 @@
 import { Link } from "react-router-dom";
 import { NavBar, SettingAside } from "../Component";
 import { cogIcon, leftArrowIcon, userIcon } from "../assets/Icon";
+import { useNavigate } from "react-router-dom";
 
 const Setting = () => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <>
       <header>
         <NavBar />
+
         {/* mobile */}
         <div className="sm:hidden flex justify-between py-2 px-4">
           <div className="flex flex-row justify-center items-center">
@@ -59,7 +67,10 @@ const Setting = () => {
               Contact
             </button>
           </Link>
-          <button className="border border-gray-400 rounded-lg py-2 my-2 font-bold bg-gray-300">
+          <button
+            className="border border-gray-400 rounded-lg py-2 my-2 font-bold bg-gray-300"
+            onClick={() => logout()}
+          >
             Log Out
           </button>
         </div>

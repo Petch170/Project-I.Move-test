@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { NavBar, PieChartComponent, SettingAside, Stat } from "../Component";
-import { clearIcon } from "../assets/Icon";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 export const customContext = createContext({});
 const Dashboard = () => {
@@ -10,10 +10,8 @@ const Dashboard = () => {
   useEffect(() => {
     const getUserData = async () => {
       const token = localStorage.getItem("token");
-      const userId = localStorage.getItem("userId");
-      // console.log("token", token);
-      // console.log("userId", userId);
-
+      const decode = jwtDecode(token);
+      const userId = decode.data.userId;
       const response = await axios.get(
         `http://localhost:8000/user/activity/${userId}`,
         { headers: { Authorization: `Bearer ${token}` } }
@@ -37,31 +35,6 @@ const Dashboard = () => {
             <h1 className="text-3xl font-bold underline underline-offset-4 text-center sm:text-2xl sm:text-left sm:no-underline">
               Dashboard
             </h1>
-            {/* <div className="mt-4 flex flex-row gap-4 sm:mt-0">
-              <label htmlFor="date range">
-                choose date range
-                <select name="date range" id="date range" className="block">
-                  <option value="all">all</option>
-                  <option value="week">week</option>
-                  <option value="year">year</option>
-                </select>
-              </label>
-              <label htmlFor="activity">
-                choose activity
-                <select name="activity" id="activity" className="block">
-                  <option value="all">all</option>
-                  <option value="badminton">badminton</option>
-                  <option value="basketball">basketball</option>
-                  <option value="swimming">swimming</option>
-                  <option value="running">running</option>
-                  <option value="walking">walking</option>
-                </select>
-              </label>
-              <div className="sm:hidden">
-                <p>clear</p>
-                <img src={clearIcon} alt="clearIcon" />
-              </div>
-            </div> */}
           </div>
           <h2 className="text-center mb-2 font-bold">
             Total Activity Time (hr)
