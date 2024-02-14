@@ -4,4 +4,4 @@ import HeaderMobile from "./Setting/HeaderMobile";
 import NavBar from "./Setting/NavBar";
 import SettingAside from "./Setting/SettingAside";
 
-export { NavBar, SettingAside, HeaderMobile, PieChartComponent, Stat };
+export { PieChartComponent, Stat, HeaderMobile, NavBar, SettingAside };
