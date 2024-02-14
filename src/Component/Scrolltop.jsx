@@ -6,7 +6,7 @@ import upIcon from "/upIcon.svg";
 const Scrolltop = () => {
     const scrollToTop = ()=>{
         animateScroll.scrollToTop({ duration: 500,
-            smooth: true,});
+            smooth: true,})
       };
       
   return (
