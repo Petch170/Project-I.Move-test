@@ -7,8 +7,6 @@ import Footer from "./Component/Footer";
 import Navbarmbh from "./Component/Navbarmbh";
 import Scrolltop from "./Component/Scrolltop";
 
-
-
 const App = () => {
   return (
     <>
@@ -17,7 +15,7 @@ const App = () => {
       <Home />
       <Aboutus />
       <Contact />
-<Scrolltop/>
+      <Scrolltop />
       <Footer />
     </>
   );
