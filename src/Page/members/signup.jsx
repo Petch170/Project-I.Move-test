@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Login from "../login";
 import { Navbarmember } from "../../Component/Register/Navforregister";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { Hidden } from "@mui/material";
 
 function Signup() {
   const [fullName, setFullname] = useState();
@@ -29,7 +27,7 @@ function Signup() {
       // console.log(lala);
       try {
         if (gettoken != null) {
-          const response = await axios.post("http://127.0.0.1:8000/data", lala);
+          // const response = await axios.post("http://127.0.0.1:8000/data", lala);
           // console.log(response.data); // Example of processing data
 
           // setSaveData(response.data);
