@@ -14,7 +14,7 @@ function ForgotPassword() {
   const handleData = async (e) => {
     e.preventDefault();
     const responseEmail = await axios.get(
-      `http://127.0.0.1:8000/api?email=${email}`
+      `https://imoveprojectgroup5.onrender.com/api?email=${email}`
     );
     // console.log(responseEmail);
     try {
@@ -51,11 +51,11 @@ function ForgotPassword() {
       alert("Password didn't Match");
     }
 
-    const responseEmail = await axios.get(`http://127.0.0.1:8000/api/?email=${email}`);
+    const responseEmail = await axios.get(`https://imoveprojectgroup5.onrender.com/api/?email=${email}`);
     // console.log(responseEmail);
     try {
       if (responseEmail.data.dob === dob) {
-      const push = await axios.post("http://127.0.0.1:8000/updatepassword", data);
+      const push = await axios.post("https://imoveprojectgroup5.onrender.com/updatepassword", data);
         alert("Succesfull");
         navigate("/login");
       } else {
