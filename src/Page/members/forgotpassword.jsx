@@ -149,7 +149,7 @@ function ForgotPassword() {
                 className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 pr-2 pl-2 border-2 rounded-md"
                 onClick={handleData}
               >
-                Submit1
+                Submit
               </button>
             )}
             {submitted && (
@@ -158,7 +158,7 @@ function ForgotPassword() {
                 className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 pr-2 pl-2 border-2 rounded-md"
                 onClick={handleData2}
               >
-                Submit2
+                Submit
               </button>
             )}
           </div>
