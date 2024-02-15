@@ -78,7 +78,6 @@ export default function ModalForm({
       );
       if (res.status === 200) {
         enqueueSnackbar("Edited successfully", { variant: "success" });
-        console.log("Create Complete!");
       }
       setInputData(initialValues);
       closeModal();
@@ -100,7 +99,6 @@ export default function ModalForm({
       });
       if (res.status === 201) {
         enqueueSnackbar("Create activity successfully", { variant: "success" });
-        console.log("Create Complete!");
       }
      
       setInputData(initialValues);
@@ -145,7 +143,6 @@ export default function ModalForm({
                 if (ev) {
                   handleOnChangeInputData("files", ev.target.files[0]);
                   setImageFile(URL.createObjectURL(ev.target.files[0]));
-                  console.log(ev.target.files[0]);
                 }
               }}
             />{" "}

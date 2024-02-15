@@ -22,7 +22,6 @@ export default function UserHomePage() {
       const res = await axios.get(`https://imoveprojectgroup5.onrender.com/post/`);
       const data = res.data;
       setCardData(data);
-      console.log(data);
     };
 
     getData();

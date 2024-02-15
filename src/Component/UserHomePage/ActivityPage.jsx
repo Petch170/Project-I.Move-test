@@ -55,7 +55,6 @@ export default function ActivityPage() {
     };
     getData();
   }, [reRender]);
-  console.log(userInfo);
   const customStyles = {
     content: {
       top: "50%",
@@ -91,7 +90,6 @@ export default function ActivityPage() {
   }
 
   const handleDelete = async (cardId) => {
-    console.log(cardId);
     try {
       const response = await axios.delete(
         `http://localhost:8000/delete/post/${cardId}`
@@ -127,7 +125,6 @@ export default function ActivityPage() {
       files: undefined,
     });
     setImageFile(item.imageUrl);
-    console.log(item);
     setIsOpen(true);
     setFormType("edit");
   };
