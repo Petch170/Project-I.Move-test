@@ -3,14 +3,14 @@ import { HeaderMobile, NavBar, SettingAside } from "../Component";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 
 const SettingProfile = () => {
   const [userInfo, setUserInfo] = useState([]);
   const [reload, setReload] = useState(false);
-  const [message, setMessage] = useState("");
   const token = localStorage.getItem("token");
-  const decode = jwtDecode(token);
-  const userId = decode.data.userId;
+  const navigate = useNavigate();
 
   const {
     register,
@@ -19,6 +19,8 @@ const SettingProfile = () => {
   } = useForm({
     defaultValues: async () => {
       try {
+        const decode = jwtDecode(token);
+        const userId = decode.data.userId;
         const response = await axios.get(
           `http://localhost:8000/user/info/${userId}`,
           { headers: { Authorization: `Bearer ${token}` } }
@@ -38,6 +40,11 @@ const SettingProfile = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
+      if (!token) {
+        navigate("/login");
+      }
+      const decode = jwtDecode(token);
+      const userId = decode.data.userId;
       const response = await axios.get(
         `http://localhost:8000/user/info/${userId}`,
         { headers: { Authorization: `Bearer ${token}` } }
@@ -51,6 +58,8 @@ const SettingProfile = () => {
 
   const editProfile = async (data) => {
     try {
+      const decode = jwtDecode(token);
+      const userId = decode.data.userId;
       const response = await axios.patch(
         `http://localhost:8000/user/editProfile/${userId}`,
         data,
@@ -71,7 +80,7 @@ const SettingProfile = () => {
     formData.append("phoneNumber", data.phoneNumber);
     formData.append("image", data.image[0]);
     editProfile(formData);
-    setMessage("Profile editing is successful");
+    enqueueSnackbar("Profile editing is successful", { variant: "success" });
   };
 
   return (
@@ -82,12 +91,9 @@ const SettingProfile = () => {
       </header>
       <main className="sm:grid sm:grid-cols-3">
         <SettingAside />
-        <section className="w-screen px-10 sm:w-fit">
-          <div className="sm:border-l-2 sm:border-black sm:pl-10">
+        <section className="w-screen px-10 sm:w-fit text-dark-blue">
+          <div className="sm:border-l-2 sm:border-dark-blue sm:pl-10">
             <h2 className="text-2xl font-bold my-4">Edit Profile</h2>
-            {message && (
-              <p className="font-bold text-green-600 mb-4">{message}</p>
-            )}
             <form
               action=""
               onSubmit={handleSubmit(submitForm)}
@@ -135,7 +141,7 @@ const SettingProfile = () => {
                   name="name"
                   id="name"
                   placeholder="Enter your full name"
-                  className="block w-full mt-1 rounded-lg p-2 border border-black"
+                  className="block w-full mt-1 rounded-lg p-2 border border-dark-blue"
                   {...register("name", {
                     required: true,
                   })}
@@ -152,7 +158,7 @@ const SettingProfile = () => {
                   name="email"
                   id="email"
                   placeholder="Enter your e-mail"
-                  className="block w-full mt-1 rounded-lg p-2 border border-black"
+                  className="block w-full mt-1 rounded-lg p-2 border border-dark-blue"
                   {...register("email", {
                     required: true,
                     pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
@@ -173,7 +179,7 @@ const SettingProfile = () => {
                   name="phoneNumber"
                   id="phoneNumber"
                   placeholder="Enter your phone number"
-                  className="block w-full mt-1 rounded-lg p-2 border border-black"
+                  className="block w-full mt-1 rounded-lg p-2 border border-dark-blue"
                   {...register("phoneNumber", {
                     required: true,
                     pattern: /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/,

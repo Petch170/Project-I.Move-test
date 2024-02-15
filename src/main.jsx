@@ -10,7 +10,6 @@ import {
   SettingPassword,
   SettingProfile,
   Dashboard,
-  Mock,
 } from "./Page";
 import ActivityPage from "./Component/UserHomePage/ActivityPage.jsx";
 import Home from "./Component/Home.jsx";
@@ -75,7 +74,6 @@ const router = createBrowserRouter([
     path: "/forgotpassword",
     element: <ForgotPassword />,
   },
-  { path: "/mock", element: <Mock /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

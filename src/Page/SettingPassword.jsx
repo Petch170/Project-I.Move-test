@@ -5,9 +5,10 @@ import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 
 const SettingPassword = () => {
-  const [message, setMessage] = useState("");
   let password;
 
   const formSchema = Yup.object().shape({
@@ -31,9 +32,19 @@ const SettingPassword = () => {
   } = useForm({ mode: "onTouched", resolver: yupResolver(formSchema) });
   password = watch("newPassword", "");
 
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  useEffect(() => {
+    const checkToken = () => {
+      if (!token) {
+        navigate("/login");
+      }
+    };
+    checkToken();
+  }, []);
+
   const changePassword = async (data) => {
     try {
-      const token = localStorage.getItem("token");
       const decode = jwtDecode(token);
       const userId = decode.data.userId;
       const response = await axios.post(
@@ -51,7 +62,7 @@ const SettingPassword = () => {
 
   const submitForm = (data) => {
     changePassword(data);
-    setMessage("Password changing is successful");
+    enqueueSnackbar("Password changing is successful", { variant: "success" });
     reset();
   };
 
@@ -63,16 +74,12 @@ const SettingPassword = () => {
       </header>
       <main className="sm:grid sm:grid-cols-3">
         <SettingAside />
-        <section className="w-full px-10 sm:max-w-[400px]">
-          <div className="sm:border-l-2 sm:border-black sm:pl-10 sm:my-4 ">
+        <section className="w-full px-10 sm:max-w-[400px] text-dark-blue">
+          <div className="sm:border-l-2 sm:border-dark-blue sm:pl-10 sm:my-4 ">
             <form action="" onSubmit={handleSubmit(submitForm)}>
               <h2 className="text-2xl font-bold text-center mb-4 sm:text-left">
                 Password
               </h2>
-              {message && (
-                <p className="font-bold text-green-600 mb-4">{message}</p>
-              )}
-
               <div className="mb-4">
                 <label htmlFor="newPassword">New password</label>
                 <input
@@ -80,7 +87,7 @@ const SettingPassword = () => {
                   name="newPassword"
                   id="newPassword"
                   placeholder="Your new password"
-                  className="block w-full mt-1 rounded-lg p-2 border border-black"
+                  className="block w-full mt-1 rounded-lg p-2 border border-dark-blue"
                   {...register("newPassword")}
                 />
                 <p className="errorMsg">{errors.newPassword?.message}</p>
@@ -93,7 +100,7 @@ const SettingPassword = () => {
                   name="retypePassword"
                   id="retypePassword"
                   placeholder="Re-type your password"
-                  className="block w-full mt-1 rounded-lg p-2 border border-black"
+                  className="block w-full mt-1 rounded-lg p-2 border border-dark-blue"
                   {...register("retypePassword")}
                 />
                 <p className="errorMsg">{errors.retypePassword?.message}</p>

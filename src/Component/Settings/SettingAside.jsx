@@ -10,7 +10,7 @@ const SettingAside = () => {
   };
 
   return (
-    <aside className="desktop flex flex-row justify-center">
+    <aside className="desktop flex flex-row justify-center text-dark-blue">
       <div>
         <h2 className="text-2xl font-bold my-4 text-center">Settings</h2>
         <div className="grid grid-cols-2 gap-3 mb-3 items-center">
