@@ -2,10 +2,8 @@ import React, { useState } from "react";
 
 const Accordion = ({ activityCardData, handleEditClick, editButtonShow }) => {
   const [activeIndex, setActiveIndex] = useState(null);
-  console.log(activityCardData);
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
-    console.log(activeIndex);
   };
 
   return (

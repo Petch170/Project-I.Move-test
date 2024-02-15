@@ -19,10 +19,9 @@ export default function UserHomePage() {
       enqueueSnackbar("Please login first", { variant: "warning"})
     }
     const getData = async () => {
-      const res = await axios.get(`http://localhost:8000/post/`);
+      const res = await axios.get(`https://imoveprojectgroup5.onrender.com/post/`);
       const data = res.data;
       setCardData(data);
-      console.log(data);
     };
 
     getData();
