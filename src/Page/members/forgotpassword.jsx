@@ -8,8 +8,7 @@ function ForgotPassword() {
   const [showInput, setShowInput] = useState(false); // สร้าง state เพื่อเก็บค่าเพื่อแสดงหรือซ่อน ID
   const [submitted, setSubmitted] = useState(false); // สร้าง state เพื่อติดตามว่า "Submit" ถูกกดหรือไม่
   const [dob, setDOB] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+
 
   const navigate = useNavigate();
 
@@ -37,7 +36,8 @@ function ForgotPassword() {
     e.preventDefault();
   }
 
-
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
 
   const handleData2 = async () => {
     const data = {
@@ -75,7 +75,7 @@ function ForgotPassword() {
             <div className="flex flex-row">
               <img
                 className="nav w-14 h-14"
-                src="public\Pic-home\logo1.png"
+                src="/Pic-home/logo1.png"
                 alt="icon"
               />
               <div className=" flex flex-col justify-center font-bold text-xl">

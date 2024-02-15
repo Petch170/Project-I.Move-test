@@ -30,7 +30,7 @@ function Signup() {
       try {
         if (gettoken != null) {
           const response = await axios.post(
-            "https://immove.onrender.com/data",
+            "http://127.0.0.1:8000/data",
             lala
           );
           // console.log(response.data); // Example of processing data
@@ -130,7 +130,7 @@ function Signup() {
           <div className="flex flex-row">
             <img
               className="nav w-14 h-14"
-              src="public\Pic-home\logo1.png"
+              src="/Pic-home/logo1.png"
               alt="icon"
             />
             <div className=" flex flex-col justify-center font-bold text-xl">i-move</div>
@@ -212,6 +212,7 @@ function Signup() {
                   id="male"
                   name="gender"
                   value="male"
+                  className="ml-1"
                   onChange={(e) => setGender(e.target.value)}
                   required
                 ></input>
@@ -226,6 +227,7 @@ function Signup() {
                   id="female"
                   name="gender"
                   value="female"
+                  className="ml-1"
                   onChange={(e) => setGender(e.target.value)}
                   required
                 ></input>
@@ -237,6 +239,7 @@ function Signup() {
                 type="date"
                 id="dob"
                 name="dob"
+                className="border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setDob(e.target.value)}
                 required
               />
@@ -250,11 +253,12 @@ function Signup() {
                 type="tel"
                 id="phonenumber"
                 name="phonenumber"
-                placeholder="Phone number"
+                placeholder="xxx-xxx-xxxx"
                 className="border-solid border-2 border-[#c7c7c7] rounded-md"
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 title="Please enter phone number in the format xxx-xxx-xxxx"
                 onChange={(e) => setPhoneNumber(e.target.value)}
+                inputmode="numeric"
                 required
               ></input>
 

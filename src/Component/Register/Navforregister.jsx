@@ -40,8 +40,9 @@ export const Navbarmember = () => {
 
 
             <ul className='hidden md:flex space-x-4 text-lg pr-16'>
-            <li><a href='/Contact' className=''>Contact</a></li>
-            <li><a href='/Aboutus' className=''>About</a></li>
+            {/* <li><a href='/Contact' className=''>Contact</a></li>
+            <li><a href='/Aboutus' className=''>About</a></li> */}
+            <li><a href='/' className=''>Home</a></li>
             <li><a href='/login' className=''>Login</a></li>
             <li><a href='/signup' className=''>Sign up</a></li>
             </ul>
@@ -50,8 +51,9 @@ export const Navbarmember = () => {
 
     {/* Mobile */}
     {isMenuOpen ? (<ul className='flex-col md:hidden'>
-            <li className='py-2 text-center decoration-solid underline'><a href='/Contact' className=''>Contact</a></li>
-            <li className='py-2 text-center decoration-solid underline'><a href='/Aboutus' className=''>About</a></li>
+            {/* <li className='py-2 text-center decoration-solid underline'><a href='/Contact' className=''>Contact</a></li>
+            <li className='py-2 text-center decoration-solid underline'><a href='/Aboutus' className=''>About</a></li> */}
+            <li className='py-2 text-center decoration-solid underline'><a href='/' className=''>Home</a></li>
             <li className='py-2 text-center decoration-solid underline'><a href='/login' className=''>Login</a></li>
             <li className='py-2 text-center decoration-solid underline'><a href='/signup' className=''>Sign up</a></li>
             </ul>
