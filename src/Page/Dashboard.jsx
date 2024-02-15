@@ -19,7 +19,7 @@ const Dashboard = () => {
       const decode = jwtDecode(token);
       const userId = decode.data.userId;
       const response = await axios.get(
-        `http://localhost:8000/user/activity/${userId}`,
+        `https://imoveprojectgroup5.onrender.com/user/activity/${userId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200 && response.data) {
