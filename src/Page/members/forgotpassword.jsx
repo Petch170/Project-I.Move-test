@@ -7,7 +7,6 @@ function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [showInput, setShowInput] = useState(false); // สร้าง state เพื่อเก็บค่าเพื่อแสดงหรือซ่อน ID
   const [submitted, setSubmitted] = useState(false); // สร้าง state เพื่อติดตามว่า "Submit" ถูกกดหรือไม่
-  const [dob, setDOB] = useState();
 
 
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ function ForgotPassword() {
     );
     // console.log(responseEmail);
     try {
-      if (responseEmail.status === 200 && responseEmail.data === "Match Email") {
+      if (responseEmail.status === 200 && responseEmail.data) {
         setShowInput(true); // เปลี่ยนค่า state เมื่ออีเมลไม่ถูกต้อง
         setSubmitted(true); // เปลี่ยนค่า state เมื่อ "Submit" ไม่มีอีเมลถูกต้อง
       } else {
@@ -38,12 +37,15 @@ function ForgotPassword() {
 
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const [dob, setDOB] = useState();
 
   const handleData2 = async () => {
     const data = {
       email: email,
       password: password,
+      dob: dob,
     };
+    console.log(data);
 
     if (password != confirmPassword) {
       alert("Password didn't Match");
@@ -52,8 +54,9 @@ function ForgotPassword() {
     const responseEmail = await axios.get(
       `http://127.0.0.1:8000/api/?email=${email}`
     );
+    console.log(responseEmail);
     try {
-      if (responseEmail.dob === dob) {
+      if (responseEmail.data.dob === dob) {
         await axios.put("/updatepassword", data);
         alert("Succesfull");
         navigate("/login");
