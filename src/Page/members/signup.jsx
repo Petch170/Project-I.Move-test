@@ -94,7 +94,7 @@ function Signup() {
     };
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/signup", data);
+      const response = await axios.post("https://imoveprojectgroup5.onrender.com/signup", data);
       // console.log(response);
       if (response.status === 200 && response.data) {
         navigate("/login")

@@ -22,7 +22,7 @@ function Login() {
     // get data
     // console.log(data);
     try {
-      const resposedata = await axios.post("http://127.0.0.1:8000/login", data);
+      const resposedata = await axios.post("https://imoveprojectgroup5.onrender.com/login", data);
       if (resposedata.status === 200 && resposedata.data.token != null) {
         localStorage.setItem("token", resposedata.data.token);
         navigate("/UserHomePage");
@@ -45,7 +45,7 @@ function Login() {
       // console.log(lala);
       try {
         if (gettoken != null) {
-          const response = await axios.post("http://127.0.0.1:8000/data", lala);
+          const response = await axios.post("https://imoveprojectgroup5.onrender.com/data", lala);
           // console.log(response.data); // Example of processing data
 
           setSaveData(response.data);
