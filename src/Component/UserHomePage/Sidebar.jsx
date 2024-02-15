@@ -2,6 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { handleLogOut } from "../../helper/LogOut";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [userData, setUserData] =useState();
@@ -40,22 +41,30 @@ export default function Sidebar() {
         {/* choose direction */}
         <div>
           <div className="text-[#102C57] font-bold text-base flex flex-col gap-6 p-3">
+            <Link to="/UserHomePage">
             <div className="flex items-center cursor-pointer">
               <span className="material-icons-outlined">house</span>
-              <a href="/UserHomePage">Home</a>
+              <p>Home</p>
             </div>
+            </Link>
+            <Link to="/Activity">
             <div className="flex items-center cursor-pointer">
               <span className="material-icons-outlined">snowshoeing</span>
-              <a href="/Activity">Activity</a>
+              <p>Activity</p>
             </div>
+            </Link>
+            <Link to="/user/dashboard">
             <div className="flex items-center cursor-pointer">
               <span class="material-icons-outlined">stacked_bar_chart</span>
-              <a href="/user/dashboard">Dashboard</a>
+              <p>Dashboard</p>
             </div>
+            </Link>
+            <Link to="/setting">
             <div className="flex items-center cursor-pointer">
               <span class="material-icons-outlined">manage_accounts</span>
-              <a href="/setting">Setting</a>
+              <p>Setting</p>
             </div>
+            </Link>
           </div>
         </div>
       </div>
