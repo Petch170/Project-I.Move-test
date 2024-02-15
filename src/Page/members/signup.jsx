@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Login from "../login";
 import { Navbarmember } from "../../Component/Register/Navforregister";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-
 
 function Signup() {
   const [fullName, setFullname] = useState();
@@ -29,10 +27,7 @@ function Signup() {
       // console.log(lala);
       try {
         if (gettoken != null) {
-          const response = await axios.post(
-            "http://127.0.0.1:8000/data",
-            lala
-          );
+          // const response = await axios.post("http://127.0.0.1:8000/data", lala);
           // console.log(response.data); // Example of processing data
 
           // setSaveData(response.data);
@@ -48,18 +43,26 @@ function Signup() {
 
   const handledata = async (e) => {
     e.preventDefault();
-    if (!fullName || !email || !password || !confirmPassword || !gender || !dob || !phoneNumber) {
+    if (
+      !fullName ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !gender ||
+      !dob ||
+      !phoneNumber
+    ) {
       alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
       return;
     }
-  
+
     // ตรวจสอบ pattern ของอีเมล
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     // ตรวจสอบ pattern ของพาสเวิร์ด
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     // ตรวจสอบ pattern ของเบอร์โทรศัพท์
     const phonePattern = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
-  
+
     switch (true) {
       case !emailPattern.test(email):
         alert("รูปแบบอีเมลไม่ถูกต้อง");
@@ -79,7 +82,7 @@ function Signup() {
       alert("Password and Confirm Password do not match");
       return;
     }
-  
+
     const data = {
       fullName: fullName,
       email: email,
@@ -89,29 +92,31 @@ function Signup() {
       phoneNumber: phoneNumber,
       typemem: "individual",
     };
-  
+
     try {
-      const response = await axios.post("http://127.0.0.1:8000/signup", data);
-      console.log(response);
+      const response = await axios.post("https://imoveprojectgroup5.onrender.com/signup", data);
+      // console.log(response);
       if (response.status === 200 && response.data) {
-        navigate("/login");
+        navigate("/login")
       }
     } catch (error) {
       console.error("Signup error:", error);
-      if (error.response.status === 400 && error.response.data.error === 'Email already exists') {
+      if (
+        error.response.status === 400 &&
+        error.response.data.error === "Email already exists"
+      ) {
         alert("error: Email already exists");
       } else {
         alert("Signup failed. Please try again.");
       }
     }
   };
-  
 
   return (
     <>
       <Navbarmember />
       <div className="flex h-screen w-screen mb-5">
-      <div className="flex-1 h-full w-1/2 border-r-4 hidden md:flex">
+        <div className="flex-1 h-full w-1/2 border-r-4 hidden md:flex">
           <div
             id="img"
             className="items-center content-center w-screen h-screen aspect-auto"
@@ -133,7 +138,9 @@ function Signup() {
               src="/Pic-home/logo1.png"
               alt="icon"
             />
-            <div className=" flex flex-col justify-center font-bold text-xl">i-move</div>
+            <div className=" flex flex-col justify-center font-bold text-xl">
+              i-move
+            </div>
           </div>
           <div className="font-bold">Sign Up</div>
           <br />
@@ -258,7 +265,6 @@ function Signup() {
                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 title="Please enter phone number in the format xxx-xxx-xxxx"
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                inputmode="numeric"
                 required
               ></input>
 
@@ -266,7 +272,6 @@ function Signup() {
                 <button
                   className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 border-2 rounded-md"
                   type="summit"
-                 
                 >
                   Register
                 </button>
@@ -285,6 +290,8 @@ function Signup() {
           </form>
         </div>
       </div>
+
+
     </>
   );
 }

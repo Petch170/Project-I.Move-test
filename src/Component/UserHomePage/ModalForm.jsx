@@ -43,7 +43,7 @@ export default function ModalForm({
       !inputData.date ||
       !inputData.durations ||
       !inputData.distance||
-      !inputData.files 
+      (!inputData.files && !imageFile)
     ) {
       setValidate({
         activityName: !inputData.activityName ? "Activity Name is required" : "",
@@ -51,7 +51,7 @@ export default function ModalForm({
         date: !inputData.date ? "Date is required" : "",
         durations: !inputData.durations ? "Durations is required" : "",
         distance: !inputData.distance ? "Distance is required" : "",
-        files: !inputData.files ? "Image is required" : "",
+        files: !inputData.files && !imageFile ? "Image is required" : "",
       });
       return;
     }
@@ -78,7 +78,6 @@ export default function ModalForm({
       );
       if (res.status === 200) {
         enqueueSnackbar("Edited successfully", { variant: "success" });
-        console.log("Create Complete!");
       }
       setInputData(initialValues);
       closeModal();
@@ -100,7 +99,6 @@ export default function ModalForm({
       });
       if (res.status === 201) {
         enqueueSnackbar("Create activity successfully", { variant: "success" });
-        console.log("Create Complete!");
       }
      
       setInputData(initialValues);
@@ -145,7 +143,6 @@ export default function ModalForm({
                 if (ev) {
                   handleOnChangeInputData("files", ev.target.files[0]);
                   setImageFile(URL.createObjectURL(ev.target.files[0]));
-                  console.log(ev.target.files[0]);
                 }
               }}
             />{" "}

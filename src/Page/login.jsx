@@ -26,6 +26,8 @@ function Login() {
       if (resposedata.status === 200 && resposedata.data.token != null) {
         localStorage.setItem("token", resposedata.data.token);
         navigate("/UserHomePage");
+      } else {
+       alert("Invalid E-mail or Password")
       }
     } catch (error) {
       console.log(error);
