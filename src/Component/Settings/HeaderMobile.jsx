@@ -4,7 +4,7 @@ import { logo } from "../../assets/Picture";
 
 const HeaderMobile = () => {
   return (
-    <nav className="sm:hidden grid grid-cols-3 items-center px-4">
+    <nav className="sm:hidden grid grid-cols-3 items-center px-4 text-dark-blue">
       <Link to="/setting">
         <img
           src={leftArrowIcon}

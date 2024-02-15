@@ -2,13 +2,25 @@ import { Link } from "react-router-dom";
 import { NavBar, SettingAside } from "../Component";
 import { cogIcon, leftArrowIcon, userIcon } from "../assets/Icon";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Setting = () => {
   const navigate = useNavigate();
+
   const logout = () => {
     localStorage.clear();
     navigate("/login");
   };
+
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const checkToken = () => {
+      if (!token) {
+        navigate("/login");
+      }
+    };
+    checkToken();
+  }, []);
 
   return (
     <>
@@ -16,7 +28,7 @@ const Setting = () => {
         <NavBar />
 
         {/* mobile */}
-        <div className="sm:hidden flex justify-between py-2 px-4">
+        <div className="sm:hidden flex justify-between py-2 px-4 text-dark-blue">
           <div className="flex flex-row justify-center items-center">
             <Link to="/UserHomePage">
               <img src={leftArrowIcon} alt="leftArrowIcon" />
@@ -33,7 +45,7 @@ const Setting = () => {
         <SettingAside />
 
         {/* mobile */}
-        <div className="sm:hidden flex flex-col px-8 ">
+        <div className="sm:hidden flex flex-col px-8 text-dark-blue">
           <div className="flex justify-center gap-2 my-2">
             <img src={userIcon} alt="userIcon" />
             <p className="font-bold text-lg">Account</p>
