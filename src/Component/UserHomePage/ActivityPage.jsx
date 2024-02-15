@@ -44,18 +44,17 @@ export default function ActivityPage() {
       const decode = jwtDecode(gettoken);
       const userId = decode.data.userId;
       const response = await axios.get(
-        `http://localhost:8000/user/data/${userId}`
+        `https://imoveprojectgroup5.onrender.com/user/data/${userId}`
       );
       const userData = response.data;
       setUserinfo(userData);
       setUserId(userId);
-      const res = await axios.get(`http://localhost:8000/post/${userId}/`);
+      const res = await axios.get(`https://imoveprojectgroup5.onrender.com/post/${userId}/`);
       const data = res.data;
       setCardData(data);
     };
     getData();
   }, [reRender]);
-  console.log(userInfo);
   const customStyles = {
     content: {
       top: "50%",
@@ -91,7 +90,6 @@ export default function ActivityPage() {
   }
 
   const handleDelete = async (cardId) => {
-    console.log(cardId);
     try {
       const response = await axios.delete(
         `http://localhost:8000/delete/post/${cardId}`
@@ -127,7 +125,6 @@ export default function ActivityPage() {
       files: undefined,
     });
     setImageFile(item.imageUrl);
-    console.log(item);
     setIsOpen(true);
     setFormType("edit");
   };

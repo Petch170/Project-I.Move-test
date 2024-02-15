@@ -14,7 +14,7 @@ const Home = () => {
     const userLogIn = localStorage.getItem("login");//loginกับหลังบ้าน
     if (userLogIn) {
       setLogin(true);
-      console.log(userLogIn);
+      
     }
 
   }, []);
