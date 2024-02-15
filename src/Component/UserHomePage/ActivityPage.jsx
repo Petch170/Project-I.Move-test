@@ -92,7 +92,7 @@ export default function ActivityPage() {
   const handleDelete = async (cardId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8000/delete/post/${cardId}`
+        `https://imoveprojectgroup5.onrender.com/delete/post/${cardId}`
       );
       if (response.status === 200) {
         enqueueSnackbar("Deleted successfully", { variant: "success" });
