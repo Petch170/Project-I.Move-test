@@ -42,15 +42,12 @@ export default function ActivityPage() {
          enqueueSnackbar("Please login first", { variant: "warning"})
        }
       const decode = jwtDecode(gettoken);
-      const email = decode.email;
+      const userId = decode.data.userId;
       const response = await axios.get(
-        `http://localhost:8000/user/data/${email}`
+        `http://localhost:8000/user/data/${userId}`
       );
-      console.log(response);
       const userData = response.data;
-      const newUserInfo = userData[0];
-      setUserinfo(newUserInfo);
-      const userId = userData[0].userId;
+      setUserinfo(userData);
       setUserId(userId);
       const res = await axios.get(`http://localhost:8000/post/${userId}/`);
       const data = res.data;
@@ -160,7 +157,7 @@ export default function ActivityPage() {
                 <img
                   src={userInfo?.imagePath}
                   alt="Profile picture"
-                  className="rounded-full w-full h-full"
+                  className="rounded-full w-full h-full object-cover aspect-square"
                 />
               ) : (
                 <img src="./Pic-home/user-circle-2.svg" alt="user" />

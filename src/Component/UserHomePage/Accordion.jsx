@@ -25,10 +25,10 @@ const Accordion = ({ activityCardData, handleEditClick, editButtonShow }) => {
                     {item.userDetails?.imagePath ? (
                       <img
                         src={item.userDetails.imagePath}
-                        className="w-10 h-10 p-2 "
+                        className="w-10 h-10 p-2 object-cover aspect-square"
                       />
                     ) : (
-                      <img src="./Pic-home/user-circle-2.svg" alt="user" />
+                      <img src="./Pic-home/user-circle-2.svg" alt="user" className="w-10 h-10 p-2 "/>
                     )}
 
                     <span className="pl-2 pt-2 text-[#102C57] font-bold  ">
@@ -54,7 +54,7 @@ const Accordion = ({ activityCardData, handleEditClick, editButtonShow }) => {
                     <span className="material-icons-outlined">
                       sports_gymnastics
                     </span>
-                    <p className="text-[20px] text-[#102C57] font-bold">
+                    <p className="text-[20px] text-[#102C57] font-bold  ">
                       {item.activityName}
                     </p>
                   </div>
