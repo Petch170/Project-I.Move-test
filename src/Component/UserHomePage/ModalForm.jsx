@@ -42,7 +42,8 @@ export default function ModalForm({
       !inputData.activityType ||
       !inputData.date ||
       !inputData.durations ||
-      !inputData.distance
+      !inputData.distance||
+      !inputData.files 
     ) {
       setValidate({
         activityName: !inputData.activityName ? "Activity Name is required" : "",

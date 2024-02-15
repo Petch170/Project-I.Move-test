@@ -46,7 +46,7 @@ const Accordion = ({ activityCardData, handleEditClick, editButtonShow }) => {
                 </div>
                 {/* PicContainer */}
                 <div className="w-full h-[220px]">
-                  <img className="w-full h-full" src={item.imageUrl} />
+                  <img className="w-full h-full object-cover aspect-square " src={item.imageUrl} />
                 </div>
                 {/* Content */}
                 <div className="flex justify-between gap-4 p-3 text-center ">
