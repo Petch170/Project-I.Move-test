@@ -43,7 +43,7 @@ export default function ModalForm({
       !inputData.date ||
       !inputData.durations ||
       !inputData.distance||
-      !inputData.files 
+      (!inputData.files && !imageFile)
     ) {
       setValidate({
         activityName: !inputData.activityName ? "Activity Name is required" : "",
@@ -51,7 +51,7 @@ export default function ModalForm({
         date: !inputData.date ? "Date is required" : "",
         durations: !inputData.durations ? "Durations is required" : "",
         distance: !inputData.distance ? "Distance is required" : "",
-        files: !inputData.files ? "Image is required" : "",
+        files: !inputData.files && !imageFile ? "Image is required" : "",
       });
       return;
     }
@@ -68,7 +68,7 @@ export default function ModalForm({
       }
       formData.append("oldImageUrl", imageFile);
       const res = await axios.put(
-        `http://localhost:8000/edit/post/${inputData.id}`,
+        `https://imoveprojectgroup5.onrender.com/edit/post/${inputData.id}`,
         formData,
         {
           headers: {
@@ -93,7 +93,7 @@ export default function ModalForm({
       formData.append("distance", inputData.distance);
       formData.append("description", inputData.description);
       formData.append("imageUrl", inputData.files);
-      const res = await axios.post(`http://localhost:8000/post/`, formData, {
+      const res = await axios.post(`https://imoveprojectgroup5.onrender.com/post/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

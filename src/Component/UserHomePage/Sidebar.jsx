@@ -12,7 +12,7 @@ export default function Sidebar() {
       const decode = jwtDecode(gettoken);
       const userId = decode.data.userId;
       const response = await axios.get(
-        `http://localhost:8000/user/data/${userId}`
+        `https://imoveprojectgroup5.onrender.com/user/data/${userId}`
       );
       const data = response.data;
       setUserData(data);

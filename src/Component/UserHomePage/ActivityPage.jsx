@@ -44,12 +44,12 @@ export default function ActivityPage() {
       const decode = jwtDecode(gettoken);
       const userId = decode.data.userId;
       const response = await axios.get(
-        `http://localhost:8000/user/data/${userId}`
+        `https://imoveprojectgroup5.onrender.com/user/data/${userId}`
       );
       const userData = response.data;
       setUserinfo(userData);
       setUserId(userId);
-      const res = await axios.get(`http://localhost:8000/post/${userId}/`);
+      const res = await axios.get(`https://imoveprojectgroup5.onrender.com/post/${userId}/`);
       const data = res.data;
       setCardData(data);
     };
