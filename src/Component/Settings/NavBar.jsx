@@ -32,7 +32,7 @@ const NavBar = () => {
   return (
     <>
       {/* desktop */}
-      <nav className="flex flex-row justify-between bg-cream desktop px-4">
+      <nav className="flex flex-row justify-between bg-cream desktop px-4 text-dark-blue">
         <div className="flex flex-row  items-center relative">
           <img src={logo} alt="logo" />
           <p className="font-black absolute left-[55px]">I.MOVE</p>
@@ -63,7 +63,7 @@ const NavBar = () => {
       </nav>
 
       {/* mobile */}
-      <nav className="sm:hidden grid grid-cols-4 items-center bg-cream py-1 fixed inset-x-0 bottom-0 ">
+      <nav className="sm:hidden grid grid-cols-4 items-center bg-cream py-1 fixed inset-x-0 bottom-0 text-dark-blue">
         <Link to="/">
           <div className="flex flex-col justify-center items-center">
             <img src={homeIcon} alt="home" />
