@@ -21,6 +21,7 @@ function ForgotPassword() {
       if (responseEmail.status === 200 && responseEmail.data) {
         setShowInput(true); // เปลี่ยนค่า state เมื่ออีเมลไม่ถูกต้อง
         setSubmitted(true); // เปลี่ยนค่า state เมื่อ "Submit" ไม่มีอีเมลถูกต้อง
+        return responseEmail;
       } else {
         setShowInput(false); // เปลี่ยนค่า state เมื่ออีเมลถูกต้อง
         setSubmitted(false); // เปลี่ยนค่า state เมื่อ "Submit" มีอีเมลถูกต้อง
@@ -43,21 +44,18 @@ function ForgotPassword() {
     const data = {
       email: email,
       password: password,
-      dob: dob,
     };
-    console.log(data);
+    // console.log(data);
 
     if (password != confirmPassword) {
       alert("Password didn't Match");
     }
 
-    const responseEmail = await axios.get(
-      `http://127.0.0.1:8000/api/?email=${email}`
-    );
-    console.log(responseEmail);
+    const responseEmail = await axios.get(`http://127.0.0.1:8000/api/?email=${email}`);
+    // console.log(responseEmail);
     try {
       if (responseEmail.data.dob === dob) {
-        await axios.put("/updatepassword", data);
+      const push = await axios.post("http://127.0.0.1:8000/updatepassword", data);
         alert("Succesfull");
         navigate("/login");
       } else {
@@ -108,7 +106,7 @@ function ForgotPassword() {
             />
           </div>
           <div
-            className={`flex-col justify-center items-center ${showInput ? "" : "hidden"}`}
+            className={`flex flex-col justify-center items-center ${showInput ? "" : "hidden"}`}
           >
             <div>
               <label htmlFor="date">Date of Birth:</label>
@@ -116,7 +114,7 @@ function ForgotPassword() {
                 type="date"
                 id="date"
                 name="date"
-                className="ml-2 mt-2"
+                className="ml-2 mt-2 border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setDOB(e.target.value)}
               ></input>
             </div>
@@ -127,7 +125,7 @@ function ForgotPassword() {
                 id="password"
                 name="password"
                 placeholder="Enter Your Password"
-                className="ml-2"
+                className="ml-2 border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
             </div>
@@ -138,7 +136,7 @@ function ForgotPassword() {
                 id="confirmpassword"
                 name="confirmpassword"
                 placeholder="Enter Your Password"
-                className="ml-2"
+                className="ml-2 border-solid border-2 border-[#c7c7c7] rounded-md"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               ></input>
             </div>
@@ -151,7 +149,7 @@ function ForgotPassword() {
                 className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 pr-2 pl-2 border-2 rounded-md"
                 onClick={handleData}
               >
-                Submit1
+                Submit
               </button>
             )}
             {submitted && (
@@ -160,7 +158,7 @@ function ForgotPassword() {
                 className="bg-[#102C57] text-white hover:bg-[#c7c7c7] pt-1 pb-1 pr-2 pl-2 border-2 rounded-md"
                 onClick={handleData2}
               >
-                Submit2
+                Submit
               </button>
             )}
           </div>
