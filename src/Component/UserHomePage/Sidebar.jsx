@@ -2,19 +2,20 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import React, { useEffect, useState } from "react";
 import { handleLogOut } from "../../helper/LogOut";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] =useState();
   useEffect(() => {
     const getData = async () => {
       const gettoken = localStorage.getItem("token");
       const decode = jwtDecode(gettoken);
-      const email = decode.email;
+      const userId = decode.data.userId;
       const response = await axios.get(
-        `http://localhost:8000/user/data/${email}`
+        `http://localhost:8000/user/data/${userId}`
       );
       const data = response.data;
-      setUserData(data[0]);
+      setUserData(data);
     };
     getData();
   }, []);
@@ -27,10 +28,10 @@ export default function Sidebar() {
               <img
                 src={userData?.imagePath}
                 alt="Profile picture"
-                className="rounded-full "
+                className="rounded-full w-full h-full object-cover aspect-square "
               />
             ) : (
-              <img src="./Pic-home/user-circle-2.svg" alt="user" />
+              <img src="./Pic-home/user-circle-2.svg" alt="user" className="w-28 h-28 p-3" />
             )}
           </div>
           <div className="font-bold">
@@ -40,22 +41,30 @@ export default function Sidebar() {
         {/* choose direction */}
         <div>
           <div className="text-[#102C57] font-bold text-base flex flex-col gap-6 p-3">
+            <Link to="/UserHomePage">
             <div className="flex items-center cursor-pointer">
-              <span class="material-icons-outlined">house</span>
-              <a href="/UserHomePage">Home</a>
+              <span className="material-icons-outlined">house</span>
+              <p>Home</p>
             </div>
+            </Link>
+            <Link to="/Activity">
             <div className="flex items-center cursor-pointer">
-              <span class="material-icons-outlined">snowshoeing</span>
-              <a href="/Activity">Activity</a>
+              <span className="material-icons-outlined">snowshoeing</span>
+              <p>Activity</p>
             </div>
+            </Link>
+            <Link to="/user/dashboard">
             <div className="flex items-center cursor-pointer">
               <span class="material-icons-outlined">stacked_bar_chart</span>
-              <a href="/user/dashboard">Dashboard</a>
+              <p>Dashboard</p>
             </div>
+            </Link>
+            <Link to="/setting">
             <div className="flex items-center cursor-pointer">
               <span class="material-icons-outlined">manage_accounts</span>
-              <a href="/setting">Setting</a>
+              <p>Setting</p>
             </div>
+            </Link>
           </div>
         </div>
       </div>
