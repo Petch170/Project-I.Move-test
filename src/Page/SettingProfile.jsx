@@ -22,7 +22,7 @@ const SettingProfile = () => {
         const decode = jwtDecode(token);
         const userId = decode.data.userId;
         const response = await axios.get(
-          `http://localhost:8000/user/info/${userId}`,
+          `https://imoveprojectgroup5.onrender.com/user/info/${userId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         if (response.status === 200 && response.data) {
@@ -46,7 +46,7 @@ const SettingProfile = () => {
       const decode = jwtDecode(token);
       const userId = decode.data.userId;
       const response = await axios.get(
-        `http://localhost:8000/user/info/${userId}`,
+        `https://imoveprojectgroup5.onrender.com/user/info/${userId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200 && response.data) {
@@ -61,7 +61,7 @@ const SettingProfile = () => {
       const decode = jwtDecode(token);
       const userId = decode.data.userId;
       const response = await axios.patch(
-        `http://localhost:8000/user/editProfile/${userId}`,
+        `https://imoveprojectgroup5.onrender.com/user/editProfile/${userId}`,
         data,
         { headers: { Authorization: `Bearer ${token}` } }
       );

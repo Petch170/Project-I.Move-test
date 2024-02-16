@@ -48,7 +48,7 @@ const SettingPassword = () => {
       const decode = jwtDecode(token);
       const userId = decode.data.userId;
       const response = await axios.post(
-        `http://localhost:8000/user/changePassword/${userId}`,
+        `https://imoveprojectgroup5.onrender.com/user/changePassword/${userId}`,
         data,
         { headers: { Authorization: `Bearer ${token}` } }
       );
