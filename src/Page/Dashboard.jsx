@@ -12,14 +12,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getUserData = async () => {
-      // const token = localStorage.getItem("token");
       if (!token) {
         navigate("/login");
       }
       const decode = jwtDecode(token);
       const userId = decode.data.userId;
       const response = await axios.get(
-        `http://localhost:8000/user/activity/${userId}`,
+        `https://imoveprojectgroup5.onrender.com/user/activity/${userId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200 && response.data) {
