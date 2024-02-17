@@ -45,7 +45,7 @@ export default function NavHead({ handleCreateClick }) {
             </a>
           </div>
           <div>
-            <h1 className="text-[#102C57] font-bold absolute left-[55px] top-[40px]">
+            <h1 className="text-[#102C57] font-bold absolute left-[65px] top-[30px]">
               I.MOVE
             </h1>
           </div>
