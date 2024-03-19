@@ -27,7 +27,10 @@ function Signup() {
       // console.log(lala);
       try {
         if (gettoken != null) {
-          // const response = await axios.post("http://127.0.0.1:8000/data", lala);
+          const response = await axios.post(
+            "https://imovebackend.onrender.com/data",
+            lala
+          );
           // console.log(response.data); // Example of processing data
 
           // setSaveData(response.data);
@@ -94,8 +97,8 @@ function Signup() {
     };
 
     try {
-      const response = await axios.post("https://imoveprojectgroup5.onrender.com/signup", data);
-      // console.log(response);
+      const response = await axios.post("https://imovebackend.onrender.com/signup", data);
+      console.log(response);
       if (response.status === 200 && response.data) {
         navigate("/login")
       }

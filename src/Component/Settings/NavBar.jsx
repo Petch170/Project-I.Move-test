@@ -33,9 +33,12 @@ const NavBar = () => {
     <>
       {/* desktop */}
       <nav className="flex flex-row justify-between bg-cream desktop px-4 text-dark-blue">
-        <div className="flex flex-row  items-center relative">
-          <img src={logo} alt="logo" />
-          <p className="font-black absolute left-[55px]">I.MOVE</p>
+        <div className="flex flex-row items-center justify-center flex-nowrap">
+        <Link to="/" className="flex flex-row items-center">
+        <img src={logo} alt="logo" />
+        <p className="font-black">I.MOVE</p>
+          </Link>
+
         </div>
         <div className="flex flex-row  items-center gap-8 px-4 py-2">
           <Link to="/">
